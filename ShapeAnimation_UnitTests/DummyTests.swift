@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 github.com/rhcad. All rights reserved.
 //
 
-import Cocoa
+import UIKit
 import XCTest
 import SwiftGraphics
-//import ShapeAnimation
+import ShapeAnimation
 
 class DummyTests: XCTestCase {
 

@@ -9,8 +9,18 @@ Vector animation framework in Swift based on [SwiftGraphics](https://github.com/
 
 ## What's included
 
-* ShapeView which contains vector shape layers.
+* ShapeView class which contains vector shape layers.
 * Animation extension functions of CALayer and CAShapeLayer.
+  * opacityAnimation, flashAnimation
+  * scaleAnimation
+  * rotate360Degrees, rotationAnimation
+  * shakeAnimation
+  * moveOnPathAnimation
+  * slideToRight
+  * strokeEndAnimation
+  * switchPathAnimation
+  * animationGroup
+  * applyAnimations
 
 ![Stroke Lines Screenshot](Documentation/strokelines.gif)
 ![Move on Path Screenshot](Documentation/moveonpath.gif)

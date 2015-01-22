@@ -28,7 +28,26 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "454D551119AA5CE6000E3EB3"
+               BuildableName = "ShapeAnimationTests.xctest"
+               BlueprintName = "ShapeAnimationTests"
+               ReferencedContainer = "container:ShapeAnimation.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "45DA4AC319AA62A800133F32"
+            BuildableName = "ShapeAnimation.framework"
+            BlueprintName = "ShapeAnimation"
+            ReferencedContainer = "container:ShapeAnimation.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"

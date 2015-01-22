@@ -132,7 +132,7 @@ public extension CAShapeLayer {
         return AnimationPair(self, animation)
     }
     
-    func pathAnimation(to:CGPath) -> AnimationPair {
+    func switchPathAnimation(to:CGPath) -> AnimationPair {
         var animation = CABasicAnimation(keyPath:"path")
         animation.duration = 0.8
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
