@@ -17,7 +17,7 @@ public class ShapeView : UIView {
     //
     public var strokeColor     = UIColor(white:0, alpha:0.8)
     public var fillColor       : UIColor?
-    public var strokeWidth     : CGFloat = 3.0
+    public var strokeWidth     : CGFloat = 2.0
     public var lineCap         = kCALineCapButt
     public var lineJoin        = kCALineJoinRound
     public var lineDash        : [CGFloat]?
@@ -41,6 +41,9 @@ public class ShapeView : UIView {
         return layer
     }
 
+    public func addCircleLayer(center c:CGPoint, radius:CGFloat) -> CAShapeLayer {
+        return addShapeLayer(CGPathCreateWithEllipseInRect(CGRect(center:c, radius:radius), nil))
+    }
 }
 
 public extension CAShapeLayer {

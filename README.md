@@ -22,8 +22,9 @@ Vector animation framework in Swift based on [SwiftGraphics](https://github.com/
   * animationGroup
   * applyAnimations
 
-![Stroke Lines Screenshot](Documentation/strokelines.gif)
-![Move on Path Screenshot](Documentation/moveonpath.gif)
+![Stroke Lines](Documentation/strokelines.gif)
+![Move on Path](Documentation/moveonpath.gif)
+![Radar Circles](Documentation/radar.gif)
 
 ## Usage
 

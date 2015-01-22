@@ -40,6 +40,10 @@ class MasterViewController: UITableViewController {
             viewController.title = NSLocalizedString("Rotate Polygons with Text", comment:"")
             testRotatePolygons(viewController)
             
+        case "Radar Circles":
+            viewController.title = NSLocalizedString("Radar Circles", comment:"")
+            testRadarCircles(viewController)
+            
         default:
             println("Hello TouchVG")
         }
@@ -88,6 +92,26 @@ class MasterViewController: UITableViewController {
     private func testRotatePolygons(viewController:DetailViewController) {
         viewController.animationBlock = { (view) -> Void in
             
+        }
+    }
+    
+    private func testRadarCircles(viewController:DetailViewController) {
+        viewController.animationBlock = { (view) -> Void in
+            let duration: Double = 2
+            let count = 6
+            let defaultCurve = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+            
+            view.strokeWidth = 1
+            for i in 0..<count {
+                let la1 = view.addCircleLayer(center:CGPoint(x:200, y:200), radius:15)
+                let anim = animationGroup([la1.scaleAnimation(from:0, to:5),
+                    la1.opacityAnimation(from:1, to:0)])
+                    .setDuration(duration)
+                    .set {$0.beginTime = CACurrentMediaTime() + Double(i) * duration / Double(count) }
+                    .set {$0.repeatCount=HUGE; $0.fillMode = kCAFillModeBackwards}
+                    .set {$0.timingFunction = defaultCurve}
+                anim.apply()
+            }
         }
     }
     
