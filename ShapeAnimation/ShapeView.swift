@@ -10,11 +10,14 @@ import UIKit
 import QuartzCore
 import SwiftGraphics
 
+//! View class which contains vector shape layers.
 public class ShapeView : UIView {
     
+    // Properties for the new shape layers
+    //
     public var strokeColor     = UIColor(white:0, alpha:0.8)
     public var fillColor       : UIColor?
-    public var strokeWidth     : CGFloat = 3.0
+    public var strokeWidth     : CGFloat = 2.0
     public var lineCap         = kCALineCapButt
     public var lineJoin        = kCALineJoinRound
     public var lineDash        : [CGFloat]?
@@ -38,10 +41,14 @@ public class ShapeView : UIView {
         return layer
     }
 
+    public func addCircleLayer(center c:CGPoint, radius:CGFloat) -> CAShapeLayer {
+        return addShapeLayer(CGPathCreateWithEllipseInRect(CGRect(center:c, radius:radius), nil))
+    }
 }
 
 public extension CAShapeLayer {
     
+    //! The path used to create this layer initially and mapped to the parent layer's coordinate systems.
     public var transformedPath:CGPath {
         get {
             var xf = CGAffineTransform(translation:frame.origin)

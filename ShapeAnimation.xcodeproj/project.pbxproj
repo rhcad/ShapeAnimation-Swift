@@ -10,7 +10,8 @@
 		02093A5A1A709B0E004BB18E /* ShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02093A571A709B0E004BB18E /* ShapeView.swift */; };
 		02093A5B1A709B0E004BB18E /* BasicAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02093A581A709B0E004BB18E /* BasicAnimation.swift */; };
 		02093A5C1A709B0E004BB18E /* AnimationPrivate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02093A591A709B0E004BB18E /* AnimationPrivate.swift */; };
-		02CD3EFE1A708ECE00C83B5C /* SwiftGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CD3EEE1A708C8D00C83B5C /* SwiftGraphics.framework */; };
+		02478B091A70C6A200CCAC47 /* ShapeAnimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DA4AC419AA62A800133F32 /* ShapeAnimation.framework */; };
+		027E6C631A70CCB7002658F7 /* SwiftGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CD3EEE1A708C8D00C83B5C /* SwiftGraphics.framework */; };
 		02CD3F091A70907600C83B5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD3F081A70907600C83B5C /* AppDelegate.swift */; };
 		02CD3F0B1A70907600C83B5C /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD3F0A1A70907600C83B5C /* MasterViewController.swift */; };
 		02CD3F0D1A70907600C83B5C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD3F0C1A70907600C83B5C /* DetailViewController.swift */; };
@@ -18,12 +19,18 @@
 		02CD3F121A70907600C83B5C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02CD3F111A70907600C83B5C /* Images.xcassets */; };
 		02CD3F151A70907600C83B5C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02CD3F131A70907600C83B5C /* LaunchScreen.xib */; };
 		02CD3F2A1A70929F00C83B5C /* ShapeAnimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DA4AC419AA62A800133F32 /* ShapeAnimation.framework */; };
-		02CD3F2D1A7092BC00C83B5C /* SwiftGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CD3EEE1A708C8D00C83B5C /* SwiftGraphics.framework */; };
 		4537991D19AA788B004DF99E /* DummyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4537991C19AA788B004DF99E /* DummyTests.swift */; };
 		45DA4AC919AA62A800133F32 /* ShapeAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 45DA4AC819AA62A800133F32 /* ShapeAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		02478B071A70C69F00CCAC47 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 454D54FE19AA5CE6000E3EB3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45DA4AC319AA62A800133F32;
+			remoteInfo = ShapeAnimation;
+		};
 		02CD3EED1A708C8D00C83B5C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 02CD3EE31A708C8D00C83B5C /* SwiftGraphics.xcodeproj */;
@@ -80,13 +87,6 @@
 			remoteGlobalIDString = 45DA4AC319AA62A800133F32;
 			remoteInfo = ShapeAnimation;
 		};
-		02CD3F2B1A7092B500C83B5C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 02CD3EE31A708C8D00C83B5C /* SwiftGraphics.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 45DA4AC319AA62A800133F32;
-			remoteInfo = SwiftGraphics_iOS;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -116,7 +116,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02CD3F2D1A7092BC00C83B5C /* SwiftGraphics.framework in Frameworks */,
 				02CD3F2A1A70929F00C83B5C /* ShapeAnimation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02478B091A70C6A200CCAC47 /* ShapeAnimation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,7 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02CD3EFE1A708ECE00C83B5C /* SwiftGraphics.framework in Frameworks */,
+				027E6C631A70CCB7002658F7 /* SwiftGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +274,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				02CD3F2C1A7092B500C83B5C /* PBXTargetDependency */,
 				02CD3F291A70929600C83B5C /* PBXTargetDependency */,
 			);
 			name = ShapeAnimation_UITest;
@@ -293,6 +292,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				02478B081A70C69F00CCAC47 /* PBXTargetDependency */,
 			);
 			name = ShapeAnimationTests;
 			productName = ShapeAnimationTests;
@@ -468,6 +468,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		02478B081A70C69F00CCAC47 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45DA4AC319AA62A800133F32 /* ShapeAnimation */;
+			targetProxy = 02478B071A70C69F00CCAC47 /* PBXContainerItemProxy */;
+		};
 		02CD3EFC1A708EBC00C83B5C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftGraphics_iOS;
@@ -477,11 +482,6 @@
 			isa = PBXTargetDependency;
 			target = 45DA4AC319AA62A800133F32 /* ShapeAnimation */;
 			targetProxy = 02CD3F281A70929600C83B5C /* PBXContainerItemProxy */;
-		};
-		02CD3F2C1A7092B500C83B5C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftGraphics_iOS;
-			targetProxy = 02CD3F2B1A7092B500C83B5C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -629,17 +629,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = ShapeAnimation_UnitTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/..";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -647,13 +645,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = ShapeAnimation_UnitTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/..";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
