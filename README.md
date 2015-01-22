@@ -5,7 +5,7 @@ Vector animation framework in Swift based on [SwiftGraphics](https://github.com/
 [![Travis][travis_img]][travis]
 
 [travis]: https://travis-ci.org/rhcad/ShapeAnimation-Swift
-[travis_img]: https://travis-ci.org/rhcad/ShapeAnimation-Swift.svg?branch=develop
+[travis_img]: https://travis-ci.org/rhcad/ShapeAnimation-Swift.svg?branch=master
 
 ## What's included
 
