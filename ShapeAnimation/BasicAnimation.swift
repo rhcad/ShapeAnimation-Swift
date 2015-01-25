@@ -10,16 +10,18 @@ import UIKit
 import QuartzCore
 import SwiftGraphics
 
+// MARK: Animation extension of CALayer
+
 public extension CALayer {
     
-    func opacityAnimation(from f:Float, to:Float) -> AnimationPair {
-        return opacityAnimation(from:f, to:to, didStop:nil)
+    func opacityAnimation(#from:Float, to:Float) -> AnimationPair {
+        return opacityAnimation(from:from, to:to, didStop:nil)
     }
     
-    func opacityAnimation(from f:Float, to:Float, didStop:(() -> Void)?) -> AnimationPair {
+    func opacityAnimation(#from:Float, to:Float, didStop:(() -> Void)?) -> AnimationPair {
         var animation = CABasicAnimation(keyPath:"opacity")
         animation.duration = 0.8
-        animation.fromValue = f
+        animation.fromValue = from
         animation.toValue = to
         animation.didStop = didStop
         animation.removedOnCompletion = false
@@ -35,14 +37,14 @@ public extension CALayer {
         }
     }
     
-    func scaleAnimation(from f:Float, to:Float) -> AnimationPair {
-        return scaleAnimation(from:f, to:to, didStop:nil)
+    func scaleAnimation(#from:Float, to:Float) -> AnimationPair {
+        return scaleAnimation(from:from, to:to, didStop:nil)
     }
     
-    func scaleAnimation(from f:Float, to:Float, didStop:(() -> Void)?) -> AnimationPair {
+    func scaleAnimation(#from:Float, to:Float, didStop:(() -> Void)?) -> AnimationPair {
         var animation = CABasicAnimation(keyPath:"transform.scale")
         animation.duration = 0.8
-        animation.fromValue = f
+        animation.fromValue = from
         animation.toValue = to
         animation.didStop = didStop
         animation.autoreverses = true
@@ -50,24 +52,24 @@ public extension CALayer {
         return AnimationPair(self, animation)
     }
     
-    func scaleAnimation(from f:Float, to:Float, repeatCount:Float) -> AnimationPair {
-        return scaleAnimation(from:f, to:to, didStop:nil).set {$0.repeatCount=repeatCount}
+    func scaleAnimation(#from:Float, to:Float, repeatCount:Float) -> AnimationPair {
+        return scaleAnimation(from:from, to:to, didStop:nil).set {$0.repeatCount=repeatCount}
     }
     
     func rotate360Degrees() -> AnimationPair {
         return rotationAnimation(angle:CGFloat(2 * M_PI), didStop:nil)
     }
     
-    func rotationAnimation(angle a:CGFloat) -> AnimationPair {
-        return rotationAnimation(angle:a, didStop:nil)
+    func rotationAnimation(#angle:CGFloat) -> AnimationPair {
+        return rotationAnimation(angle:angle, didStop:nil)
     }
     
-    func rotationAnimation(angle a:CGFloat, didStop:(() -> Void)?) -> AnimationPair {
+    func rotationAnimation(#angle:CGFloat, didStop:(() -> Void)?) -> AnimationPair {
         var animation = CABasicAnimation(keyPath:"transform.rotation")
         animation.duration = 0.8
         animation.additive = true
         animation.fromValue = 0.0
-        animation.toValue = a
+        animation.toValue = angle
         animation.didStop = didStop
         animation.removedOnCompletion = false
         return AnimationPair(self, animation)
@@ -81,6 +83,21 @@ public extension CALayer {
         animation.additive = true
         animation.removedOnCompletion = false
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
+        return AnimationPair(self, animation)
+    }
+    
+    func moveAnimation(#from:CGPoint, to:CGPoint) -> AnimationPair {
+        return moveAnimation(from:from, to:to, didStop:nil)
+    }
+    
+    func moveAnimation(#from:CGPoint, to:CGPoint, didStop:(() -> Void)?) -> AnimationPair {
+        var animation = CABasicAnimation(keyPath:"position")
+        animation.duration = 0.5
+        animation.additive = true
+        animation.fromValue = NSValue(CGPoint: from)
+        animation.toValue = NSValue(CGPoint: to)
+        animation.didStop = didStop
+        animation.removedOnCompletion = false
         return AnimationPair(self, animation)
     }
     
@@ -107,21 +124,23 @@ public extension CALayer {
     
 }
 
+// MARK: Animation extension of CAShapeLayer
+
 public extension CAShapeLayer {
 
     func strokeEndAnimation() -> AnimationPair {
         return strokeEndAnimation(nil)
     }
     
-    func strokeEndAnimation(from f:Float, to:Float) -> AnimationPair {
-        return strokeEndAnimation(from:f, to:to, didStop:nil)
+    func strokeEndAnimation(#from:Float, to:Float) -> AnimationPair {
+        return strokeEndAnimation(from:from, to:to, didStop:nil)
     }
     
     func strokeEndAnimation(didStop:(() -> Void)?) -> AnimationPair {
         return strokeEndAnimation(from:0, to:1.0, didStop:didStop)
     }
     
-    func strokeEndAnimation(from f:Float, to:Float, didStop:(() -> Void)?) -> AnimationPair {
+    func strokeEndAnimation(#from:Float, to:Float, didStop:(() -> Void)?) -> AnimationPair {
         var animation = CABasicAnimation(keyPath:"strokeEnd")
         animation.duration = 0.8
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
@@ -129,7 +148,37 @@ public extension CAShapeLayer {
         animation.toValue = 1.0
         animation.didStop = didStop
         animation.removedOnCompletion = false
-        return AnimationPair(self, animation)
+        return AnimationPair(self, animation, true)
+    }
+    
+    func strokeColorAnimation(#from:UIColor, to:UIColor) -> AnimationPair {
+        var animation = CABasicAnimation(keyPath:"strokeColor")
+        animation.duration = 0.8
+        animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
+        animation.fromValue = from.CGColor
+        animation.toValue = to.CGColor
+        animation.removedOnCompletion = false
+        return AnimationPair(self, animation, true)
+    }
+    
+    func lineWidthAnimation(#from:CGFloat, to:CGFloat) -> AnimationPair {
+        var animation = CABasicAnimation(keyPath:"lineWidth")
+        animation.duration = 0.8
+        animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
+        animation.fromValue = from
+        animation.toValue = to
+        animation.removedOnCompletion = false
+        return AnimationPair(self, animation, true)
+    }
+    
+    func dashPhaseAnimation(#from:CGFloat, to:CGFloat) -> AnimationPair {
+        var animation = CABasicAnimation(keyPath:"lineDashPhase")
+        animation.duration = 0.8
+        animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
+        animation.fromValue = from
+        animation.toValue = to
+        animation.removedOnCompletion = false
+        return AnimationPair(self, animation, true)
     }
     
     func switchPathAnimation(to:CGPath) -> AnimationPair {
@@ -138,9 +187,12 @@ public extension CAShapeLayer {
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.toValue = path
         animation.removedOnCompletion = false
-        return AnimationPair(self, animation)
+        return AnimationPair(self, animation, true)
     }
 }
+
+// MARK: animationGroup() and applyAnimations()
+// animationGroup() for the same layer, and applyAnimations() for multiple layers
 
 public func animationGroup(animations:[AnimationPair]) -> AnimationPair {
     return animationGroup(animations, nil)
@@ -148,12 +200,17 @@ public func animationGroup(animations:[AnimationPair]) -> AnimationPair {
 
 public func animationGroup(animations:[AnimationPair], didStop:(() -> Void)?) -> AnimationPair {
     var animation = CAAnimationGroup()
-    animation.animations = animations.map { return $0.animation }
+    let layer = animations.first!.layer
+    
+    animation.animations = animations.map {
+        assert($0.layer == layer)
+        return $0.animation
+    }
     for anim in animation.animations {
         animation.duration = max(animation.duration, anim.duration)
     }
     animation.removedOnCompletion = false
-    return AnimationPair(animations.first!.layer, animation)
+    return AnimationPair(layer, animation)
 }
 
 public func applyAnimations(animations:[AnimationPair], completion:(() -> Void)?) {
@@ -164,20 +221,30 @@ public func applyAnimations(animations:[AnimationPair], completion:(() -> Void)?
     }
     var duration:CFTimeInterval = 0
     for la in animations {
-        la.layer.addAnimation(la.animation)
+        la.apply()
         duration = max(duration, la.animation.duration)
     }
     CATransaction.setAnimationDuration(duration)
     CATransaction.commit()
 }
 
-public class AnimationPair : NSObject {
-    public var layer:CALayer
-    public var animation:CAAnimation
+// MARK: Pair of layer and animation
+
+public class AnimationPair {
+    public let layer:CALayer
+    public let animation:CAAnimation
+    private let forShapeLayer:Bool
     
     init(_ layer:CALayer, _ animation:CAAnimation) {
         self.layer = layer
         self.animation = animation
+        self.forShapeLayer = false
+    }
+    
+    init(_ layer:CALayer, _ animation:CAAnimation, _ forShapeLayer:Bool) {
+        self.layer = layer
+        self.animation = animation
+        self.forShapeLayer = forShapeLayer
     }
     
     public func set(did:(CAAnimation) -> Void) -> AnimationPair {
@@ -201,23 +268,32 @@ public class AnimationPair : NSObject {
         return self
     }
     
+    public func setBeginTime(index:Int, gap:CFTimeInterval, duration:CFTimeInterval) -> AnimationPair {
+        animation.beginTime = CACurrentMediaTime() + Double(index) * gap
+        setDuration(duration)
+        return self
+    }
+    
     public func apply() {
         layer.addAnimation(animation)
+        if let gradientLayer = layer.gradientLayer {
+            gradientLayer.addAnimation(animation)
+        }
     }
     
     public func apply(didStop:(() -> Void)?) {
         animation.didStop = didStop
-        layer.addAnimation(animation)
+        apply()
     }
     
     public func apply(duration d:CFTimeInterval) {
         setDuration(d)
-        layer.addAnimation(animation)
+        apply()
     }
     
     public func apply(duration d:CFTimeInterval, didStop:(() -> Void)?) {
         setDuration(d)
         animation.didStop = didStop
-        layer.addAnimation(animation)
+        apply()
     }
 }

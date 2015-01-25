@@ -1,30 +1,40 @@
 # ShapeAnimation-Swift
 
-Vector animation framework in Swift based on [SwiftGraphics](https://github.com/schwa/SwiftGraphics) for iOS 8.
+The Write Less, Do More, Vector animation framework in Swift based on [SwiftGraphics](https://github.com/schwa/SwiftGraphics) for iOS 8.
 
 [![Travis][travis_img]][travis]
 
 [travis]: https://travis-ci.org/rhcad/ShapeAnimation-Swift
 [travis_img]: https://travis-ci.org/rhcad/ShapeAnimation-Swift.svg?branch=master
 
+All development happens on the [develop][develop] branch. Code is merged back on master branch infrequently.
+
+[develop]: https://github.com/rhcad/ShapeAnimation-Swift/tree/develop
+
 ## What's included
 
 * ShapeView class which contains vector shape layers.
+  * Helpers to add text, circle, regular polygon, lines and other shapes.
+  * Support gradient fill with animation.
+
 * Animation extension functions of CALayer and CAShapeLayer.
   * opacityAnimation, flashAnimation
   * scaleAnimation
   * rotate360Degrees, rotationAnimation
   * shakeAnimation
-  * moveOnPathAnimation
+  * moveAnimation, moveOnPathAnimation
   * slideToRight
   * strokeEndAnimation
+  * strokeColorAnimation, lineWidthAnimation, dashPhaseAnimation
   * switchPathAnimation
-  * animationGroup
-  * applyAnimations
+  * animationGroup for the same layer 
+  * applyAnimations for multiple layers
 
 ![Stroke Lines](Documentation/strokelines.gif)
 ![Move on Path](Documentation/moveonpath.gif)
 ![Radar Circles](Documentation/radar.gif)
+
+![Rotate Polygons](Documentation/rotate_polygons.gif)
 
 ## Usage
 
