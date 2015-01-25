@@ -10,14 +10,18 @@ Vector animation framework in Swift based on [SwiftGraphics](https://github.com/
 ## What's included
 
 * ShapeView class which contains vector shape layers.
+  * Helpers to add text, circle, regular polygon, lines and other shapes.
+  * Support gradient fill with animation.
+
 * Animation extension functions of CALayer and CAShapeLayer.
   * opacityAnimation, flashAnimation
   * scaleAnimation
   * rotate360Degrees, rotationAnimation
   * shakeAnimation
-  * moveOnPathAnimation
+  * moveAnimation, moveOnPathAnimation
   * slideToRight
   * strokeEndAnimation
+  * strokeColorAnimation, lineWidthAnimation, dashPhaseAnimation
   * switchPathAnimation
   * animationGroup
   * applyAnimations
@@ -25,6 +29,7 @@ Vector animation framework in Swift based on [SwiftGraphics](https://github.com/
 ![Stroke Lines](Documentation/strokelines.gif)
 ![Move on Path](Documentation/moveonpath.gif)
 ![Radar Circles](Documentation/radar.gif)
+![Rotate Polygons](Documentation/rotate_polygons.gif)
 
 ## Usage
 

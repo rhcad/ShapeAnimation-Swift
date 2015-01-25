@@ -51,23 +51,24 @@ class MasterViewController: UITableViewController {
     
     private func testAddLines(viewController:DetailViewController) {
         viewController.animationBlock = { (view) -> Void in
-            view.strokeWidth = 8
+            view.style.strokeWidth = 8
             
-            let layer1 = self.addLinesLayer(view, points:[(10.0,20.0),(150.0,40.0),(120.0,320.0)])
+            let points1 = [(10.0,20.0),(150.0,40.0),(120.0,320.0)].map{ CGPoint($0) }
+            let layer1 = view.addLinesLayer(points1, closed:true)
             layer1.strokeEndAnimation().apply() {
                 layer1.shakeAnimation().apply()
             }
             
-            let xf2 = CGAffineTransform(tx:100.0, ty:0.0)
-            let points1 = layer1.transformedPath.points
-            let points2 = points1.map { ($0 * xf2).asTuple }
+            view.style.strokeColor = UIColor.blueColor()
             
-            let la2 = self.addLinesLayer(view, points:points2, color: UIColor.blueColor())
+            let xf2 = CGAffineTransform(tx:100.0, ty:0.0)
+            let la2 = view.addLinesLayer(points1.map { $0 * xf2 }, closed:true)
             la2.scaleAnimation(from:1, to:1.1, repeatCount:3).apply(duration:0.3)
             
+            view.style.strokeColor = UIColor.greenColor()
+            
             let xf3 = CGAffineTransform(tx:200.0, ty:0.0)
-            let points3 = points1.map { ($0 * xf3).asTuple }
-            let la3 = self.addLinesLayer(view, points:points3, color: UIColor.greenColor())
+            let la3 = view.addLinesLayer(points1.map { $0 * xf3 }, closed:true)
             la3.flashAnimation(repeatCount:6).apply()
         }
     }
@@ -79,58 +80,61 @@ class MasterViewController: UITableViewController {
             path.addCubicCurveToPoint(CGPoint(x:250, y:220), control1:CGPoint(x:10, y:300), control2:CGPoint(x:150, y:375))
             path.addSmoothQuadCurveToPoint(CGPoint(x:120, y:120))
             
-            let layer1 = self.addLinesLayer(view, points: [(10.0, 20.0), (150.0, 40.0), (120.0, 120.0)])
+            view.style.gradientColors = [UIColor(red:0.5, green:0.5, blue:0.9, alpha:1.0),
+                UIColor(red:0.9, green:0.9, blue:0.3, alpha:1.0)]
+            let points = [(10.0, 20.0), (150.0, 40.0), (120.0, 120.0)].map{ CGPoint($0) }
+            let layer1 = view.addLinesLayer(points, closed:true)
+            
             let a1 = layer1.moveOnPathAnimation(path).set {$0.duration=1.6}
             let a2 = layer1.rotate360Degrees().set {$0.repeatCount=2}
-            animationGroup([a1, a2]).set {$0.autoreverses=true}.apply()
+            let a3 = layer1.lineWidthAnimation(from:0, to:5)
+            animationGroup([a1, a2, a3]).set {$0.autoreverses=true;$0.repeatCount=HUGE}.apply()
             
-            let pathLayer = self.addLinesLayer(view, points:[(10.0, 20.0)], color: UIColor.lightGrayColor())
+            let pathLayer = view.addLinesLayer([], closed:false)
             pathLayer.transformedPath = path
+            let a4 = pathLayer.strokeColorAnimation(from:UIColor.lightGrayColor(), to:UIColor.greenColor())
+                .set{$0.autoreverses=true;$0.repeatCount=HUGE}
+            let a5 = pathLayer.dashPhaseAnimation(from:0, to:20)
+            pathLayer.lineDashPattern = [5, 5]
+            animationGroup([a4, a5]).set{$0.repeatCount=HUGE}.apply()
         }
     }
     
     private func testRotatePolygons(viewController:DetailViewController) {
         viewController.animationBlock = { (view) -> Void in
+            view.style.gradientColors = [UIColor(red:0, green:0.5, blue:1, alpha:1),
+                UIColor(red:0, green:1, blue:1, alpha:1)]
             
+            var animations:[AnimationPair] = []
+            
+            for (i, character) in enumerate("swift") {
+                let layer = view.addPolygonLayer(5, center:CGPoint(x:50 + 60*i, y:50), radius:25)
+                let textLayer = view.addTextLayer(String(character), frame:layer.frame, fontSize:35)
+                
+                animations.append(layer.rotationAnimation(angle: CGFloat(2 * M_PI))
+                    .setBeginTime(i, gap:0.3, duration:1.5))
+                animations.append(textLayer.rotationAnimation(angle: CGFloat(2 * M_PI))
+                    .setBeginTime(i, gap:0.3, duration:1.5))
+            }
+            applyAnimations(animations, nil)
         }
     }
     
     private func testRadarCircles(viewController:DetailViewController) {
         viewController.animationBlock = { (view) -> Void in
-            let duration: Double = 2
             let count = 6
-            let defaultCurve = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+            let duration: Double = 2
             
-            view.strokeWidth = 1
+            view.style.strokeWidth = 1
             for i in 0..<count {
-                let la1 = view.addCircleLayer(center:CGPoint(x:200, y:200), radius:15)
+                let la1 = view.addCircleLayer(center:CGPoint(x:200, y:100), radius:15)
                 let anim = animationGroup([la1.scaleAnimation(from:0, to:5),
                     la1.opacityAnimation(from:1, to:0)])
-                    .setDuration(duration)
-                    .set {$0.beginTime = CACurrentMediaTime() + Double(i) * duration / Double(count) }
+                    .setBeginTime(i, gap:duration / Double(count), duration:duration)
                     .set {$0.repeatCount=HUGE; $0.fillMode = kCAFillModeBackwards}
-                    .set {$0.timingFunction = defaultCurve}
                 anim.apply()
             }
         }
-    }
-    
-    private func addLinesLayer(view: ShapeView, points:[(CGFloat, CGFloat)]) -> CAShapeLayer {
-        var path = CGPathCreateMutable()
-        
-        path.move(CGPoint(points[0]))
-        for i in 1..<points.count {
-            path.addLine(CGPoint(points[i]))
-        }
-        path.close()
-        
-        return view.addShapeLayer(path)
-    }
-    
-    private func addLinesLayer(view: ShapeView, points:[(CGFloat, CGFloat)], color:UIColor) -> CAShapeLayer {
-        let layer = addLinesLayer(view, points:points)
-        layer.strokeColor = color.CGColor
-        return layer
     }
     
 }

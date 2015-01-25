@@ -10,40 +10,107 @@ import UIKit
 import QuartzCore
 import SwiftGraphics
 
+//! Stroke and fill properties for shape layers
+public struct StrokeFill {
+    public var strokeColor      = UIColor(white:0, alpha:0.8)
+    public var fillColor        : UIColor?
+    public var gradientColors   :[UIColor]?
+    public var gradientStops    = [0.0, 1.0]
+    public var strokeWidth      : CGFloat = 2.0
+    public var lineCap          = kCALineCapButt
+    public var lineJoin         = kCALineJoinRound
+    public var lineDash         : [CGFloat]?
+    
+    public init() {}
+}
+
 //! View class which contains vector shape layers.
 public class ShapeView : UIView {
     
-    // Properties for the new shape layers
-    //
-    public var strokeColor     = UIColor(white:0, alpha:0.8)
-    public var fillColor       : UIColor?
-    public var strokeWidth     : CGFloat = 2.0
-    public var lineCap         = kCALineCapButt
-    public var lineJoin        = kCALineJoinRound
-    public var lineDash        : [CGFloat]?
+    public var style = StrokeFill()
     
     public func addShapeLayer(path:CGPath) -> CAShapeLayer {
-        let frame = path.bounds
+        let frame = path.boundingBox
         var xf    = CGAffineTransform(translation:-frame.origin)
         let layer = CAShapeLayer()
-
-        layer.frame = frame
-        layer.path = CGPathCreateCopyByTransformingPath(path, &xf)
-        layer.strokeColor = strokeColor.CGColor
-        layer.fillColor = fillColor?.CGColor
-        layer.lineWidth = strokeWidth
-        layer.lineCap = path.isClosed ? kCALineCapRound : lineCap
-        layer.lineJoin = lineJoin
-        layer.lineDashPattern = lineDash
         
+        layer.frame = frame
+        layer.path = frame.isEmpty ? path : CGPathCreateCopyByTransformingPath(path, &xf)
+        layer.strokeColor = style.strokeColor.CGColor
+        layer.lineWidth = style.strokeWidth
+        layer.lineCap = path.isClosed ? kCALineCapRound : style.lineCap
+        layer.lineJoin = style.lineJoin
+        layer.lineDashPattern = style.lineDash
+        
+        if style.gradientColors != nil && path.isClosed {
+            let gradientLayer = CAGradientLayer()
+            let maskLayer = CAShapeLayer()
+            
+            maskLayer.frame = layer.bounds
+            maskLayer.path = layer.path
+            maskLayer.strokeColor = nil
+            
+            gradientLayer.colors = style.gradientColors!.map{$0.CGColor}
+            gradientLayer.locations = style.gradientStops
+            gradientLayer.startPoint = CGPoint.zeroPoint
+            gradientLayer.endPoint = CGPoint(x:1, y:1)
+            gradientLayer.frame = frame
+            
+            gradientLayer.mask = maskLayer
+            self.layer.addSublayer(gradientLayer)
+            layer.fillColor = nil
+            LayerLink.add((layer, gradientLayer))
+        } else {
+            layer.fillColor = style.fillColor?.CGColor
+        }
         self.layer.addSublayer(layer)
         
         return layer
     }
+    
+    public func addTextLayer(text:String, frame:CGRect, fontSize: CGFloat) -> CATextLayer {
+        let layer = CATextLayer()
+        
+        layer.frame = frame
+        layer.string = text
+        layer.fontSize = fontSize
+        layer.foregroundColor = style.strokeColor.CGColor
+        layer.alignmentMode = kCAAlignmentCenter
+        layer.wrapped = true
+        self.layer.addSublayer(layer)
+    
+        return layer
+    }
+}
 
+public extension CALayer {
+    
+    public var gradientLayer:CAGradientLayer? { get { return LayerLink.find(self) as? CAGradientLayer } }
+    
+    public func removeLayer() {
+        if let reflayer = LayerLink.find(self) {
+            LayerLink.remove(reflayer)
+            reflayer.removeFromSuperlayer()
+        }
+        LayerLink.remove(self)
+        self.removeFromSuperlayer()
+    }
+}
+
+public extension ShapeView {
+    
     public func addCircleLayer(center c:CGPoint, radius:CGFloat) -> CAShapeLayer {
         return addShapeLayer(CGPathCreateWithEllipseInRect(CGRect(center:c, radius:radius), nil))
     }
+    
+    public func addPolygonLayer(nside:Int, center:CGPoint, radius:CGFloat) -> CAShapeLayer {
+        return addLinesLayer(RegularPolygon(nside:nside, center:center, radius:radius).points, closed:true)
+    }
+    
+    public func addLinesLayer(points:[CGPoint], closed:Bool) -> CAShapeLayer {
+        return addShapeLayer(Path(vertices:points, closed:closed).CGPath)
+    }
+    
 }
 
 public extension CAShapeLayer {
@@ -55,7 +122,7 @@ public extension CAShapeLayer {
             return CGPathCreateCopyByTransformingPath(path, &xf)
         }
         set(v) {
-            frame = v.bounds
+            frame = v.boundingBox
             var xf = CGAffineTransform(translation:-frame.origin)
             path = CGPathCreateCopyByTransformingPath(v, &xf)
         }
