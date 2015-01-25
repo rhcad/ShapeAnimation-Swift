@@ -10,7 +10,7 @@ The Write Less, Do More, Vector animation framework in Swift based on [SwiftGrap
 ## What's included
 
 * ShapeView class which contains vector shape layers.
-  * Helpers to add text, circle, regular polygon, lines and other shapes.
+  * Helper functions to add text, circle, regular polygon, lines and other shapes.
   * Support gradient fill with animation.
 
 * Animation extension functions of CALayer and CAShapeLayer.
@@ -23,7 +23,7 @@ The Write Less, Do More, Vector animation framework in Swift based on [SwiftGrap
   * strokeEndAnimation
   * strokeColorAnimation, lineWidthAnimation, dashPhaseAnimation
   * switchPathAnimation
-  * animationGroup for the same layer 
+  * animationGroup for the same layer
   * applyAnimations for multiple layers
 
 ![Stroke Lines](Documentation/strokelines.gif)
