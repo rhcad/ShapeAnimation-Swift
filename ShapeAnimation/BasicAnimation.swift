@@ -192,6 +192,7 @@ public extension CAShapeLayer {
 }
 
 // MARK: animationGroup() and applyAnimations()
+// animationGroup() for the same layer, and applyAnimations() for multiple layers
 
 public func animationGroup(animations:[AnimationPair]) -> AnimationPair {
     return animationGroup(animations, nil)
@@ -199,12 +200,17 @@ public func animationGroup(animations:[AnimationPair]) -> AnimationPair {
 
 public func animationGroup(animations:[AnimationPair], didStop:(() -> Void)?) -> AnimationPair {
     var animation = CAAnimationGroup()
-    animation.animations = animations.map { return $0.animation }
+    let layer = animations.first!.layer
+    
+    animation.animations = animations.map {
+        assert($0.layer == layer)
+        return $0.animation
+    }
     for anim in animation.animations {
         animation.duration = max(animation.duration, anim.duration)
     }
     animation.removedOnCompletion = false
-    return AnimationPair(animations.first!.layer, animation)
+    return AnimationPair(layer, animation)
 }
 
 public func applyAnimations(animations:[AnimationPair], completion:(() -> Void)?) {

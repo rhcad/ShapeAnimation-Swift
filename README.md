@@ -1,6 +1,6 @@
 # ShapeAnimation-Swift
 
-Vector animation framework in Swift based on [SwiftGraphics](https://github.com/schwa/SwiftGraphics) for iOS 8.
+The Write Less, Do More, Vector animation framework in Swift based on [SwiftGraphics](https://github.com/schwa/SwiftGraphics) for iOS 8.
 
 [![Travis][travis_img]][travis]
 
@@ -23,12 +23,13 @@ Vector animation framework in Swift based on [SwiftGraphics](https://github.com/
   * strokeEndAnimation
   * strokeColorAnimation, lineWidthAnimation, dashPhaseAnimation
   * switchPathAnimation
-  * animationGroup
-  * applyAnimations
+  * animationGroup for the same layer 
+  * applyAnimations for multiple layers
 
 ![Stroke Lines](Documentation/strokelines.gif)
 ![Move on Path](Documentation/moveonpath.gif)
 ![Radar Circles](Documentation/radar.gif)
+
 ![Rotate Polygons](Documentation/rotate_polygons.gif)
 
 ## Usage
