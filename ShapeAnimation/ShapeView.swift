@@ -79,7 +79,7 @@ public class ShapeView : UIView {
         return layer
     }
     
-    public func addTextLayer(text:String, frame:CGRect, fontSize: CGFloat) -> CATextLayer {
+    public func addTextLayer(text:String, frame:CGRect, fontSize:CGFloat) -> CATextLayer {
         let layer = CATextLayer()
         
         layer.frame = frame
@@ -118,8 +118,8 @@ public extension ShapeView {
         return addLinesLayer(RegularPolygon(nside:nside, center:center, radius:radius).points, closed:true)
     }
     
-    public func addLinesLayer(points:[CGPoint], closed:Bool) -> CAShapeLayer {
-        return addShapeLayer(Path(vertices:points, closed:closed).CGPath)
+    public func addLinesLayer(points:[CGPoint], closed:Bool = false) -> CAShapeLayer {
+        return addShapeLayer(Path(vertices:points, closed:closed).cgPath)
     }
     
 }

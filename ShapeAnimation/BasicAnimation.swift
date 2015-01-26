@@ -16,11 +16,7 @@ public extension CALayer {
     typealias Radians = CGFloat
     typealias RelativePoint = CGPoint
     
-    func opacityAnimation(#from:Float, to:Float) -> AnimationPair {
-        return opacityAnimation(from:from, to:to, didStop:nil)
-    }
-    
-    func opacityAnimation(#from:Float, to:Float, didStop:(() -> Void)?) -> AnimationPair {
+    func opacityAnimation(#from:Float, to:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"opacity")
         animation.duration = 0.8
         animation.fromValue = from
@@ -31,19 +27,15 @@ public extension CALayer {
         return AnimationPair(self, animation)
     }
     
-    func flashAnimation(repeatCount n:Float) -> AnimationPair {
-        return opacityAnimation(from:0, to:1).set {
+    func flashAnimation(repeatCount n:Float = 1, didStop:(() -> Void)? = nil) -> AnimationPair {
+        return opacityAnimation(from:0, to:1, didStop:didStop).set {
             $0.repeatCount = n
             $0.autoreverses = true
             $0.duration = 0.2
         }
     }
     
-    func scaleAnimation(#from:Float, to:Float) -> AnimationPair {
-        return scaleAnimation(from:from, to:to, didStop:nil)
-    }
-    
-    func scaleAnimation(#from:Float, to:Float, didStop:(() -> Void)?) -> AnimationPair {
+    func scaleAnimation(#from:Float, to:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"transform.scale")
         animation.duration = 0.8
         animation.fromValue = from
@@ -54,19 +46,15 @@ public extension CALayer {
         return AnimationPair(self, animation)
     }
     
-    func scaleAnimation(#from:Float, to:Float, repeatCount:Float) -> AnimationPair {
-        return scaleAnimation(from:from, to:to, didStop:nil).set {$0.repeatCount=repeatCount}
+    func scaleAnimation(#from:Float, to:Float, repeatCount:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
+        return scaleAnimation(from:from, to:to, didStop:didStop).set {$0.repeatCount=repeatCount}
     }
     
-    func rotate360Degrees() -> AnimationPair {
-        return rotationAnimation(angle:Radians(2 * M_PI), didStop:nil)
+    func rotate360Degrees(didStop:(() -> Void)? = nil) -> AnimationPair {
+        return rotationAnimation(angle:Radians(2 * M_PI), didStop:didStop)
     }
     
-    func rotationAnimation(#angle:Radians) -> AnimationPair {
-        return rotationAnimation(angle:angle, didStop:nil)
-    }
-    
-    func rotationAnimation(#angle:Radians, didStop:(() -> Void)?) -> AnimationPair {
+    func rotationAnimation(#angle:Radians, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"transform.rotation")
         animation.duration = 0.8
         animation.additive = true
@@ -77,12 +65,13 @@ public extension CALayer {
         return AnimationPair(self, animation)
     }
     
-    func shakeAnimation() -> AnimationPair {
+    func shakeAnimation(didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CAKeyframeAnimation()
         animation.keyPath = "position.x"
         animation.values = [0, 10, -10, 10, 0]
         animation.duration = 0.8
         animation.additive = true
+        animation.didStop = didStop
         animation.removedOnCompletion = false
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         return AnimationPair(self, animation)
@@ -92,33 +81,36 @@ public extension CALayer {
         return moveAnimation(from:CGPoint.zeroPoint, to:to)
     }
     
-    func moveAnimation(#from:RelativePoint, to:RelativePoint) -> AnimationPair {
+    func moveAnimation(#from:RelativePoint, to:RelativePoint, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"position")
         animation.duration = 0.5
         animation.additive = true
         animation.fromValue = NSValue(CGPoint: from)
         animation.toValue = NSValue(CGPoint: to)
+        animation.didStop = didStop
         animation.removedOnCompletion = false
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         return AnimationPair(self, animation)
     }
     
-    func moveOnPathAnimation(path:CGPath) -> AnimationPair {
+    func moveOnPathAnimation(path:CGPath, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CAKeyframeAnimation()
         animation.keyPath = "position"
         animation.path = path
         animation.duration = 0.8
+        animation.didStop = didStop
         animation.removedOnCompletion = false
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         return AnimationPair(self, animation)
     }
     
-    func slideToRight() -> AnimationPair {
+    func slideToRight(didStop:(() -> Void)? = nil) -> AnimationPair {
         let slide = CATransition()
         
         slide.type = kCATransitionPush
         slide.subtype = kCATransitionFromLeft
         slide.duration = 0.8
+        slide.didStop = didStop
         slide.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         slide.fillMode = kCAFillModeRemoved
         return AnimationPair(self, slide)
@@ -129,20 +121,8 @@ public extension CALayer {
 // MARK: Animation extension of CAShapeLayer
 
 public extension CAShapeLayer {
-
-    func strokeEndAnimation() -> AnimationPair {
-        return strokeEndAnimation(nil)
-    }
     
-    func strokeEndAnimation(#from:Float, to:Float) -> AnimationPair {
-        return strokeEndAnimation(from:from, to:to, didStop:nil)
-    }
-    
-    func strokeEndAnimation(didStop:(() -> Void)?) -> AnimationPair {
-        return strokeEndAnimation(from:0, to:1.0, didStop:didStop)
-    }
-    
-    func strokeEndAnimation(#from:Float, to:Float, didStop:(() -> Void)?) -> AnimationPair {
+    func strokeEndAnimation(from:Float = 0, to:Float = 1, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"strokeEnd")
         animation.duration = 0.8
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
@@ -153,22 +133,24 @@ public extension CAShapeLayer {
         return AnimationPair(self, animation)
     }
     
-    func strokeColorAnimation(#from:UIColor, to:UIColor) -> AnimationPair {
+    func strokeColorAnimation(#from:UIColor, to:UIColor, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"strokeColor")
         animation.duration = 0.8
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.fromValue = from.CGColor
         animation.toValue = to.CGColor
+        animation.didStop = didStop
         animation.removedOnCompletion = false
         return AnimationPair(self, animation)
     }
     
-    func lineWidthAnimation(#from:CGFloat, to:CGFloat) -> AnimationPair {
+    func lineWidthAnimation(#from:CGFloat, to:CGFloat, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"lineWidth")
         animation.duration = 0.8
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.fromValue = from
         animation.toValue = to
+        animation.didStop = didStop
         animation.removedOnCompletion = false
         return AnimationPair(self, animation)
     }
@@ -183,11 +165,12 @@ public extension CAShapeLayer {
         return AnimationPair(self, animation)
     }
     
-    func switchPathAnimation(to:CGPath) -> AnimationPair {
+    func switchPathAnimation(to:CGPath, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"path")
         animation.duration = 0.8
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.toValue = path
+        animation.didStop = didStop
         animation.removedOnCompletion = false
         return AnimationPair(self, animation)
     }
@@ -196,11 +179,7 @@ public extension CAShapeLayer {
 // MARK: animationGroup() and applyAnimations()
 // animationGroup() for the same layer, and applyAnimations() for multiple layers
 
-public func animationGroup(animations:[AnimationPair]) -> AnimationPair {
-    return animationGroup(animations, nil)
-}
-
-public func animationGroup(animations:[AnimationPair], didStop:(() -> Void)?) -> AnimationPair {
+public func animationGroup(animations:[AnimationPair], didStop:(() -> Void)? = nil) -> AnimationPair {
     let animation = CAAnimationGroup()
     let layer = animations.first!.layer
     

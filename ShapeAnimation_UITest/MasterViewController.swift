@@ -51,25 +51,22 @@ class MasterViewController: UITableViewController {
     
     private func testAddLines(viewController:DetailViewController) {
         viewController.animationBlock = { (view) -> Void in
-            view.style.strokeWidth = 8
+            view.style.strokeWidth = 7
+            view.style.strokeColor = UIColor.purpleColor()
             
             let points1 = [(10.0,20.0),(150.0,40.0),(120.0,320.0)].map{ CGPoint($0) }
             let layer1 = view.addLinesLayer(points1, closed:true)
-            layer1.strokeEndAnimation().apply() {
+            animationGroup([layer1.strokeEndAnimation(), layer1.lineWidthAnimation(from:0, to:5)]).apply() {
                 layer1.shakeAnimation().apply()
             }
             
-            view.style.strokeColor = UIColor.blueColor()
-            
             let xf2 = CGAffineTransform(tx:100.0, ty:0.0)
             let la2 = view.addLinesLayer(points1.map { $0 * xf2 }, closed:true)
-            la2.scaleAnimation(from:1, to:1.1, repeatCount:3).apply(duration:0.3)
+            let la3 = view.addLinesLayer(points1.map { $0 * xf2 * xf2 }, closed:true)
             
-            view.style.strokeColor = UIColor.greenColor()
-            
-            let xf3 = CGAffineTransform(tx:200.0, ty:0.0)
-            let la3 = view.addLinesLayer(points1.map { $0 * xf3 }, closed:true)
-            la3.flashAnimation(repeatCount:6).apply()
+            la2.scaleAnimation(from:1, to:1.1, repeatCount:3).apply(duration:0.3) {
+                la3.flashAnimation().apply()
+            }
         }
     }
     
@@ -87,10 +84,9 @@ class MasterViewController: UITableViewController {
             
             let a1 = layer1.moveOnPathAnimation(path).set {$0.duration=1.6}
             let a2 = layer1.rotate360Degrees().set {$0.repeatCount=2}
-            let a3 = layer1.lineWidthAnimation(from:0, to:5)
-            animationGroup([a1, a2, a3]).set {$0.autoreverses=true;$0.repeatCount=HUGE}.apply()
+            animationGroup([a1, a2]).set {$0.autoreverses=true;$0.repeatCount=HUGE}.apply()
             
-            let pathLayer = view.addLinesLayer([CGPoint.zeroPoint], closed:false)
+            let pathLayer = view.addLinesLayer([CGPoint.zeroPoint])
             pathLayer.transformedPath = path
             let a4 = pathLayer.strokeColorAnimation(from:UIColor.lightGrayColor(), to:UIColor.greenColor())
                 .set{$0.autoreverses=true;$0.repeatCount=HUGE}
@@ -119,7 +115,7 @@ class MasterViewController: UITableViewController {
                     .setBeginTime(i, gap:0.3, duration:1.5))
             }
             applyAnimations(animations) {
-                let movement = CGPoint(x:500, y:0)
+                let movement = CGPoint(x:500)
                 for (i, anim) in enumerate(animations) {
                     anim.layer.moveAnimation(to:movement)
                         .setBeginTime(5 - i/2, gap:0.3, duration:0.5).apply() {
