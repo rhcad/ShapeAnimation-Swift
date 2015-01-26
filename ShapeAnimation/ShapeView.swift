@@ -27,7 +27,7 @@ public struct StrokeFill {
         set(v) {
             if v != nil && v!.count > 0 {
                 var i = 0
-                gradientFill = v?.map{ (CGFloat(i)/CGFloat(v!.count), $0) }
+                gradientFill = v?.map{ (CGFloat(i++)/CGFloat(v!.count), $0) }
             } else {
                 gradientFill = nil
             }

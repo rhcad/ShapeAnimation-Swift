@@ -235,6 +235,7 @@ public func applyAnimations(animations:[AnimationPair], completion:(() -> Void)?
 public class AnimationPair {
     public let layer:CALayer
     public let animation:CAAnimation
+    public var key = "TGAnimation"
     
     init(_ layer:CALayer, _ animation:CAAnimation) {
         self.layer = layer
@@ -269,9 +270,9 @@ public class AnimationPair {
     }
     
     public func apply() {
-        layer.addAnimation(animation)
+        layer.addAnimation(animation, forKey:key)
         if let gradientLayer = layer.gradientLayer {
-            gradientLayer.addAnimation(animation)
+            gradientLayer.addAnimation(animation, forKey:key)
         }
     }
     

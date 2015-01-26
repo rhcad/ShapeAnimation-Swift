@@ -104,6 +104,7 @@ class MasterViewController: UITableViewController {
         viewController.animationBlock = { (view) -> Void in
             view.style.gradientColors = [UIColor(red:0, green:0.5, blue:1, alpha:1),
                 UIColor(red:0, green:1, blue:1, alpha:1)]
+            view.style.gradientOrientation = (CGPoint.zeroPoint, CGPoint(x:1, y:1))
             
             var animations:[AnimationPair] = []
             

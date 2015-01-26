@@ -63,12 +63,6 @@ public extension CAAnimation {
     
 }
 
-public extension CALayer {
-    func addAnimation(anim: CAAnimation!) {
-        return addAnimation(anim, forKey:nil)
-    }
-}
-
 // MARK: Relations between CALayer and CAGradientLayer
 
 public struct LayerLink {
