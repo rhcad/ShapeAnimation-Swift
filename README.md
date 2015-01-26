@@ -14,7 +14,7 @@ All development happens on the [develop][develop] branch. Code is merged back on
 ## What's included
 
 * ShapeView class which contains vector shape layers.
-  * Helpers to add text, circle, regular polygon, lines and other shapes.
+  * Helper functions to add text, circle, regular polygon, lines and other shapes.
   * Support gradient fill with animation.
 
 * Animation extension functions of CALayer and CAShapeLayer.
@@ -27,7 +27,7 @@ All development happens on the [develop][develop] branch. Code is merged back on
   * strokeEndAnimation
   * strokeColorAnimation, lineWidthAnimation, dashPhaseAnimation
   * switchPathAnimation
-  * animationGroup for the same layer 
+  * animationGroup for the same layer
   * applyAnimations for multiple layers
 
 ![Stroke Lines](Documentation/strokelines.gif)
@@ -58,7 +58,19 @@ let a2 = la4.rotate360Degrees().set {$0.repeatCount=2}
 animationGroup([a1, a2]).set {$0.autoreverses=true}.apply()
 ```
 
-## In Progress
+## Help Wanted
 
-All of this code is very much a _*work in progress*_. I'm adding and changing functionality as needed. Your help wanted. Please fork this project and submit pull requests or [issues][issues].
+All of this code is very much a _*work in progress*_. I'm adding and changing functionality as needed.
+
+Your help wanted. Please fork this project and submit pull requests or [issues][issues].
 [issues]: https://github.com/rhcad/ShapeAnimation-Swift/issues
+
+Contributions are always welcome in the following areas:
+
+* Header doc comments explaining what the functions do
+* Useful animation template or application examples
+* Fix issues about animation, Swift usage rules or translations
+
+## License
+
+ShapeAnimation-Swift is released under a BSD License. See LICENSE file for details.

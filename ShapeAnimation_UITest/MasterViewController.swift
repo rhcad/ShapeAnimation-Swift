@@ -90,7 +90,7 @@ class MasterViewController: UITableViewController {
             let a3 = layer1.lineWidthAnimation(from:0, to:5)
             animationGroup([a1, a2, a3]).set {$0.autoreverses=true;$0.repeatCount=HUGE}.apply()
             
-            let pathLayer = view.addLinesLayer([], closed:false)
+            let pathLayer = view.addLinesLayer([CGPoint.zeroPoint], closed:false)
             pathLayer.transformedPath = path
             let a4 = pathLayer.strokeColorAnimation(from:UIColor.lightGrayColor(), to:UIColor.greenColor())
                 .set{$0.autoreverses=true;$0.repeatCount=HUGE}
@@ -104,19 +104,29 @@ class MasterViewController: UITableViewController {
         viewController.animationBlock = { (view) -> Void in
             view.style.gradientColors = [UIColor(red:0, green:0.5, blue:1, alpha:1),
                 UIColor(red:0, green:1, blue:1, alpha:1)]
+            view.style.gradientOrientation = (CGPoint.zeroPoint, CGPoint(x:1, y:1))
             
             var animations:[AnimationPair] = []
             
             for (i, character) in enumerate("swift") {
-                let layer = view.addPolygonLayer(5, center:CGPoint(x:50 + 60*i, y:50), radius:25)
-                let textLayer = view.addTextLayer(String(character), frame:layer.frame, fontSize:35)
+                let polygon = RegularPolygon(nside:5, center:CGPoint(x:50 + 60*i, y:50), radius:25)
+                let edgeLayer = view.addLinesLayer(polygon.points, closed:true)
+                let textLayer = view.addTextLayer(String(character), frame:polygon.incircle.frame, fontSize:30)
                 
-                animations.append(layer.rotationAnimation(angle: CGFloat(2 * M_PI))
+                animations.append(edgeLayer.rotationAnimation(angle: CGFloat(2 * M_PI))
                     .setBeginTime(i, gap:0.3, duration:1.5))
                 animations.append(textLayer.rotationAnimation(angle: CGFloat(2 * M_PI))
                     .setBeginTime(i, gap:0.3, duration:1.5))
             }
-            applyAnimations(animations, nil)
+            applyAnimations(animations) {
+                let movement = CGPoint(x:500, y:0)
+                for (i, anim) in enumerate(animations) {
+                    anim.layer.moveAnimation(to:movement)
+                        .setBeginTime(5 - i/2, gap:0.3, duration:0.5).apply() {
+                            anim.layer.removeLayer()
+                    }
+                }
+            }
         }
     }
     

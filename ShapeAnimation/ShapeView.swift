@@ -10,18 +10,29 @@ import UIKit
 import QuartzCore
 import SwiftGraphics
 
-//! Stroke and fill properties for shape layers
+//! Stroke and fill properties for new shape layers
 public struct StrokeFill {
     public var strokeColor      = UIColor(white:0, alpha:0.8)
     public var fillColor        : UIColor?
-    public var gradientColors   :[UIColor]?
-    public var gradientStops    = [0.0, 1.0]
+    public var gradientFill     :[(CGFloat, UIColor)]?
+    public var gradientOrientation = (CGPoint(x:0.5, y:0), CGPoint(x:0.5, y:1))
     public var strokeWidth      : CGFloat = 2.0
     public var lineCap          = kCALineCapButt
     public var lineJoin         = kCALineJoinRound
     public var lineDash         : [CGFloat]?
     
     public init() {}
+    public var gradientColors:[UIColor]? {
+        get { return gradientFill?.map{$0.1} }
+        set(v) {
+            if v != nil && v!.count > 0 {
+                var i = 0
+                gradientFill = v?.map{ (CGFloat(i++)/CGFloat(v!.count), $0) }
+            } else {
+                gradientFill = nil
+            }
+        }
+    }
 }
 
 //! View class which contains vector shape layers.
@@ -42,7 +53,7 @@ public class ShapeView : UIView {
         layer.lineJoin = style.lineJoin
         layer.lineDashPattern = style.lineDash
         
-        if style.gradientColors != nil && path.isClosed {
+        if style.gradientFill != nil && path.isClosed {
             let gradientLayer = CAGradientLayer()
             let maskLayer = CAShapeLayer()
             
@@ -50,10 +61,10 @@ public class ShapeView : UIView {
             maskLayer.path = layer.path
             maskLayer.strokeColor = nil
             
-            gradientLayer.colors = style.gradientColors!.map{$0.CGColor}
-            gradientLayer.locations = style.gradientStops
-            gradientLayer.startPoint = CGPoint.zeroPoint
-            gradientLayer.endPoint = CGPoint(x:1, y:1)
+            gradientLayer.colors = style.gradientFill!.map{$0.1.CGColor}
+            gradientLayer.locations = style.gradientFill!.map{$0.0}
+            gradientLayer.startPoint = style.gradientOrientation.0
+            gradientLayer.endPoint = style.gradientOrientation.1
             gradientLayer.frame = frame
             
             gradientLayer.mask = maskLayer
