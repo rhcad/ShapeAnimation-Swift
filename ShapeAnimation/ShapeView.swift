@@ -93,6 +93,14 @@ public class ShapeView : UIView {
         return layer
     }
     
+    public func addImageLayer(image:UIImage!, center:CGPoint) -> CALayer {
+        let layer = CALayer()
+        layer.contents = image.CGImage
+        layer.frame = CGRect(center:center, size:image.size)
+        self.layer.addSublayer(layer)
+        return layer
+    }
+    
     override public func removeFromSuperview() {
         if self.layer.sublayers != nil {
             for layer in self.layer.sublayers {

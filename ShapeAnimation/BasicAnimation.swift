@@ -13,7 +13,7 @@ import SwiftGraphics
 // MARK: Animation extension of CALayer
 
 public extension CALayer {
-    typealias Radians = CGFloat
+    typealias Radians = AnyObject
     typealias RelativePoint = CGPoint
     
     func opacityAnimation(#from:Float, to:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
@@ -51,7 +51,7 @@ public extension CALayer {
     }
     
     func rotate360Degrees(didStop:(() -> Void)? = nil) -> AnimationPair {
-        return rotationAnimation(angle:Radians(2 * M_PI), didStop:didStop)
+        return rotationAnimation(angle:2 * M_PI, didStop:didStop)
     }
     
     func rotationAnimation(#angle:Radians, didStop:(() -> Void)? = nil) -> AnimationPair {
@@ -62,6 +62,7 @@ public extension CALayer {
         animation.toValue = angle
         animation.didStop = didStop
         animation.removedOnCompletion = false
+        animation.fillMode = kCAFillModeForwards
         return AnimationPair(self, animation)
     }
     
@@ -93,7 +94,7 @@ public extension CALayer {
         return AnimationPair(self, animation)
     }
     
-    func moveOnPathAnimation(path:CGPath, didStop:(() -> Void)? = nil) -> AnimationPair {
+    func moveOnPathAnimation(path:CGPath, autoRotate:Bool = false, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CAKeyframeAnimation()
         animation.keyPath = "position"
         animation.path = path
@@ -101,6 +102,10 @@ public extension CALayer {
         animation.didStop = didStop
         animation.removedOnCompletion = false
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
+        animation.fillMode = kCAFillModeForwards
+        if autoRotate {
+            animation.rotationMode = kCAAnimationRotateAuto;
+        }
         return AnimationPair(self, animation)
     }
     

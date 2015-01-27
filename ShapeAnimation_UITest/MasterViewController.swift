@@ -95,6 +95,13 @@ class MasterViewController: UITableViewController {
             let a5 = pathLayer.dashPhaseAnimation(from:0, to:20)
             pathLayer.lineDashPattern = [5, 5]
             animationGroup([a4, a5]).set{$0.repeatCount=HUGE}.apply()
+            
+            if let imageLayer = view.addImageLayer("airship.png", center:path.getPoint(0)!) {
+                let startTagent = path.getPoint(1)! - path.getPoint(0)!
+                imageLayer.rotationAnimation(angle:startTagent.direction).apply() {
+                    imageLayer.moveOnPathAnimation(path, autoRotate:true).set {$0.autoreverses=true}.apply(duration:2)
+                }
+            }
         }
     }
     
@@ -143,6 +150,16 @@ class MasterViewController: UITableViewController {
                 anim.apply()
             }
         }
+    }
+    
+
+public extension ShapeView {
+    
+    public func addImageLayer(name:String, center:CGPoint) -> CALayer? {
+        if let image = UIImage(named:name) {
+            return self.addImageLayer(image, center:center)
+        }
+        return nil
     }
     
 }
