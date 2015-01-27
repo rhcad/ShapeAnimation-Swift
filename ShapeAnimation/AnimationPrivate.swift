@@ -62,32 +62,3 @@ public extension CAAnimation {
     }
     
 }
-
-// MARK: Relations between CALayer and CAGradientLayer
-
-public struct LayerLink {
-    private static var link:[(CALayer, CALayer)] = []
-    
-    public static func add(p:(CALayer, CALayer)) {
-        link.append(p)
-    }
-    public static func find(l:CALayer) -> CALayer? {
-        for i in link {
-            if i.0 == l {
-                return i.1
-            }
-        }
-        return nil
-    }
-    public static func remove(l:CALayer) {
-        var i = 0
-        for (f,s) in link {
-            if f == l || s == l {
-                link.removeAtIndex(i)
-                remove(l)
-                return
-            }
-            i++
-        }
-    }
-}

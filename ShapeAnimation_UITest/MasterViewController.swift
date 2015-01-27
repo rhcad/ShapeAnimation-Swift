@@ -52,7 +52,7 @@ class MasterViewController: UITableViewController {
     private func testAddLines(viewController:DetailViewController) {
         viewController.animationBlock = { (view) -> Void in
             view.style.strokeWidth = 7
-            view.style.strokeColor = UIColor.purpleColor()
+            view.style.strokeColor = UIColor.redColor()
             
             let points1 = [(10.0,20.0),(150.0,40.0),(120.0,320.0)].map{ CGPoint($0) }
             let layer1 = view.addLinesLayer(points1, closed:true)
@@ -60,10 +60,12 @@ class MasterViewController: UITableViewController {
                 layer1.shakeAnimation().apply()
             }
             
+            view.style.strokeColor = UIColor.purpleColor()
             let xf2 = CGAffineTransform(tx:100.0, ty:0.0)
             let la2 = view.addLinesLayer(points1.map { $0 * xf2 }, closed:true)
             let la3 = view.addLinesLayer(points1.map { $0 * xf2 * xf2 }, closed:true)
             
+            la3.strokeColor = UIColor.greenColor().CGColor
             la2.scaleAnimation(from:1, to:1.1, repeatCount:3).apply(duration:0.3) {
                 la3.flashAnimation().apply()
             }
@@ -96,6 +98,7 @@ class MasterViewController: UITableViewController {
         }
     }
     
+    // Modified from http://zulko.github.io/blog/2014/09/20/vector-animations-with-python/
     private func testRotatePolygons(viewController:DetailViewController) {
         viewController.animationBlock = { (view) -> Void in
             view.style.gradientColors = [UIColor(red:0, green:0.5, blue:1, alpha:1),
@@ -111,8 +114,7 @@ class MasterViewController: UITableViewController {
                 
                 animations.append(edgeLayer.rotationAnimation(angle: CGFloat(2 * M_PI))
                     .setBeginTime(i, gap:0.3, duration:1.5))
-                animations.append(textLayer.rotationAnimation(angle: CGFloat(2 * M_PI))
-                    .setBeginTime(i, gap:0.3, duration:1.5))
+                animations.append(animations.last!.clone(textLayer))
             }
             applyAnimations(animations) {
                 let movement = CGPoint(x:500)
@@ -135,7 +137,7 @@ class MasterViewController: UITableViewController {
             for i in 0..<count {
                 let la1 = view.addCircleLayer(center:CGPoint(x:200, y:100), radius:15)
                 let anim = animationGroup([la1.scaleAnimation(from:0, to:5),
-                    la1.opacityAnimation(from:1, to:0)])
+                                           la1.opacityAnimation(from:1, to:0)])
                     .setBeginTime(i, gap:duration / Double(count), duration:duration)
                     .set {$0.repeatCount=HUGE; $0.fillMode = kCAFillModeBackwards}
                 anim.apply()

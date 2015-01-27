@@ -70,7 +70,7 @@ public class ShapeView : UIView {
             gradientLayer.mask = maskLayer
             self.layer.addSublayer(gradientLayer)
             layer.fillColor = nil
-            LayerLink.add((layer, gradientLayer))
+            layer.gradientLayer = gradientLayer
         } else {
             layer.fillColor = style.fillColor?.CGColor
         }
@@ -92,18 +92,49 @@ public class ShapeView : UIView {
     
         return layer
     }
+    
+    override public func removeFromSuperview() {
+        if self.layer.sublayers != nil {
+            for layer in self.layer.sublayers {
+                layer.removeLayer()
+            }
+        }
+        super.removeFromSuperview()
+    }
 }
 
 public extension CALayer {
     
-    public var gradientLayer:CAGradientLayer? { get { return LayerLink.find(self) as? CAGradientLayer } }
+    public var gradientLayer:CALayer? {
+        get {
+            if let dict = self.style {
+                return dict["gradientLayer"] as? CALayer
+            }
+            return nil
+        }
+        set {
+            weak var layer = newValue
+            if layer != nil || self.style != nil {
+                if self.style == nil {
+                    self.style = ["gradientLayer" : layer!]
+                } else {
+                    var newstyle = self.style
+                    if layer != nil {
+                        newstyle["gradientLayer"] = layer!
+                        self.style = newstyle
+                    } else {
+                        if let layer = newstyle.removeValueForKey("gradientLayer") as? CALayer {
+                            self.style = newstyle
+                            layer.removeFromSuperlayer()
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     public func removeLayer() {
-        if let reflayer = LayerLink.find(self) {
-            LayerLink.remove(reflayer)
-            reflayer.removeFromSuperlayer()
-        }
-        LayerLink.remove(self)
+        gradientLayer = nil
         self.removeFromSuperlayer()
     }
 }

@@ -27,7 +27,7 @@ public extension CALayer {
         return AnimationPair(self, animation)
     }
     
-    func flashAnimation(repeatCount n:Float = 1, didStop:(() -> Void)? = nil) -> AnimationPair {
+    func flashAnimation(repeatCount n:Float = 2, didStop:(() -> Void)? = nil) -> AnimationPair {
         return opacityAnimation(from:0, to:1, didStop:didStop).set {
             $0.repeatCount = n
             $0.autoreverses = true
@@ -219,6 +219,10 @@ public class AnimationPair {
     init(_ layer:CALayer, _ animation:CAAnimation) {
         self.layer = layer
         self.animation = animation
+    }
+    
+    public func clone(layer:CALayer) -> AnimationPair {
+        return AnimationPair(layer, self.animation)
     }
     
     public func set(did:(CAAnimation) -> Void) -> AnimationPair {
