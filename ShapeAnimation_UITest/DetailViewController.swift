@@ -9,14 +9,23 @@
 import UIKit
 import ShapeAnimation
 
+typealias AnimationBlock = ((view:ShapeView) -> Void)
+
 class DetailViewController: UIViewController {
     
-    @IBOutlet var animationView: ShapeView?
-    var animationBlock : ((view:ShapeView) -> Void)?
+    @IBOutlet var animationView: ShapeView!
+    var animationBlock : AnimationBlock?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        animationBlock?(view: animationView!)
+        animationBlock?(view: animationView)
     }
     
+    @IBAction func stop(sender: AnyObject) {
+        animationView.removeAllAnimations()
+    }
+    
+    @IBAction func pause(sender: UIBarButtonItem) {
+        animationView.paused = !animationView.paused
+    }
 }

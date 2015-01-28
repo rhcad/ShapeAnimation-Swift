@@ -34,7 +34,7 @@ The Write Less, Do More, Vector animation framework in Swift based on [SwiftGrap
 
 ## Usage
 
-Please see the examples in MasterViewController.swift.
+Please see the examples in [MasterViewController.swift](ShapeAnimation_UITest/MasterViewController.swift).
 
 ``` Swift
 let layer1 = self.addLinesLayer(view, points:[(10.0,20.0),(150.0,40.0),(120.0,320.0)])

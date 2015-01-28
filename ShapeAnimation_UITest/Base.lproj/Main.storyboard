@@ -154,7 +154,13 @@
                             <constraint firstItem="OQb-Vw-E3I" firstAttribute="top" secondItem="f2e-jy-Ie9" secondAttribute="bottom" id="Yvy-Y9-bzL"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Detail" id="LMf-ol-OPd"/>
+                    <navigationItem key="navigationItem" title="Detail" id="LMf-ol-OPd">
+                        <barButtonItem key="rightBarButtonItem" systemItem="pause" id="iQI-sD-L5T">
+                            <connections>
+                                <action selector="pause:" destination="ZGS-jo-7Sy" id="RM2-Nj-vwm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="animationView" destination="f2e-jy-Ie9" id="deQ-Na-JPF"/>
                     </connections>
