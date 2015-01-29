@@ -10,12 +10,15 @@
 		0201B2961A78C5A5003E4D29 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0201B2951A78C5A5003E4D29 /* CALayer+Animation.swift */; };
 		02093A5A1A709B0E004BB18E /* ShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02093A571A709B0E004BB18E /* ShapeView.swift */; };
 		02093A5C1A709B0E004BB18E /* AnimationPrivate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02093A591A709B0E004BB18E /* AnimationPrivate.swift */; };
+		022933C41A78C81900295AF6 /* AnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022933C31A78C81900295AF6 /* AnimationLayer.swift */; };
 		02478B091A70C6A200CCAC47 /* ShapeAnimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DA4AC419AA62A800133F32 /* ShapeAnimation.framework */; };
 		027DC1B91A77998D00D3CF60 /* airship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 027DC1B81A77998D00D3CF60 /* airship@2x.png */; };
 		027DC1C01A788D3900D3CF60 /* CAShapeLayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027DC1BE1A788D3900D3CF60 /* CAShapeLayer+Animation.swift */; };
 		027DC1C11A788D3900D3CF60 /* AnimationPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027DC1BF1A788D3900D3CF60 /* AnimationPair.swift */; };
 		027DC1C91A788E3000D3CF60 /* CALayer+Pause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027DC1C81A788E3000D3CF60 /* CALayer+Pause.swift */; };
 		027E6C631A70CCB7002658F7 /* SwiftGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CD3EEE1A708C8D00C83B5C /* SwiftGraphics.framework */; };
+		02C80DAC1A79C81A008D6E8D /* Gradient+Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C80DAB1A79C81A008D6E8D /* Gradient+Layer.swift */; };
+		02C80DB41A79C980008D6E8D /* CAShapeLayer+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C80DB31A79C980008D6E8D /* CAShapeLayer+Style.swift */; };
 		02CD3F091A70907600C83B5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD3F081A70907600C83B5C /* AppDelegate.swift */; };
 		02CD3F0B1A70907600C83B5C /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD3F0A1A70907600C83B5C /* MasterViewController.swift */; };
 		02CD3F0D1A70907600C83B5C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD3F0C1A70907600C83B5C /* DetailViewController.swift */; };
@@ -97,10 +100,13 @@
 		0201B2951A78C5A5003E4D29 /* CALayer+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Animation.swift"; sourceTree = "<group>"; };
 		02093A571A709B0E004BB18E /* ShapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeView.swift; sourceTree = "<group>"; };
 		02093A591A709B0E004BB18E /* AnimationPrivate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationPrivate.swift; sourceTree = "<group>"; };
+		022933C31A78C81900295AF6 /* AnimationLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationLayer.swift; sourceTree = "<group>"; };
 		027DC1B81A77998D00D3CF60 /* airship@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "airship@2x.png"; sourceTree = "<group>"; };
 		027DC1BE1A788D3900D3CF60 /* CAShapeLayer+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Animation.swift"; sourceTree = "<group>"; };
 		027DC1BF1A788D3900D3CF60 /* AnimationPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationPair.swift; sourceTree = "<group>"; };
 		027DC1C81A788E3000D3CF60 /* CALayer+Pause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Pause.swift"; sourceTree = "<group>"; };
+		02C80DAB1A79C81A008D6E8D /* Gradient+Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Gradient+Layer.swift"; sourceTree = "<group>"; };
+		02C80DB31A79C980008D6E8D /* CAShapeLayer+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Style.swift"; sourceTree = "<group>"; };
 		02CD3EE31A708C8D00C83B5C /* SwiftGraphics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftGraphics.xcodeproj; path = Vendor/SwiftGraphics/SwiftGraphics.xcodeproj; sourceTree = "<group>"; };
 		02CD3F041A70907600C83B5C /* ShapeAnimation_UITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShapeAnimation_UITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02CD3F071A70907600C83B5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -195,9 +201,12 @@
 			isa = PBXGroup;
 			children = (
 				02093A571A709B0E004BB18E /* ShapeView.swift */,
+				02C80DAB1A79C81A008D6E8D /* Gradient+Layer.swift */,
+				02C80DB31A79C980008D6E8D /* CAShapeLayer+Style.swift */,
 				027DC1C81A788E3000D3CF60 /* CALayer+Pause.swift */,
 				0201B2951A78C5A5003E4D29 /* CALayer+Animation.swift */,
 				027DC1BE1A788D3900D3CF60 /* CAShapeLayer+Animation.swift */,
+				022933C31A78C81900295AF6 /* AnimationLayer.swift */,
 				027DC1BF1A788D3900D3CF60 /* AnimationPair.swift */,
 				02093A591A709B0E004BB18E /* AnimationPrivate.swift */,
 			);
@@ -481,11 +490,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0201B2961A78C5A5003E4D29 /* CALayer+Animation.swift in Sources */,
+				022933C41A78C81900295AF6 /* AnimationLayer.swift in Sources */,
+				02C80DB41A79C980008D6E8D /* CAShapeLayer+Style.swift in Sources */,
 				02093A5A1A709B0E004BB18E /* ShapeView.swift in Sources */,
 				027DC1C91A788E3000D3CF60 /* CALayer+Pause.swift in Sources */,
 				02093A5C1A709B0E004BB18E /* AnimationPrivate.swift in Sources */,
 				027DC1C11A788D3900D3CF60 /* AnimationPair.swift in Sources */,
 				027DC1C01A788D3900D3CF60 /* CAShapeLayer+Animation.swift in Sources */,
+				02C80DAC1A79C81A008D6E8D /* Gradient+Layer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

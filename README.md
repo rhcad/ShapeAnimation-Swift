@@ -26,11 +26,15 @@ The Write Less, Do More, Vector animation framework in Swift based on [SwiftGrap
   * animationGroup for the same layer
   * applyAnimations for multiple layers
 
+* Animations with customized properties
+  * Use AnimationLayer class to draw customized animations, such as math functional image.
+
 ![Stroke Lines](Documentation/strokelines.gif)
 ![Move on Path](Documentation/moveonpath.gif)
 ![Radar Circles](Documentation/radar.gif)
 
 ![Rotate Polygons](Documentation/rotate_polygons.gif)
+![Jumping Ball](Documentation/jumpball.gif)
 
 ## Usage
 
@@ -70,3 +74,8 @@ Contributions are always welcome in the following areas:
 ## License
 
 ShapeAnimation-Swift is released under a BSD License. See LICENSE file for details.
+
+## FAQ
+
+* Could not build Objective-C module 'ShapeAnimation':
+  - Quit Xcode and delete the sub folders in ~/Library/Developer/Xcode/DerivedData/.

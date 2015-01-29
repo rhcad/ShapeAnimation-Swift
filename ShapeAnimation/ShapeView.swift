@@ -10,35 +10,16 @@ import UIKit
 import QuartzCore
 import SwiftGraphics
 
-//! Stroke and fill properties for new shape layers
-public struct StrokeFill {
-    public var strokeColor      = UIColor(white:0, alpha:0.8)
-    public var fillColor        : UIColor?
-    public var gradientFill     :[(CGFloat, UIColor)]?
-    public var gradientOrientation = (CGPoint(x:0.5, y:0), CGPoint(x:0.5, y:1))
-    public var strokeWidth      : CGFloat = 2.0
-    public var lineCap          = kCALineCapButt
-    public var lineJoin         = kCALineJoinRound
-    public var lineDash         : [CGFloat]?
-    
-    public init() {}
-    public var gradientColors:[UIColor]? {
-        get { return gradientFill?.map{$0.1} }
-        set(v) {
-            if v != nil && v!.count > 0 {
-                var i = 0
-                gradientFill = v?.map{ (CGFloat(i++)/CGFloat(v!.count), $0) }
-            } else {
-                gradientFill = nil
-            }
-        }
-    }
-}
-
 //! View class which contains vector shape layers.
 public class ShapeView : UIView {
     
-    public var style = StrokeFill()
+    public var style:PaintStyle = {
+        var style = PaintStyle.defaultStyle
+        style.lineCap = kCGLineCapButt
+        style.lineJoin = kCGLineJoinRound
+        return style
+        }()
+    public var gradient = Gradient()
     
     public func addShapeLayer(path:CGPath) -> CAShapeLayer {
         let frame = path.boundingBox
@@ -47,34 +28,9 @@ public class ShapeView : UIView {
         
         layer.frame = frame
         layer.path = frame.isEmpty ? path : CGPathCreateCopyByTransformingPath(path, &xf)
-        layer.strokeColor = style.strokeColor.CGColor
-        layer.lineWidth = style.strokeWidth
-        layer.lineCap = path.isClosed ? kCALineCapRound : style.lineCap
-        layer.lineJoin = style.lineJoin
-        layer.lineDashPattern = style.lineDash
-        
-        if style.gradientFill != nil && path.isClosed {
-            let gradientLayer = CAGradientLayer()
-            let maskLayer = CAShapeLayer()
-            
-            maskLayer.frame = layer.bounds
-            maskLayer.path = layer.path
-            maskLayer.strokeColor = nil
-            
-            gradientLayer.colors = style.gradientFill!.map{$0.1.CGColor}
-            gradientLayer.locations = style.gradientFill!.map{$0.0}
-            gradientLayer.startPoint = style.gradientOrientation.0
-            gradientLayer.endPoint = style.gradientOrientation.1
-            gradientLayer.frame = frame
-            
-            gradientLayer.mask = maskLayer
-            self.layer.addSublayer(gradientLayer)
-            layer.fillColor = nil
-            layer.gradientLayer = gradientLayer
-        } else {
-            layer.fillColor = style.fillColor?.CGColor
-        }
         self.layer.addSublayer(layer)
+        layer.apply(style)
+        layer.apply(gradient)
         
         return layer
     }
@@ -85,7 +41,9 @@ public class ShapeView : UIView {
         layer.frame = frame
         layer.string = text
         layer.fontSize = fontSize
-        layer.foregroundColor = style.strokeColor.CGColor
+        if let strokeColor = style.strokeColor {
+            layer.foregroundColor = strokeColor
+        }
         layer.alignmentMode = kCAAlignmentCenter
         layer.wrapped = true
         self.layer.addSublayer(layer)
@@ -112,34 +70,6 @@ public class ShapeView : UIView {
 }
 
 public extension CALayer {
-    
-    public var gradientLayer:CALayer? {
-        get {
-            if let dict = self.style {
-                return dict["gradientLayer"] as? CALayer
-            }
-            return nil
-        }
-        set {
-            weak var layer = newValue
-            if layer != nil || self.style != nil {
-                if self.style == nil {
-                    self.style = ["gradientLayer" : layer!]
-                } else {
-                    var newstyle = self.style
-                    if layer != nil {
-                        newstyle["gradientLayer"] = layer!
-                        self.style = newstyle
-                    } else {
-                        if let layer = newstyle.removeValueForKey("gradientLayer") as? CALayer {
-                            self.style = newstyle
-                            layer.removeFromSuperlayer()
-                        }
-                    }
-                }
-            }
-        }
-    }
     
     public func removeLayer() {
         gradientLayer = nil

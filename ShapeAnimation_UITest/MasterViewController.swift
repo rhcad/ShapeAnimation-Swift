@@ -26,25 +26,28 @@ class MasterViewController: UITableViewController {
             viewController.animationBlock = testRotatePolygons(viewController)
         case "Radar Circles":
             viewController.animationBlock = testRadarCircles(viewController)
+        case "Jumping Ball":
+            viewController.animationBlock = testJumpingBall(viewController)
         default:
             println("Hello Swift")
         }
         viewController.title = NSLocalizedString(segue.identifier! as NSString, comment:"")
     }
     
+    // Demo about strokeEndAnimation, lineWidthAnimation, scaleAnimation, shakeAnimation and flashAnimation.
     private func testAddLines(viewController:DetailViewController) -> AnimationBlock {
         return { (view) -> Void in
-            view.style.strokeWidth = 7
+            view.style.lineWidth = 7
             
             let points1 = [(10.0,20.0),(150.0,40.0),(120.0,320.0)].map{ CGPoint($0) }
-            let la1 = view.addLinesLayer(points1, closed:true, color:UIColor.redColor())
+            let la1 = view.addLinesLayer(points1, closed:true, color:CGColor.redColor())
             animationGroup([la1.strokeEndAnimation(), la1.lineWidthAnimation(from:0, to:5)]).apply() {
                 la1.shakeAnimation().apply()
             }
             
             let xf2 = CGAffineTransform(tx:100.0, ty:0.0)
-            let la2 = view.addLinesLayer(points1.map { $0 * xf2 }, closed:true, color:UIColor.purpleColor())
-            let la3 = view.addLinesLayer(points1.map { $0 * xf2 * xf2 }, closed:true, color:UIColor.greenColor())
+            let la2 = view.addLinesLayer(points1.map { $0 * xf2 }, closed:true, color:CGColor.purpleColor())
+            let la3 = view.addLinesLayer(points1.map { $0 * xf2 * xf2 }, closed:true, color:CGColor.greenColor())
             
             la2.scaleAnimation(from:1, to:1.1, repeatCount:3).apply(duration:0.3) {
                 la3.flashAnimation().apply()
@@ -52,6 +55,8 @@ class MasterViewController: UITableViewController {
         }
     }
     
+    // Demo about moveOnPathAnimation, moveAnimation, rotationAnimation, dashPhaseAnimation and animationGroup.
+    // Rotate and move a picture and polygon with gradient fill along the path.
     private func testMoveLines(viewController:DetailViewController) -> AnimationBlock {
         return { (view) -> Void in
             // Create a smooth path
@@ -62,8 +67,7 @@ class MasterViewController: UITableViewController {
             path.addSmoothQuadCurveToPoint(CGPoint(x:120, y:120))
             
             // Add a triangle with gradient fill
-            view.style.gradientColors = [UIColor(red:0.5, green:0.5, blue:0.9, alpha:1.0),
-                UIColor(red:0.9, green:0.9, blue:0.3, alpha:1.0)]
+            view.gradient.setColors([(0.5, 0.5, 0.9, 1.0), (0.9, 0.9, 0.3, 1.0)])
             let points = [(10.0, 20.0), (150.0, 40.0), (120.0, 120.0)].map{ CGPoint($0) }
             let layer1 = view.addLinesLayer(points, closed:true)
             
@@ -76,7 +80,7 @@ class MasterViewController: UITableViewController {
             let pathLayer = view.addLinesLayer([CGPoint.zeroPoint])
             pathLayer.transformedPath = path
             pathLayer.lineDashPattern = [5, 5]
-            let a4 = pathLayer.strokeColorAnimation(from:UIColor.lightGrayColor(), to:UIColor.greenColor())
+            let a4 = pathLayer.strokeColorAnimation(from:CGColor.lightGrayColor(), to:CGColor.greenColor())
                 .set{$0.autoreverses=true;$0.repeatCount=HUGE}
             let a5 = pathLayer.dashPhaseAnimation(from:0, to:20)
             animationGroup([a4, a5]).set{$0.repeatCount=HUGE}.apply()
@@ -93,12 +97,12 @@ class MasterViewController: UITableViewController {
         }
     }
     
+    // Demo about polygon with text and gradient fill moving and rotating one by one.
     // Modified from http://zulko.github.io/blog/2014/09/20/vector-animations-with-python/
     private func testRotatePolygons(viewController:DetailViewController) -> AnimationBlock {
         return { (view) -> Void in
-            view.style.gradientColors = [UIColor(red:0, green:0.5, blue:1, alpha:1),
-                UIColor(red:0, green:1, blue:1, alpha:1)]
-            view.style.gradientOrientation = (CGPoint.zeroPoint, CGPoint(x:1, y:1))
+            view.gradient.setColors([(0, 0.5, 1, 1), (0, 1, 1, 1)])
+            view.gradient.orientation = (CGPoint.zeroPoint, CGPoint(x:1, y:1))
             
             var animations:[AnimationPair] = []
             
@@ -121,12 +125,13 @@ class MasterViewController: UITableViewController {
         }
     }
     
+    // Demo about growing circles.
     private func testRadarCircles(viewController:DetailViewController) -> AnimationBlock {
         return { (view) -> Void in
             let count = 6
             let duration: Double = 2
             
-            view.style.strokeWidth = 1
+            view.style.lineWidth = 1
             for i in 0..<count {
                 let la1 = view.addCircleLayer(center:CGPoint(x:200, y:100), radius:15)
                 let anim = animationGroup([la1.scaleAnimation(from:0, to:5),
@@ -138,11 +143,49 @@ class MasterViewController: UITableViewController {
         }
     }
     
+    // Demo about jumping ball with shadow.
+    // Modified from http://zulko.github.io/blog/2014/09/20/vector-animations-with-python/
+    private func testJumpingBall(viewController:DetailViewController) -> AnimationBlock {
+        var gradient = Gradient(colors:[(1.0,0.0,0.0), (0.1,0.0,0.0)], axial:true)
+        gradient.orientation = (CGPoint(x:0.3, y:-0.3), CGPoint(x:0, y:1.4))
+        
+        return { (view) -> Void in
+            let layer = AnimationLayer()
+            layer.properties = [("t", 0)]
+            layer.draw = { (layer, ctx) -> Void in
+                let W:CGFloat = 300, H:CGFloat = 75
+                let D:CGFloat = 3, r:CGFloat = 15       // radius of ball
+                let DJ:CGFloat = 50, HJ:CGFloat = 35    // distance and height of jumping
+                let ground:CGFloat = 0.75*H
+                
+                let t = layer.getProperty("t")
+                
+                let x = W * t / D
+                let y = ground - HJ*4*(x % DJ)*(DJ-(x % DJ))/DJ**2
+                let coef = (HJ-y)/HJ
+                let sr = (1 - coef / 2) * r
+                
+                var sgradient = Gradient(colors: [CGColor.color(white:0, alpha:0.2-coef/5), CGColor.clearColor()], axial:true)
+                sgradient.orientation = (CGPoint(y:0.5), CGPoint(x:1, y:0.5))
+                
+                let shadow = Ellipse(center:CGPoint(x:x, y:ground + r/2), size:CGSize(w:sr*2, h:sr))
+                ctx.fillEllipseInRect(sgradient, rect: shadow.boundingBox)
+                
+                let ball = Circle(center:CGPoint(x:x, y:y), radius:r)
+                ctx.fillEllipseInRect(gradient, rect: ball.frame)
+            }
+            layer.animationCreated = { $1.repeatCount=HUGE; $1.duration=3.0 }
+            layer.frame = view.layer.bounds
+            view.layer.addSublayer(layer)
+            layer.setProperty(5, key: "t")
+        }
+    }
+    
 }
 
 public extension ShapeView {
     
-    public func addLinesLayer(points:[CGPoint], closed:Bool = false, color:UIColor) -> CAShapeLayer {
+    public func addLinesLayer(points:[CGPoint], closed:Bool = false, color:CGColor) -> CAShapeLayer {
         style.strokeColor = color
         return addShapeLayer(Path(vertices:points, closed:closed).cgPath)
     }

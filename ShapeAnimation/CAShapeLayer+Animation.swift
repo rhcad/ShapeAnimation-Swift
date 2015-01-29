@@ -23,12 +23,12 @@ public extension CAShapeLayer {
         return AnimationPair(self, animation, key:"strokeEnd")
     }
     
-    func strokeColorAnimation(#from:UIColor, to:UIColor, didStop:(() -> Void)? = nil) -> AnimationPair {
+    func strokeColorAnimation(#from:CGColor, to:CGColor, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"strokeColor")
         animation.duration = 0.8
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
-        animation.fromValue = from.CGColor
-        animation.toValue = to.CGColor
+        animation.fromValue = from
+        animation.toValue = to
         animation.didStop = didStop
         animation.removedOnCompletion = false
         animation.fillMode = kCAFillModeForwards
