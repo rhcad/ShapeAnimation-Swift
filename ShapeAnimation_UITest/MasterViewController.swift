@@ -150,9 +150,8 @@ class MasterViewController: UITableViewController {
         gradient.orientation = (CGPoint(x:0.3, y:-0.3), CGPoint(x:0, y:1.4))
         
         return { (view) -> Void in
-            let layer = AnimationLayer()
-            layer.properties = [("t", 0)]
-            layer.draw = { (layer, ctx) -> Void in
+            let layer = view.addAnimationLayer(frame:view.layer.bounds, properties:[("t", 0)]) {
+                (layer, ctx) -> Void in
                 let W:CGFloat = 300, H:CGFloat = 75
                 let D:CGFloat = 3, r:CGFloat = 15       // radius of ball
                 let DJ:CGFloat = 50, HJ:CGFloat = 35    // distance and height of jumping
@@ -175,8 +174,6 @@ class MasterViewController: UITableViewController {
                 ctx.fillEllipseInRect(gradient, rect: ball.frame)
             }
             layer.animationCreated = { $1.repeatCount=HUGE; $1.duration=3.0 }
-            layer.frame = view.layer.bounds
-            view.layer.addSublayer(layer)
             layer.setProperty(5, key: "t")
         }
     }

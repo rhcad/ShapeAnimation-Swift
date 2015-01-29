@@ -21,14 +21,19 @@ public class ShapeView : UIView {
         }()
     public var gradient = Gradient()
     
+    public func addSublayer(layer:CALayer, frame:CGRect) {
+        layer.frame = frame
+        layer.contentsScale = UIScreen.mainScreen().scale
+        self.layer.addSublayer(layer)
+    }
+    
     public func addShapeLayer(path:CGPath) -> CAShapeLayer {
         let frame = path.boundingBox
         var xf    = CGAffineTransform(translation:-frame.origin)
         let layer = CAShapeLayer()
         
-        layer.frame = frame
         layer.path = frame.isEmpty ? path : CGPathCreateCopyByTransformingPath(path, &xf)
-        self.layer.addSublayer(layer)
+        self.addSublayer(layer, frame:frame)
         layer.apply(style)
         layer.apply(gradient)
         
@@ -38,7 +43,6 @@ public class ShapeView : UIView {
     public func addTextLayer(text:String, frame:CGRect, fontSize:CGFloat) -> CATextLayer {
         let layer = CATextLayer()
         
-        layer.frame = frame
         layer.string = text
         layer.fontSize = fontSize
         if let strokeColor = style.strokeColor {
@@ -46,7 +50,7 @@ public class ShapeView : UIView {
         }
         layer.alignmentMode = kCAAlignmentCenter
         layer.wrapped = true
-        self.layer.addSublayer(layer)
+        self.addSublayer(layer, frame:frame)
     
         return layer
     }
@@ -54,8 +58,7 @@ public class ShapeView : UIView {
     public func addImageLayer(image:UIImage!, center:CGPoint) -> CALayer {
         let layer = CALayer()
         layer.contents = image.CGImage
-        layer.frame = CGRect(center:center, size:image.size)
-        self.layer.addSublayer(layer)
+        self.addSublayer(layer, frame:CGRect(center:center, size:image.size))
         return layer
     }
     

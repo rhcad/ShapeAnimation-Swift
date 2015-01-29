@@ -110,3 +110,17 @@ public class AnimationLayer : CALayer {
     }
     
 }
+
+public extension ShapeView {
+    
+    public func addAnimationLayer(#frame:CGRect, properties:[(key:String, min:CGFloat)],
+                                    draw:((AnimationLayer, CGContext) -> Void)) -> AnimationLayer
+    {
+        var layer = AnimationLayer()
+        layer.properties = properties
+        layer.draw = draw
+        self.addSublayer(layer, frame:frame)
+        return layer
+    }
+    
+}

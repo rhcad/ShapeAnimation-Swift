@@ -44,6 +44,7 @@ public extension CAShapeLayer {
             }
             gradientLayer.frame = frame
             gradientLayer.mask = maskLayer
+            gradientLayer.contentsScale = UIScreen.mainScreen().scale
             
             self.superlayer.addSublayer(gradientLayer)
             self.fillColor = nil
