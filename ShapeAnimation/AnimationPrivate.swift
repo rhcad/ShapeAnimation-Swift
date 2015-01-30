@@ -10,19 +10,38 @@ import UIKit
 import QuartzCore
 import SwiftGraphics
 
+private var stopping = 0
+
 public class AnimationDelagate : NSObject {
     
     public var didStart:((CAAnimation!) -> Void)?
     public var didStop :(() -> Void)?
+    public var finished = true
     
     override public func animationDidStart(anim:CAAnimation!) {
         didStart?(anim)
     }
     
-    override public func animationDidStop(anim:CAAnimation!, finished flag:Bool) {
-        self.didStop?()
+    override public func animationDidStop(anim:CAAnimation!, finished:Bool) {
+        self.finished = finished
+        if finished {
+            self.didStop?()
+        } else {
+            stopping++
+            self.didStop?()
+            stopping--
+        }
     }
     
+    public class func groupDidStop(completion:() -> Void, finished:Bool) {
+        if finished {
+            completion()
+        } else {
+            stopping++
+            completion()
+            stopping--
+        }
+    }
 }
 
 public extension CAAnimation {
@@ -61,33 +80,29 @@ public extension CAAnimation {
         }
     }
     
-}
-
-// MARK: Relations between CALayer and CAGradientLayer
-
-public struct LayerLink {
-    private static var link:[(CALayer, CALayer)] = []
+    public var finished:Bool {
+        get {
+            if let delegate = self.delegate as? AnimationDelagate {
+                if let p = self as? CAPropertyAnimation {
+                    if !(delegate.finished) {
+                        println(p.keyPath)
+                    }
+                }
+                return delegate.finished
+            }
+            return true
+        }
+        set {
+            if let delegate = self.delegate as? AnimationDelagate {
+                delegate.finished = newValue
+            }
+            else {
+                var delegate = AnimationDelagate()
+                delegate.finished = finished
+                self.delegate = delegate
+            }
+        }
+    }
     
-    public static func add(p:(CALayer, CALayer)) {
-        link.append(p)
-    }
-    public static func find(l:CALayer) -> CALayer? {
-        for i in link {
-            if i.0 == l {
-                return i.1
-            }
-        }
-        return nil
-    }
-    public static func remove(l:CALayer) {
-        var i = 0
-        for (f,s) in link {
-            if f == l || s == l {
-                link.removeAtIndex(i)
-                remove(l)
-                return
-            }
-            i++
-        }
-    }
+    public class var isStopping:Bool { return stopping > 0 }
 }

@@ -14,7 +14,7 @@ All development happens on the [develop][develop] branch. Code is merged back on
 ## What's included
 
 * ShapeView class which contains vector shape layers.
-  * Helper functions to add text, circle, regular polygon, lines and other shapes.
+  * Helper functions to add image, text, circle, regular polygon, lines and other shapes.
   * Support gradient fill with animation.
 
 * Animation extension functions of CALayer and CAShapeLayer.
@@ -30,15 +30,22 @@ All development happens on the [develop][develop] branch. Code is merged back on
   * animationGroup for the same layer
   * applyAnimations for multiple layers
 
+* Animations with customized properties
+  * Use AnimationLayer class to draw customized animations, such as math functional image.
+  * Animation with sliders example: [EllipseViewController.swift](ShapeAnimation_UITest/EllipseViewController.swift)
+
 ![Stroke Lines](Documentation/strokelines.gif)
 ![Move on Path](Documentation/moveonpath.gif)
 ![Radar Circles](Documentation/radar.gif)
 
 ![Rotate Polygons](Documentation/rotate_polygons.gif)
+![Jumping Ball](Documentation/jumpball.gif)
+
+![Animation with Sliders](Documentation/ellipse_slider.gif)
 
 ## Usage
 
-Please see the examples in MasterViewController.swift.
+Please see the examples in [MasterViewController.swift](ShapeAnimation_UITest/MasterViewController.swift).
 
 ``` Swift
 let layer1 = self.addLinesLayer(view, points:[(10.0,20.0),(150.0,40.0),(120.0,320.0)])
@@ -74,3 +81,8 @@ Contributions are always welcome in the following areas:
 ## License
 
 ShapeAnimation-Swift is released under a BSD License. See LICENSE file for details.
+
+## FAQ
+
+* Could not build Objective-C module 'ShapeAnimation':
+  - Quit Xcode and delete the sub folders in ~/Library/Developer/Xcode/DerivedData/.
