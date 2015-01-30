@@ -26,17 +26,11 @@ class EllipseViewController: DetailViewController {
                 let angle = layer.getProperty("angle")
                 
                 let ellipse = Ellipse(center:self.animationView.bounds.mid,
-                    semiMajorAxis:max(rx, ry),
-                    semiMinorAxis:min(rx, ry),
+                    semiMajorAxis:max(rx, ry), semiMinorAxis:min(rx, ry),
                     rotation:angle + (rx < ry ? CGFloat(M_PI_2) : 0))
                 ctx.stroke(ellipse.asBezierChain)
                 
-                func round1(x:CGFloat) -> CGFloat { return round(x * 10) / 10 }
-                let text:NSString = "rx=\(round1(rx))\nry=\(round1(ry))\nangle=\(round1(RadiansToDegrees(angle)))"
-                let attr = [NSFontAttributeName: UIFont.systemFontOfSize(17)]
-                UIGraphicsPushContext(ctx)
-                text.drawAtPoint(CGPoint(x:10, y:10), withAttributes:attr)
-                UIGraphicsPopContext()
+                self.drawLabelText(ctx, rx, ry, angle)
         }
         
         radiusXChanged(rxSlider)
@@ -54,5 +48,15 @@ class EllipseViewController: DetailViewController {
     
     @IBAction func angleChanged(sender: UISlider) {
         animationLayer.setProperty(DegreesToRadians(CGFloat(-sender.value)), key:"angle")
+    }
+    
+    private func drawLabelText(ctx:CGContext, _ rx:CGFloat, _ ry:CGFloat, _ angle:CGFloat) {
+        func round1(x:CGFloat) -> CGFloat { return round(x * 10) / 10 }
+        let deg = round1(RadiansToDegrees(angle))
+        let text:NSString = "rx=\(round1(rx))\nry=\(round1(ry))\nangle=\(deg)"
+        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(17)]
+        UIGraphicsPushContext(ctx)
+        text.drawAtPoint(CGPoint(x:10, y:10), withAttributes:attr)
+        UIGraphicsPopContext()
     }
 }
