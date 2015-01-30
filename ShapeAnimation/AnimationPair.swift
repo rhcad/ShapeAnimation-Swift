@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 github.com/rhcad. All rights reserved.
 //
 
-import UIKit
-import QuartzCore
 import SwiftGraphics
 
 // MARK: animationGroup() and applyAnimations()

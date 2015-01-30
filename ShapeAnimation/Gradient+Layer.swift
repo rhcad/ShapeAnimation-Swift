@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 github.com/rhcad. All rights reserved.
 //
 
-import QuartzCore
 import SwiftGraphics
 
 private var GradientInfoKey = 11

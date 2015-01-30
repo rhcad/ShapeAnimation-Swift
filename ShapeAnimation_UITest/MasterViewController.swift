@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 github.com/rhcad. All rights reserved.
 //
 
-import UIKit
 import SwiftGraphics
 import ShapeAnimation
 
@@ -152,17 +151,18 @@ class MasterViewController: UITableViewController {
         return { (view) -> Void in
             let layer = view.addAnimationLayer(frame:view.layer.bounds, properties:[("t", 0)]) {
                 (layer, ctx) -> Void in
-                let W:CGFloat = 300, H:CGFloat = 75
-                let D:CGFloat = 3, r:CGFloat = 15       // radius of ball
-                let DJ:CGFloat = 50, HJ:CGFloat = 35    // distance and height of jumping
+                let W = view.layer.bounds.width
+                let H = view.layer.bounds.height
+                let D:CGFloat = 3, r:CGFloat = 30       // radius of ball
+                let DJ:CGFloat = W / 6, HJ = H / 2      // distance and height of jumping
                 let ground:CGFloat = 0.75*H
                 
                 let t = layer.getProperty("t")
                 
-                let x = W * t / D
+                let x = (-W / 3) + (5 * W / 3) * (t / D)
                 let y = ground - HJ*4*(x % DJ)*(DJ-(x % DJ))/DJ**2
                 let coef = (HJ-y)/HJ
-                let sr = (1 - coef / 2) * r
+                let sr = (1 - coef / 4) * r
                 
                 var sgradient = Gradient(colors: [CGColor.color(white:0, alpha:0.2-coef/5), CGColor.clearColor()], axial:true)
                 sgradient.orientation = (CGPoint(y:0.5), CGPoint(x:1, y:0.5))
@@ -173,8 +173,8 @@ class MasterViewController: UITableViewController {
                 let ball = Circle(center:CGPoint(x:x, y:y), radius:r)
                 ctx.fillEllipseInRect(gradient, rect: ball.frame)
             }
-            layer.animationCreated = { $1.repeatCount=HUGE; $1.duration=3.0 }
-            layer.setProperty(5, key: "t")
+            layer.animationCreated = { $1.repeatCount=HUGE; $1.duration=5.0 }
+            layer.setProperty(4, key: "t")
         }
     }
     

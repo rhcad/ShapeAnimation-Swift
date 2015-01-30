@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 github.com/rhcad. All rights reserved.
 //
 
-import UIKit
-import QuartzCore
 import SwiftGraphics
 
 //! View class which contains vector shape layers.
@@ -69,6 +67,30 @@ public class ShapeView : UIView {
             }
         }
         super.removeFromSuperview()
+    }
+    
+    private var lastBounds = CGRect.zeroRect
+    
+    override public func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        lastBounds = self.layer.bounds
+    }
+    
+    override public func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let bounds = self.layer.bounds
+        
+        if lastBounds != bounds {
+            for layer in self.layer.sublayers {
+                if let layer = layer as? CALayer {
+                    if layer.frame == lastBounds {
+                        layer.frame = bounds
+                    }
+                }
+            }
+            lastBounds = bounds
+        }
     }
 }
 
