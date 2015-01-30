@@ -28,6 +28,7 @@ The Write Less, Do More, Vector animation framework in Swift based on [SwiftGrap
 
 * Animations with customized properties
   * Use AnimationLayer class to draw customized animations, such as math functional image.
+  * Animation with sliders example: [EllipseViewController.swift](ShapeAnimation_UITest/EllipseViewController.swift)
 
 ![Stroke Lines](Documentation/strokelines.gif)
 ![Move on Path](Documentation/moveonpath.gif)
@@ -35,6 +36,8 @@ The Write Less, Do More, Vector animation framework in Swift based on [SwiftGrap
 
 ![Rotate Polygons](Documentation/rotate_polygons.gif)
 ![Jumping Ball](Documentation/jumpball.gif)
+
+![Animation with Sliders](Documentation/ellipse_slider.gif)
 
 ## Usage
 

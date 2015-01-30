@@ -13,9 +13,18 @@ public class AnimationLayer : CALayer {
     
     public var properties:[(key:String, min:CGFloat)]! {
         didSet { keys = properties.map { $0.key } }
+        willSet {
+            if properties == nil {
+                for (key, min) in newValue {
+                    setValue(min, forKey:key)
+                }
+            }
+        }
     }
     public var draw:((AnimationLayer, CGContext) -> Void)! = nil
     public var animationCreated:((String, CABasicAnimation) -> Void)?
+    public var didStart:(() -> Void)?
+    public var didStop :(() -> Void)?
     
     private var keys:[String]! = nil
     private var timer:CADisplayLink?
@@ -62,9 +71,10 @@ public class AnimationLayer : CALayer {
     
     override public func animationDidStart(anim:CAAnimation!) {
         if let animation = anim as? CAPropertyAnimation {
-            if contains(keys, animation.keyPath) {
+            if keys != nil && contains(keys, animation.keyPath) {
                 animations.append(animation)
                 if timer == nil {
+                    didStart?()
                     timer = CADisplayLink(target:self, selector:Selector("animationLoop:"))
                     timer!.addToRunLoop(NSRunLoop.mainRunLoop(), forMode:NSDefaultRunLoopMode)
                 }
@@ -79,13 +89,14 @@ public class AnimationLayer : CALayer {
                 timer!.invalidate()
                 timer = nil
                 self.setNeedsDisplay()  // force a final paint
+                didStop?()
             }
         }
     }
     
     // Called when layer's property changes.
     override public func actionForKey(event: String!) -> CAAction! {
-        if contains(keys, event) {
+        if keys != nil && contains(keys, event) {
             let animation = CABasicAnimation(keyPath:event)
             animation.fromValue = getProperty(event)
             animation.delegate = self

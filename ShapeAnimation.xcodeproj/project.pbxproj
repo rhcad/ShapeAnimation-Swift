@@ -26,6 +26,7 @@
 		02CD3F121A70907600C83B5C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02CD3F111A70907600C83B5C /* Images.xcassets */; };
 		02CD3F151A70907600C83B5C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02CD3F131A70907600C83B5C /* LaunchScreen.xib */; };
 		02CD3F2A1A70929F00C83B5C /* ShapeAnimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DA4AC419AA62A800133F32 /* ShapeAnimation.framework */; };
+		02E8A7EC1A7A3B9500EB03C3 /* EllipseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E8A7EB1A7A3B9500EB03C3 /* EllipseViewController.swift */; };
 		4537991D19AA788B004DF99E /* DummyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4537991C19AA788B004DF99E /* DummyTests.swift */; };
 		45DA4AC919AA62A800133F32 /* ShapeAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 45DA4AC819AA62A800133F32 /* ShapeAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -116,6 +117,7 @@
 		02CD3F0F1A70907600C83B5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		02CD3F111A70907600C83B5C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		02CD3F141A70907600C83B5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		02E8A7EB1A7A3B9500EB03C3 /* EllipseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EllipseViewController.swift; sourceTree = "<group>"; };
 		4537990519AA671E004DF99E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4537991C19AA788B004DF99E /* DummyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyTests.swift; sourceTree = "<group>"; };
 		454D551219AA5CE6000E3EB3 /* ShapeAnimationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShapeAnimationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +182,7 @@
 				02CD3F081A70907600C83B5C /* AppDelegate.swift */,
 				02CD3F0A1A70907600C83B5C /* MasterViewController.swift */,
 				02CD3F0C1A70907600C83B5C /* DetailViewController.swift */,
+				02E8A7EB1A7A3B9500EB03C3 /* EllipseViewController.swift */,
 				02CD3F0E1A70907600C83B5C /* Main.storyboard */,
 				027DC1B71A77998D00D3CF60 /* Images */,
 				02CD3F111A70907600C83B5C /* Images.xcassets */,
@@ -472,6 +475,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02CD3F0D1A70907600C83B5C /* DetailViewController.swift in Sources */,
+				02E8A7EC1A7A3B9500EB03C3 /* EllipseViewController.swift in Sources */,
 				02CD3F0B1A70907600C83B5C /* MasterViewController.swift in Sources */,
 				02CD3F091A70907600C83B5C /* AppDelegate.swift in Sources */,
 			);

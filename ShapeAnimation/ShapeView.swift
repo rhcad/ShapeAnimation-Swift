@@ -75,7 +75,9 @@ public class ShapeView : UIView {
 public extension CALayer {
     
     public func removeLayer() {
+        gradientLayer?.removeAllAnimations()
         gradientLayer = nil
+        self.removeAllAnimations()
         self.removeFromSuperlayer()
     }
 }
