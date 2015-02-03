@@ -61,8 +61,8 @@ public class ShapeView : UIView {
     }
     
     override public func removeFromSuperview() {
-        if self.layer.sublayers != nil {
-            for layer in self.layer.sublayers {
+        if let sublayers = self.layer.sublayers {
+            for layer in sublayers {
                 layer.removeLayer()
             }
         }
@@ -81,7 +81,7 @@ public class ShapeView : UIView {
         
         let bounds = self.layer.bounds
         
-        if lastBounds != bounds {
+        if lastBounds != bounds && self.layer.sublayers != nil {
             for layer in self.layer.sublayers {
                 if let layer = layer as? CALayer {
                     if layer.frame == lastBounds {
