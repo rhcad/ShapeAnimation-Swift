@@ -1,6 +1,8 @@
 # ShapeAnimation-Swift
 
-The Write Less, Do More, Vector animation framework in Swift based on [SwiftGraphics](https://github.com/schwa/SwiftGraphics) for iOS 8.
+Vector animation framework in Swift based on [SwiftGraphics](https://github.com/schwa/SwiftGraphics) for iOS 8.
+
+With ShapeAnimation you can easily create various animations with a nice Swift based syntax.
 
 [![Travis][travis_img]][travis]
 
@@ -27,7 +29,7 @@ The Write Less, Do More, Vector animation framework in Swift based on [SwiftGrap
   * applyAnimations for multiple layers
 
 * Animations with customized properties
-  * Use AnimationLayer class to draw customized animations, such as math functional image.
+  * Use AnimationLayer class to draw customized animations.
   * Animation with sliders example: [EllipseViewController.swift](ShapeAnimation_UITest/EllipseViewController.swift)
 
 ![Stroke Lines](Documentation/strokelines.gif)
