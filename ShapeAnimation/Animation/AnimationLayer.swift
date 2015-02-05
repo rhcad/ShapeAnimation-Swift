@@ -26,7 +26,7 @@ public class AnimationLayer : CALayer {
     public var didStop :(() -> Void)?
     
     private var keys:[String]! = nil
-    private var timer:CADisplayLink?
+    public  var timer:CADisplayLink?
     private var animations:[CAAnimation] = []
     
     public func getProperty(key:String) -> CGFloat {
@@ -87,7 +87,6 @@ public class AnimationLayer : CALayer {
             if animations.isEmpty {
                 timer!.invalidate()
                 timer = nil
-                self.setNeedsDisplay()  // force a final paint
                 didStop?()
             }
         }

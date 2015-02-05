@@ -186,12 +186,5 @@ public extension ShapeView {
         style.strokeColor = color
         return addShapeLayer(Path(vertices:points, closed:closed).cgPath)
     }
-    
-    public func addImageLayer(#named:String, center:CGPoint) -> CALayer? {
-        if let image = UIImage(named:named) {
-            return self.addImageLayer(image, center:center)
-        }
-        return nil
-    }
-    
+
 }

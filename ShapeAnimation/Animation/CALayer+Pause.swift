@@ -27,6 +27,9 @@ public extension CALayer {
                 self.beginTime = 0.0
                 self.beginTime = convertTime(CACurrentMediaTime(), fromLayer:nil) - pausedTime
             }
+            if let layer = self as? AnimationLayer {
+                layer.timer?.paused = newValue
+            }
         }
     }
     

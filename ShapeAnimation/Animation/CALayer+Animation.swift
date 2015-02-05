@@ -40,14 +40,16 @@ public extension CALayer {
         animation.fromValue = from
         animation.toValue = to
         animation.didStop = didStop
-        animation.autoreverses = true
         animation.removedOnCompletion = false
         animation.fillMode = kCAFillModeForwards
         return AnimationPair(self, animation, key:"scale")
     }
     
     func scaleAnimation(#from:Float, to:Float, repeatCount:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
-        return scaleAnimation(from:from, to:to, didStop:didStop).set {$0.repeatCount=repeatCount}
+        return scaleAnimation(from:from, to:to, didStop:didStop).set {
+            $0.repeatCount=repeatCount
+            $0.autoreverses = repeatCount > 1
+        }
     }
     
     func rotate360Degrees(didStop:(() -> Void)? = nil) -> AnimationPair {
