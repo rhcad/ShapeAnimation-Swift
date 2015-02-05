@@ -9,6 +9,10 @@ With ShapeAnimation you can easily create various animations with a nice Swift b
 [travis]: https://travis-ci.org/rhcad/ShapeAnimation-Swift
 [travis_img]: https://travis-ci.org/rhcad/ShapeAnimation-Swift.svg?branch=develop
 
+SVG animation development with [SVGKit](https://github.com/SVGKit/SVGKit) happens on the [SVG][svg_branch] branch.
+
+[svg_branch]: https://github.com/rhcad/ShapeAnimation-Swift/tree/SVG
+
 ## What's included
 
 * ShapeView class which contains vector shape layers.
