@@ -7,7 +7,7 @@ With ShapeAnimation you can easily create various animations with a nice Swift b
 [![Travis][travis_img]][travis]
 
 [travis]: https://travis-ci.org/rhcad/ShapeAnimation-Swift
-[travis_img]: https://travis-ci.org/rhcad/ShapeAnimation-Swift.svg?branch=develop
+[travis_img]: https://travis-ci.org/rhcad/ShapeAnimation-Swift.svg?branch=SVG
 
 ## What's included
 
@@ -31,6 +31,8 @@ With ShapeAnimation you can easily create various animations with a nice Swift b
 * Animations with customized properties
   * Use AnimationLayer class to draw customized animations.
   * Animation with sliders example: [EllipseViewController.swift](ShapeAnimation_UITest/EllipseViewController.swift)
+
+* Show SVG animation with [SVGKit](https://github.com/SVGKit/SVGKit) (_*work in progress*_)
 
 ![Stroke Lines](Documentation/strokelines.gif)
 ![Move on Path](Documentation/moveonpath.gif)

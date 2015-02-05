@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02110E551A808D9600CDF254 /* libSVGKit-iOS.1.2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AED0AF351A7FB62D004E6271 /* libSVGKit-iOS.1.2.0.a */; };
 		022E98131A8071A70028A198 /* ShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E98091A8071A70028A198 /* ShapeView.swift */; };
 		022E98141A8071A70028A198 /* AnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E980B1A8071A70028A198 /* AnimationLayer.swift */; };
 		022E98151A8071A70028A198 /* AnimationPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E980C1A8071A70028A198 /* AnimationPair.swift */; };
@@ -17,9 +18,21 @@
 		022E98201A8072270028A198 /* Gradient+Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E981E1A8072270028A198 /* Gradient+Layer.swift */; };
 		022E98211A8072270028A198 /* CAShapeLayer+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E981F1A8072270028A198 /* CAShapeLayer+Style.swift */; };
 		02478B091A70C6A200CCAC47 /* ShapeAnimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DA4AC419AA62A800133F32 /* ShapeAnimation.framework */; };
+		0263759C1A80D3770019CDCA /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0263759B1A80D3770019CDCA /* libxml2.dylib */; };
+		026BCBE31A83175200D7E061 /* ShapeView+SVG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026BCBE21A83175200D7E061 /* ShapeView+SVG.swift */; };
 		027DC1B91A77998D00D3CF60 /* airship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 027DC1B81A77998D00D3CF60 /* airship@2x.png */; };
 		027E6C631A70CCB7002658F7 /* SwiftGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CD3EEE1A708C8D00C83B5C /* SwiftGraphics.framework */; };
+		027EED711A821A5A00257830 /* lion.svg in Resources */ = {isa = PBXBuildFile; fileRef = 027EED701A821A5A00257830 /* lion.svg */; };
 		02887B2B1A820CAC00E800A1 /* CALayer+ID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02887B2A1A820CAC00E800A1 /* CALayer+ID.swift */; };
+		02C42DA21A80868D00900C64 /* CALayerExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 02C42D121A80868D00900C64 /* CALayerExporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		02C42DA31A80868D00900C64 /* SVGKExporterNSData.h in Headers */ = {isa = PBXBuildFile; fileRef = 02C42D131A80868D00900C64 /* SVGKExporterNSData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		02C42DA41A80868D00900C64 /* SVGKExporterUIImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 02C42D141A80868D00900C64 /* SVGKExporterUIImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		02C42DA51A80868D00900C64 /* SVGKImage+CGContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 02C42D151A80868D00900C64 /* SVGKImage+CGContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		02C42DAC1A80868D00900C64 /* SVGKParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 02C42D1E1A80868D00900C64 /* SVGKParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		02C42DAD1A80868D00900C64 /* SVGKParseResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 02C42D1F1A80868D00900C64 /* SVGKParseResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		02C42DAE1A80868D00900C64 /* SVGKParserExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 02C42D201A80868D00900C64 /* SVGKParserExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		02C42DB71A80868D00900C64 /* SVGKLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 02C42D2A1A80868D00900C64 /* SVGKLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		02C42DBC1A80868D00900C64 /* SVGKImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 02C42D301A80868D00900C64 /* SVGKImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		02CD3F091A70907600C83B5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD3F081A70907600C83B5C /* AppDelegate.swift */; };
 		02CD3F0B1A70907600C83B5C /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD3F0A1A70907600C83B5C /* MasterViewController.swift */; };
 		02CD3F0D1A70907600C83B5C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD3F0C1A70907600C83B5C /* DetailViewController.swift */; };
@@ -30,6 +43,7 @@
 		02E8A7EC1A7A3B9500EB03C3 /* EllipseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E8A7EB1A7A3B9500EB03C3 /* EllipseViewController.swift */; };
 		4537991D19AA788B004DF99E /* DummyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4537991C19AA788B004DF99E /* DummyTests.swift */; };
 		45DA4AC919AA62A800133F32 /* ShapeAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 45DA4AC819AA62A800133F32 /* ShapeAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE3E418D1A818708004D3C41 /* ShapeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E418C1A818708004D3C41 /* ShapeAnimation.m */; };
 		AEE57A151A81168F00420D54 /* ShapeView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE57A141A81168F00420D54 /* ShapeView+Image.swift */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +111,27 @@
 			remoteGlobalIDString = 45DA4AC319AA62A800133F32;
 			remoteInfo = ShapeAnimation;
 		};
+		AED0AF341A7FB62D004E6271 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AED0AF2F1A7FB62C004E6271 /* SVGKit-iOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6639618E16145D0400E58CCA;
+			remoteInfo = "SVGKit-iOS";
+		};
+		AED0AF361A7FB62D004E6271 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AED0AF2F1A7FB62C004E6271 /* SVGKit-iOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55452BF119EC68A200B75A30;
+			remoteInfo = "SVGKit-iOS Tests";
+		};
+		AED0AF3E1A7FB65F004E6271 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AED0AF2F1A7FB62C004E6271 /* SVGKit-iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6639618D16145D0400E58CCA;
+			remoteInfo = "SVGKit-iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -109,8 +144,20 @@
 		022E98101A8071A70028A198 /* CAShapeLayer+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Animation.swift"; sourceTree = "<group>"; };
 		022E981E1A8072270028A198 /* Gradient+Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Gradient+Layer.swift"; sourceTree = "<group>"; };
 		022E981F1A8072270028A198 /* CAShapeLayer+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Style.swift"; sourceTree = "<group>"; };
+		0263759B1A80D3770019CDCA /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/usr/lib/libxml2.dylib; sourceTree = DEVELOPER_DIR; };
+		026BCBE21A83175200D7E061 /* ShapeView+SVG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ShapeView+SVG.swift"; sourceTree = "<group>"; };
 		027DC1B81A77998D00D3CF60 /* airship@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "airship@2x.png"; sourceTree = "<group>"; };
+		027EED701A821A5A00257830 /* lion.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = lion.svg; sourceTree = "<group>"; };
 		02887B2A1A820CAC00E800A1 /* CALayer+ID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+ID.swift"; sourceTree = "<group>"; };
+		02C42D121A80868D00900C64 /* CALayerExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CALayerExporter.h; sourceTree = "<group>"; };
+		02C42D131A80868D00900C64 /* SVGKExporterNSData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGKExporterNSData.h; sourceTree = "<group>"; };
+		02C42D141A80868D00900C64 /* SVGKExporterUIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGKExporterUIImage.h; sourceTree = "<group>"; };
+		02C42D151A80868D00900C64 /* SVGKImage+CGContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVGKImage+CGContext.h"; sourceTree = "<group>"; };
+		02C42D1E1A80868D00900C64 /* SVGKParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGKParser.h; sourceTree = "<group>"; };
+		02C42D1F1A80868D00900C64 /* SVGKParseResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGKParseResult.h; sourceTree = "<group>"; };
+		02C42D201A80868D00900C64 /* SVGKParserExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGKParserExtension.h; sourceTree = "<group>"; };
+		02C42D2A1A80868D00900C64 /* SVGKLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGKLayer.h; sourceTree = "<group>"; };
+		02C42D301A80868D00900C64 /* SVGKImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGKImage.h; sourceTree = "<group>"; };
 		02CD3EE31A708C8D00C83B5C /* SwiftGraphics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftGraphics.xcodeproj; path = Vendor/SwiftGraphics/SwiftGraphics.xcodeproj; sourceTree = "<group>"; };
 		02CD3F041A70907600C83B5C /* ShapeAnimation_UITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShapeAnimation_UITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02CD3F071A70907600C83B5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -128,6 +175,8 @@
 		45DA4AC419AA62A800133F32 /* ShapeAnimation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ShapeAnimation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45DA4AC719AA62A800133F32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45DA4AC819AA62A800133F32 /* ShapeAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShapeAnimation.h; sourceTree = "<group>"; };
+		AE3E418C1A818708004D3C41 /* ShapeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShapeAnimation.m; sourceTree = "<group>"; };
+		AED0AF2F1A7FB62C004E6271 /* SVGKit-iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "SVGKit-iOS.xcodeproj"; path = "Vendor/SVGKit/SVGKit-iOS.xcodeproj"; sourceTree = "<group>"; };
 		AEE57A141A81168F00420D54 /* ShapeView+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ShapeView+Image.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,6 +201,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0263759C1A80D3770019CDCA /* libxml2.dylib in Frameworks */,
+				02110E551A808D9600CDF254 /* libSVGKit-iOS.1.2.0.a in Frameworks */,
 				027E6C631A70CCB7002658F7 /* SwiftGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,6 +215,7 @@
 			children = (
 				022E98091A8071A70028A198 /* ShapeView.swift */,
 				AEE57A141A81168F00420D54 /* ShapeView+Image.swift */,
+				026BCBE21A83175200D7E061 /* ShapeView+SVG.swift */,
 				02887B2A1A820CAC00E800A1 /* CALayer+ID.swift */,
 				022E981E1A8072270028A198 /* Gradient+Layer.swift */,
 				022E981F1A8072270028A198 /* CAShapeLayer+Style.swift */,
@@ -188,8 +240,50 @@
 			isa = PBXGroup;
 			children = (
 				027DC1B81A77998D00D3CF60 /* airship@2x.png */,
+				027EED701A821A5A00257830 /* lion.svg */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		02C42CB11A80868D00900C64 /* SVGKit */ = {
+			isa = PBXGroup;
+			children = (
+				02C42D111A80868D00900C64 /* Exporters */,
+				02C42D161A80868D00900C64 /* Parsers */,
+				02C42D221A80868D00900C64 /* QuartzCore additions */,
+				02C42D301A80868D00900C64 /* SVGKImage.h */,
+			);
+			name = SVGKit;
+			path = Vendor/SVGKit/Source;
+			sourceTree = SOURCE_ROOT;
+		};
+		02C42D111A80868D00900C64 /* Exporters */ = {
+			isa = PBXGroup;
+			children = (
+				02C42D121A80868D00900C64 /* CALayerExporter.h */,
+				02C42D131A80868D00900C64 /* SVGKExporterNSData.h */,
+				02C42D141A80868D00900C64 /* SVGKExporterUIImage.h */,
+				02C42D151A80868D00900C64 /* SVGKImage+CGContext.h */,
+			);
+			path = Exporters;
+			sourceTree = "<group>";
+		};
+		02C42D161A80868D00900C64 /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				02C42D1E1A80868D00900C64 /* SVGKParser.h */,
+				02C42D1F1A80868D00900C64 /* SVGKParseResult.h */,
+				02C42D201A80868D00900C64 /* SVGKParserExtension.h */,
+			);
+			path = Parsers;
+			sourceTree = "<group>";
+		};
+		02C42D221A80868D00900C64 /* QuartzCore additions */ = {
+			isa = PBXGroup;
+			children = (
+				02C42D2A1A80868D00900C64 /* SVGKLayer.h */,
+			);
+			path = "QuartzCore additions";
 			sourceTree = "<group>";
 		};
 		02CD3EE41A708C8D00C83B5C /* Products */ = {
@@ -232,6 +326,8 @@
 		4514F5F71A61D2D800CC9C26 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0263759B1A80D3770019CDCA /* libxml2.dylib */,
+				AED0AF2F1A7FB62C004E6271 /* SVGKit-iOS.xcodeproj */,
 				02CD3EE31A708C8D00C83B5C /* SwiftGraphics.xcodeproj */,
 			);
 			name = Frameworks;
@@ -282,6 +378,8 @@
 				022E98081A8071A70028A198 /* View */,
 				022E980A1A8071A70028A198 /* Animation */,
 				45DA4AC819AA62A800133F32 /* ShapeAnimation.h */,
+				AE3E418C1A818708004D3C41 /* ShapeAnimation.m */,
+				02C42CB11A80868D00900C64 /* SVGKit */,
 				45DA4AC619AA62A800133F32 /* Supporting Files */,
 			);
 			path = ShapeAnimation;
@@ -295,6 +393,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AED0AF301A7FB62C004E6271 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AED0AF351A7FB62D004E6271 /* libSVGKit-iOS.1.2.0.a */,
+				AED0AF371A7FB62D004E6271 /* SVGKit-iOS Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -302,6 +409,15 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02C42DAD1A80868D00900C64 /* SVGKParseResult.h in Headers */,
+				02C42DAE1A80868D00900C64 /* SVGKParserExtension.h in Headers */,
+				02C42DB71A80868D00900C64 /* SVGKLayer.h in Headers */,
+				02C42DA31A80868D00900C64 /* SVGKExporterNSData.h in Headers */,
+				02C42DA21A80868D00900C64 /* CALayerExporter.h in Headers */,
+				02C42DBC1A80868D00900C64 /* SVGKImage.h in Headers */,
+				02C42DAC1A80868D00900C64 /* SVGKParser.h in Headers */,
+				02C42DA51A80868D00900C64 /* SVGKImage+CGContext.h in Headers */,
+				02C42DA41A80868D00900C64 /* SVGKExporterUIImage.h in Headers */,
 				45DA4AC919AA62A800133F32 /* ShapeAnimation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,6 +473,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				AED0AF3F1A7FB65F004E6271 /* PBXTargetDependency */,
 				02CD3EFC1A708EBC00C83B5C /* PBXTargetDependency */,
 			);
 			name = ShapeAnimation;
@@ -396,6 +513,10 @@
 			productRefGroup = 454D550819AA5CE6000E3EB3 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = AED0AF301A7FB62C004E6271 /* Products */;
+					ProjectRef = AED0AF2F1A7FB62C004E6271 /* SVGKit-iOS.xcodeproj */;
+				},
 				{
 					ProductGroup = 02CD3EE41A708C8D00C83B5C /* Products */;
 					ProjectRef = 02CD3EE31A708C8D00C83B5C /* SwiftGraphics.xcodeproj */;
@@ -453,6 +574,20 @@
 			remoteRef = 02CD3EF71A708C8D00C83B5C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		AED0AF351A7FB62D004E6271 /* libSVGKit-iOS.1.2.0.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libSVGKit-iOS.1.2.0.a";
+			remoteRef = AED0AF341A7FB62D004E6271 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AED0AF371A7FB62D004E6271 /* SVGKit-iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SVGKit-iOS Tests.xctest";
+			remoteRef = AED0AF361A7FB62D004E6271 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -463,6 +598,7 @@
 				02CD3F101A70907600C83B5C /* Main.storyboard in Resources */,
 				02CD3F151A70907600C83B5C /* LaunchScreen.xib in Resources */,
 				02CD3F121A70907600C83B5C /* Images.xcassets in Resources */,
+				027EED711A821A5A00257830 /* lion.svg in Resources */,
 				027DC1B91A77998D00D3CF60 /* airship@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -516,6 +652,8 @@
 				022E98151A8071A70028A198 /* AnimationPair.swift in Sources */,
 				022E98201A8072270028A198 /* Gradient+Layer.swift in Sources */,
 				022E98211A8072270028A198 /* CAShapeLayer+Style.swift in Sources */,
+				026BCBE31A83175200D7E061 /* ShapeView+SVG.swift in Sources */,
+				AE3E418D1A818708004D3C41 /* ShapeAnimation.m in Sources */,
 				022E98181A8071A70028A198 /* CALayer+Pause.swift in Sources */,
 				022E98141A8071A70028A198 /* AnimationLayer.swift in Sources */,
 			);
@@ -538,6 +676,11 @@
 			isa = PBXTargetDependency;
 			target = 45DA4AC319AA62A800133F32 /* ShapeAnimation */;
 			targetProxy = 02CD3F281A70929600C83B5C /* PBXContainerItemProxy */;
+		};
+		AED0AF3F1A7FB65F004E6271 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SVGKit-iOS";
+			targetProxy = AED0AF3E1A7FB65F004E6271 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

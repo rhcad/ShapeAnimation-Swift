@@ -1,3 +1,6 @@
 [submodule "Vendor/SwiftGraphics"]
 	path = Vendor/SwiftGraphics
 	url = https://github.com/rhcad/SwiftGraphics.git
+[submodule "Vendor/SVGKit"]
+	path = Vendor/SVGKit
+	url = https://github.com/rhcad/SVGKit.git

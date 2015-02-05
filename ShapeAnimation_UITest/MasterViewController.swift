@@ -27,6 +27,8 @@ class MasterViewController: UITableViewController {
             viewController.animationBlock = testRadarCircles(viewController)
         case "Jumping Ball":
             viewController.animationBlock = testJumpingBall(viewController)
+        case "SVG Basic":
+            viewController.animationBlock = testSVGBasic(viewController)
         default:
             println("Hello Swift")
         }
@@ -175,6 +177,13 @@ class MasterViewController: UITableViewController {
             }
             layer.animationCreated = { $1.repeatCount=HUGE; $1.duration=5.0 }
             layer.setProperty(4, key: "t")
+        }
+    }
+    
+    private func testSVGBasic(viewController:DetailViewController) -> AnimationBlock {
+        return { (view) -> Void in
+            if let layer = view.addSVGLayer(named:"lion.svg", maxSize:view.bounds.size) {
+            }
         }
     }
     

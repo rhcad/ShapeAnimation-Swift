@@ -9,20 +9,33 @@
 import SwiftGraphics
 
 private var LayerIDKey = 13
+private let svgkey = "SVGElementIdentifier"
 
 public extension CALayer {
     
     public var identifier: String? {
         get {
+            if let svgid = valueForKey(svgkey) as? String {
+                return svgid
+            }
             let defv:String? = nil
             return getAssociatedObject(self, &LayerIDKey, defv)
         }
         set {
-            setAssociatedObject(self, &LayerIDKey, newValue)
+            if let svgid = valueForKey(svgkey) as? String {
+                setValue(newValue, forKey:svgkey)
+            } else {
+                setAssociatedObject(self, &LayerIDKey, newValue)
+            }
         }
     }
     
     public func layerWithIdentifier(identifier:String) -> CALayer? {
+        if let svgLayer = self as? SVGKLayer {
+            if let image = svgLayer.SVGImage {
+                return image.layerWithIdentifier(identifier)
+            }
+        }
         if let sublayers = self.sublayers {
             for layer in sublayers {
                 let layer = layer as CALayer
@@ -37,6 +50,11 @@ public extension CALayer {
     }
     
     public func layerWithIdentifier(identifier:String, layer:CALayer) -> CALayer? {
+        if let svgLayer = self as? SVGKLayer {
+            if let image = svgLayer.SVGImage {
+                return image.layerWithIdentifier(identifier, layer:layer)
+            }
+        }
         return layer.layerWithIdentifier(identifier)
     }
 }
