@@ -1,15 +1,20 @@
 # ShapeAnimation-Swift
 
-The Write Less, Do More, Vector animation framework in Swift based on [SwiftGraphics](https://github.com/schwa/SwiftGraphics) for iOS 8.
+Vector animation framework in Swift based on [SwiftGraphics](https://github.com/schwa/SwiftGraphics) for iOS 8.
+
+With ShapeAnimation you can easily create various animations with a nice Swift based syntax.
 
 [![Travis][travis_img]][travis]
 
 [travis]: https://travis-ci.org/rhcad/ShapeAnimation-Swift
 [travis_img]: https://travis-ci.org/rhcad/ShapeAnimation-Swift.svg?branch=master
 
-All development happens on the [develop][develop] branch. Code is merged back on master branch infrequently.
+The current development happens on the [develop][develop] branch. Code is merged back on master branch infrequently.
+
+SVG animation development with [SVGKit](https://github.com/SVGKit/SVGKit) happens on the [SVG][svg_branch] branch.
 
 [develop]: https://github.com/rhcad/ShapeAnimation-Swift/tree/develop
+[svg_branch]: https://github.com/rhcad/ShapeAnimation-Swift/tree/SVG
 
 ## What's included
 
@@ -31,7 +36,7 @@ All development happens on the [develop][develop] branch. Code is merged back on
   * applyAnimations for multiple layers
 
 * Animations with customized properties
-  * Use AnimationLayer class to draw customized animations, such as math functional image.
+  * Use AnimationLayer class to draw customized animations.
   * Animation with sliders example: [EllipseViewController.swift](ShapeAnimation_UITest/EllipseViewController.swift)
 
 ![Stroke Lines](Documentation/strokelines.gif)
@@ -42,6 +47,7 @@ All development happens on the [develop][develop] branch. Code is merged back on
 ![Jumping Ball](Documentation/jumpball.gif)
 
 ![Animation with Sliders](Documentation/ellipse_slider.gif)
+![Drag Layers](Documentation/drag.gif)
 
 ## Usage
 

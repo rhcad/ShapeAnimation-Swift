@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 github.com/rhcad. All rights reserved.
 //
 
-import UIKit
-import QuartzCore
 import SwiftGraphics
 
 public extension CALayer {
@@ -29,6 +27,9 @@ public extension CALayer {
                 self.beginTime = 0.0
                 self.beginTime = convertTime(CACurrentMediaTime(), fromLayer:nil) - pausedTime
             }
+            if let layer = self as? AnimationLayer {
+                layer.timer?.paused = newValue
+            }
         }
     }
     
@@ -39,23 +40,29 @@ public extension ShapeView {
     public var paused:Bool {
         get {
             var ret = false
-            for l in self.layer.sublayers {
-                let layer = l as CALayer
-                ret = ret || layer.paused
+            if let sublayers = self.layer.sublayers {
+                for layer in sublayers {
+                    let layer = layer as CALayer
+                    ret = ret || layer.paused
+                }
             }
             return ret
         }
         set {
-            for l in self.layer.sublayers {
-                let layer = l as CALayer
-                layer.paused = newValue
+            if let sublayers = self.layer.sublayers {
+                for layer in sublayers {
+                    let layer = layer as CALayer
+                    layer.paused = newValue
+                }
             }
         }
     }
     
     public func removeAllAnimations() {
-        for layer in self.layer.sublayers {
-            layer.removeAllAnimations()
+        if let sublayers = self.layer.sublayers {
+            for layer in sublayers {
+                layer.removeAllAnimations()
+            }
         }
     }
     

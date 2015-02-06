@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 github.com/rhcad. All rights reserved.
 //
 
-import UIKit
 import SwiftGraphics
 import ShapeAnimation
 
@@ -14,30 +13,21 @@ class EllipseViewController: DetailViewController {
     @IBOutlet weak var rxSlider: UISlider!
     @IBOutlet weak var rySlider: UISlider!
     @IBOutlet weak var angleSlider: UISlider!
+    
     var animationLayer:AnimationLayer!
+    var ballLayer:CAShapeLayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         animationLayer = animationView.addAnimationLayer(frame:animationView.bounds,
             properties:[("rx", 20), ("ry", 20), ("angle", 0)]) { (layer, ctx) -> Void in
-                let rx = layer.getProperty("rx")
-                let ry = layer.getProperty("ry")
-                let angle = layer.getProperty("angle")
-                
-                let ellipse = Ellipse(center:self.animationView.bounds.mid,
-                    semiMajorAxis:max(rx, ry),
-                    semiMinorAxis:min(rx, ry),
-                    rotation:angle + (rx < ry ? CGFloat(M_PI_2) : 0))
+                let ellipse = self.makeEllipse(layer)
                 ctx.stroke(ellipse.asBezierChain)
-                
-                func round1(x:CGFloat) -> CGFloat { return round(x * 10) / 10 }
-                let text:NSString = "rx=\(round1(rx))\nry=\(round1(ry))\nangle=\(round1(RadiansToDegrees(angle)))"
-                let attr = [NSFontAttributeName: UIFont.systemFontOfSize(17)]
-                UIGraphicsPushContext(ctx)
-                text.drawAtPoint(CGPoint(x:10, y:10), withAttributes:attr)
-                UIGraphicsPopContext()
+                self.drawLabelText(ctx, ellipse.a, ellipse.b, ellipse.rotation)
         }
+        animationLayer.didStart = { self.ballLayer?.removeLayer(); return }
+        animationLayer.didStop = { self.addBallLayer() }
         
         radiusXChanged(rxSlider)
         radiusYChanged(rySlider)
@@ -54,5 +44,50 @@ class EllipseViewController: DetailViewController {
     
     @IBAction func angleChanged(sender: UISlider) {
         animationLayer.setProperty(DegreesToRadians(CGFloat(-sender.value)), key:"angle")
+    }
+    
+    private func makeEllipse(layer:AnimationLayer) -> Ellipse {
+        let rx = layer.getProperty("rx")
+        let ry = layer.getProperty("ry")
+        let angle = layer.getProperty("angle")
+        
+        return Ellipse(center:self.animationView.bounds.mid,
+            semiMajorAxis:max(rx, ry),
+            semiMinorAxis:min(rx, ry),
+            rotation:angle + (rx < ry ? CGFloat(M_PI_2) : 0))
+    }
+    
+    private func drawLabelText(ctx:CGContext, _ rx:CGFloat, _ ry:CGFloat, _ angle:CGFloat) {
+        func round1(x:CGFloat) -> CGFloat { return round(x * 10) / 10 }
+        let deg = round1(RadiansToDegrees(angle))
+        let text:NSString = "rx=\(round1(rx))\nry=\(round1(ry))\nangle=\(deg)"
+        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(17)]
+        UIGraphicsPushContext(ctx)
+        text.drawAtPoint(CGPoint(x:10, y:10), withAttributes:attr)
+        UIGraphicsPopContext()
+    }
+    
+    private func addBallLayer() {
+        var gradient = Gradient(colors:[(1.0,0.0,0.0), (0.1,0.0,0.0)], axial:true)
+        gradient.orientation = (CGPoint(x:0.3, y:-0.3), CGPoint(x:0, y:1.4))
+        
+        ballLayer = animationView.addCircleLayer(center:CGPoint.zeroPoint, radius:5)
+        ballLayer?.apply(gradient)
+        
+        let ellipse = self.makeEllipse(animationLayer)
+        let (a,b,c,d) = ellipse.asBezierCurves
+        
+        var path = CGPathCreateMutable()
+        path.move(a.start!)
+        
+        path.addCurve(BezierCurve(controls: a.controls, end: a.end))
+        path.addCurve(BezierCurve(controls: b.controls, end: b.end))
+        path.addCurve(BezierCurve(controls: c.controls, end: c.end))
+        path.addCurve(BezierCurve(controls: d.controls, end: d.end))
+        
+        ballLayer!.moveOnPathAnimation(path).set{
+            $0.repeatCount=HUGE
+            $0.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
+            }.apply()
     }
 }

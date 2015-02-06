@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 github.com/rhcad. All rights reserved.
 //
 
-import UIKit
-import QuartzCore
 import SwiftGraphics
 
 //! View class which contains vector shape layers.
@@ -40,35 +38,37 @@ public class ShapeView : UIView {
         return layer
     }
     
-    public func addTextLayer(text:String, frame:CGRect, fontSize:CGFloat) -> CATextLayer {
-        let layer = CATextLayer()
-        
-        layer.string = text
-        layer.fontSize = fontSize
-        if let strokeColor = style.strokeColor {
-            layer.foregroundColor = strokeColor
-        }
-        layer.alignmentMode = kCAAlignmentCenter
-        layer.wrapped = true
-        self.addSublayer(layer, frame:frame)
-    
-        return layer
-    }
-    
-    public func addImageLayer(image:UIImage!, center:CGPoint) -> CALayer {
-        let layer = CALayer()
-        layer.contents = image.CGImage
-        self.addSublayer(layer, frame:CGRect(center:center, size:image.size))
-        return layer
-    }
-    
     override public func removeFromSuperview() {
-        if self.layer.sublayers != nil {
-            for layer in self.layer.sublayers {
+        if let sublayers = self.layer.sublayers {
+            for layer in sublayers {
                 layer.removeLayer()
             }
         }
         super.removeFromSuperview()
+    }
+    
+    private var lastBounds = CGRect.zeroRect
+    
+    override public func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        lastBounds = self.layer.bounds
+    }
+    
+    override public func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let bounds = self.bounds
+        
+        if lastBounds != bounds && self.layer.sublayers != nil {
+            for layer in self.layer.sublayers {
+                if let layer = layer as? CALayer {
+                    if layer.frame == lastBounds {
+                        layer.frame = bounds
+                    }
+                }
+            }
+            lastBounds = bounds
+        }
     }
 }
 
@@ -88,7 +88,7 @@ public extension ShapeView {
         return addShapeLayer(CGPathCreateWithEllipseInRect(CGRect(center:c, radius:radius), nil))
     }
     
-    public func addPolygonLayer(nside:Int, center:CGPoint, radius:CGFloat) -> CAShapeLayer {
+    public func addRegularPolygonLayer(nside:Int, center:CGPoint, radius:CGFloat) -> CAShapeLayer {
         return addLinesLayer(RegularPolygon(nside:nside, center:center, radius:radius).points, closed:true)
     }
     

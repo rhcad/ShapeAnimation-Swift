@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 github.com/rhcad. All rights reserved.
 //
 
-import UIKit
 import SwiftGraphics
 import ShapeAnimation
 
@@ -28,8 +27,9 @@ class MasterViewController: UITableViewController {
             viewController.animationBlock = testRadarCircles(viewController)
         case "Jumping Ball":
             viewController.animationBlock = testJumpingBall(viewController)
-        default:
-            println("Hello Swift")
+        case "Drag Layer":
+            viewController.animationBlock = testDragLayer(viewController)
+        default: ()
         }
         viewController.title = NSLocalizedString(segue.identifier! as NSString, comment:"")
     }
@@ -41,6 +41,7 @@ class MasterViewController: UITableViewController {
             
             let points1 = [(10.0,20.0),(150.0,40.0),(120.0,320.0)].map{ CGPoint($0) }
             let la1 = view.addLinesLayer(points1, closed:true, color:CGColor.redColor())
+            la1.identifier = "triangle1"
             animationGroup([la1.strokeEndAnimation(), la1.lineWidthAnimation(from:0, to:5)]).apply() {
                 la1.shakeAnimation().apply()
             }
@@ -49,6 +50,8 @@ class MasterViewController: UITableViewController {
             let la2 = view.addLinesLayer(points1.map { $0 * xf2 }, closed:true, color:CGColor.purpleColor())
             let la3 = view.addLinesLayer(points1.map { $0 * xf2 * xf2 }, closed:true, color:CGColor.greenColor())
             
+            la2.identifier = "triangle2"
+            la3.identifier = "triangle3"
             la2.scaleAnimation(from:1, to:1.1, repeatCount:3).apply(duration:0.3) {
                 la3.flashAnimation().apply()
             }
@@ -64,7 +67,7 @@ class MasterViewController: UITableViewController {
             path.move(CGPoint(x:120, y:70))
             path.addCubicCurveToPoint(CGPoint(x:250, y:220),
                 control1:CGPoint(x:0, y:200), control2:CGPoint(x:150, y:375))
-            path.addSmoothQuadCurveToPoint(CGPoint(x:120, y:120))
+            path.addSmoothQuadCurveToPoint(CGPoint(x:500, y:220))
             
             // Add a triangle with gradient fill
             view.gradient.setColors([(0.5, 0.5, 0.9, 1.0), (0.9, 0.9, 0.3, 1.0)])
@@ -86,13 +89,9 @@ class MasterViewController: UITableViewController {
             animationGroup([a4, a5]).set{$0.repeatCount=HUGE}.apply()
             
             // Rotate and move a picture along the path
-            if let imageLayer = view.addImageLayer(named:"airship.png", center:path.getPoint(0)!) {
-                let startTagent = path.getPoint(1)! - path.getPoint(0)!
-                imageLayer.rotationAnimation(angle:startTagent.direction).setBeginTime(1, gap:1).apply() {
-                    imageLayer.moveOnPathAnimation(path, autoRotate:true).apply(duration:2) {
-                        imageLayer.moveAnimation(to:CGPoint(x:500)).apply()
-                    }
-                }
+            if let imageLayer = view.addImageLayer(named:"airship.png", center:CGPoint(x:200, y:200)) {
+                imageLayer.moveOnPathAnimation(path, autoRotate:true)
+                    .setBeginTime(1.0).apply(duration:2)
             }
         }
     }
@@ -111,6 +110,8 @@ class MasterViewController: UITableViewController {
                 let edgeLayer = view.addLinesLayer(polygon.points, closed:true)
                 let textLayer = view.addTextLayer(String(c), frame:polygon.incircle.frame, fontSize:30)
                 
+                edgeLayer.identifier = "polygon\(i)"
+                textLayer.identifier = "text\(i)"
                 animations.append(edgeLayer.rotationAnimation(angle: CGFloat(2 * M_PI))
                     .setBeginTime(i, gap:0.3, duration:1.5))
                 animations.append(textLayer.rotationAnimation(angle: CGFloat(2 * M_PI))
@@ -133,7 +134,7 @@ class MasterViewController: UITableViewController {
             
             view.style.lineWidth = 1
             for i in 0..<count {
-                let la1 = view.addCircleLayer(center:CGPoint(x:200, y:100), radius:15)
+                let la1 = view.addCircleLayer(center:CGPoint(x:100, y:100), radius:15)
                 let anim = animationGroup([la1.scaleAnimation(from:0, to:5),
                                            la1.opacityAnimation(from:1, to:0)])
                     .setBeginTime(i, gap:duration / Double(count), duration:duration)
@@ -152,17 +153,18 @@ class MasterViewController: UITableViewController {
         return { (view) -> Void in
             let layer = view.addAnimationLayer(frame:view.layer.bounds, properties:[("t", 0)]) {
                 (layer, ctx) -> Void in
-                let W:CGFloat = 300, H:CGFloat = 75
-                let D:CGFloat = 3, r:CGFloat = 15       // radius of ball
-                let DJ:CGFloat = 50, HJ:CGFloat = 35    // distance and height of jumping
+                let W = view.layer.bounds.width
+                let H = view.layer.bounds.height
+                let D:CGFloat = 3, r:CGFloat = 30       // radius of ball
+                let DJ:CGFloat = W / 6, HJ = H / 2      // distance and height of jumping
                 let ground:CGFloat = 0.75*H
                 
                 let t = layer.getProperty("t")
                 
-                let x = W * t / D
+                let x = (-W / 3) + (5 * W / 3) * (t / D)
                 let y = ground - HJ*4*(x % DJ)*(DJ-(x % DJ))/DJ**2
                 let coef = (HJ-y)/HJ
-                let sr = (1 - coef / 2) * r
+                let sr = (1 - coef / 4) * r
                 
                 var sgradient = Gradient(colors: [CGColor.color(white:0, alpha:0.2-coef/5), CGColor.clearColor()], axial:true)
                 sgradient.orientation = (CGPoint(y:0.5), CGPoint(x:1, y:0.5))
@@ -173,8 +175,8 @@ class MasterViewController: UITableViewController {
                 let ball = Circle(center:CGPoint(x:x, y:y), radius:r)
                 ctx.fillEllipseInRect(gradient, rect: ball.frame)
             }
-            layer.animationCreated = { $1.repeatCount=HUGE; $1.duration=3.0 }
-            layer.setProperty(5, key: "t")
+            layer.animationCreated = { $1.repeatCount=HUGE; $1.duration=10.0 }
+            layer.setProperty(4, key: "t")
         }
     }
     
@@ -186,12 +188,5 @@ public extension ShapeView {
         style.strokeColor = color
         return addShapeLayer(Path(vertices:points, closed:closed).cgPath)
     }
-    
-    public func addImageLayer(#named:String, center:CGPoint) -> CALayer? {
-        if let image = UIImage(named:named) {
-            return self.addImageLayer(image, center:center)
-        }
-        return nil
-    }
-    
+
 }

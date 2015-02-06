@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 github.com/rhcad. All rights reserved.
 //
 
-import UIKit
 import ShapeAnimation
 
 typealias AnimationBlock = ((view:ShapeView) -> Void)
@@ -15,6 +14,7 @@ class DetailViewController: UIViewController {
     
     @IBOutlet var animationView: ShapeView!
     var animationBlock : AnimationBlock?
+    var data : AnyObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()

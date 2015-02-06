@@ -14,4 +14,5 @@ FOUNDATION_EXPORT double ShapeAnimationVersionNumber;
 //! Project version string for ShapeAnimation.
 FOUNDATION_EXPORT const unsigned char ShapeAnimationVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <ShapeAnimation/PublicHeader.h>
+// In this header, you should import all the public headers of your framework to import ObjC code into Swift.
+
