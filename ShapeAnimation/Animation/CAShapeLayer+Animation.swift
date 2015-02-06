@@ -17,7 +17,6 @@ public extension CAShapeLayer {
         animation.fromValue = 0.0
         animation.toValue = 1.0
         animation.didStop = didStop
-        animation.removedOnCompletion = false
         return AnimationPair(self, animation, key:"strokeEnd")
     }
     
@@ -27,10 +26,34 @@ public extension CAShapeLayer {
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.fromValue = from
         animation.toValue = to
-        animation.didStop = didStop
         animation.removedOnCompletion = false
         animation.fillMode = kCAFillModeForwards
+        animation.didStop = didStop
+        animation.willStop = {
+            withDisableActions(self, animation) {
+                self.strokeColor = to
+            }
+            self.removeAnimationForKey("strokeColor")
+        }
         return AnimationPair(self, animation, key:"strokeColor")
+    }
+    
+    func fillColorAnimation(#from:CGColor, to:CGColor, didStop:(() -> Void)? = nil) -> AnimationPair {
+        let animation = CABasicAnimation(keyPath:"fillColor")
+        animation.duration = 0.8
+        animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
+        animation.fromValue = from
+        animation.toValue = to
+        animation.removedOnCompletion = false
+        animation.fillMode = kCAFillModeForwards
+        animation.didStop = didStop
+        animation.willStop = {
+            withDisableActions(self, animation) {
+                self.fillColor = to
+            }
+            self.removeAnimationForKey("fillColor")
+        }
+        return AnimationPair(self, animation, key:"fillColor")
     }
     
     func lineWidthAnimation(#from:CGFloat, to:CGFloat, didStop:(() -> Void)? = nil) -> AnimationPair {
@@ -39,9 +62,15 @@ public extension CAShapeLayer {
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.fromValue = from
         animation.toValue = to
-        animation.didStop = didStop
         animation.removedOnCompletion = false
         animation.fillMode = kCAFillModeForwards
+        animation.didStop = didStop
+        animation.willStop = {
+            withDisableActions(self, animation) {
+                self.lineWidth = to
+            }
+            self.removeAnimationForKey("lineWidth")
+        }
         return AnimationPair(self, animation, key:"lineWidth")
     }
     
@@ -51,7 +80,6 @@ public extension CAShapeLayer {
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
         animation.fromValue = from
         animation.toValue = to
-        animation.removedOnCompletion = false
         return AnimationPair(self, animation, key:"dashPhase")
     }
     
@@ -63,6 +91,13 @@ public extension CAShapeLayer {
         animation.didStop = didStop
         animation.removedOnCompletion = false
         animation.fillMode = kCAFillModeForwards
+        animation.didStop = didStop
+        animation.willStop = {
+            withDisableActions(self, animation) {
+                self.path = to
+            }
+            self.removeAnimationForKey("path")
+        }
         return AnimationPair(self, animation, key:"path")
     }
 }

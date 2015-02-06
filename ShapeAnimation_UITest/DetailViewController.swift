@@ -14,6 +14,7 @@ class DetailViewController: UIViewController {
     
     @IBOutlet var animationView: ShapeView!
     var animationBlock : AnimationBlock?
+    var data : AnyObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()

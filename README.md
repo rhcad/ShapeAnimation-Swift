@@ -44,6 +44,7 @@ SVG animation development with [SVGKit](https://github.com/SVGKit/SVGKit) happen
 ![Jumping Ball](Documentation/jumpball.gif)
 
 ![Animation with Sliders](Documentation/ellipse_slider.gif)
+![Drag Layers](Documentation/drag.gif)
 
 ## Usage
 

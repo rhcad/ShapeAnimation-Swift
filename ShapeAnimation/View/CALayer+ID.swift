@@ -14,11 +14,10 @@ public extension CALayer {
     
     public var identifier: String? {
         get {
-            let defv:String? = nil
-            return getAssociatedObject(self, &LayerIDKey, defv)
+            return getAssociatedObject(self, &LayerIDKey) as? String
         }
         set {
-            setAssociatedObject(self, &LayerIDKey, newValue)
+            setAssociatedObject(self, &LayerIDKey, newValue!)
         }
     }
     

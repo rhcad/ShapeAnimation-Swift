@@ -53,7 +53,7 @@ public func applyAnimations(animations:[AnimationPair], completion:(() -> Void)?
 public class AnimationPair {
     public let layer:CALayer
     public let animation:CAAnimation
-    public var key:String
+    public let key:String
     
     init(_ layer:CALayer, _ animation:CAAnimation, key:String) {
         self.layer = layer
@@ -71,11 +71,6 @@ public class AnimationPair {
         return self
     }
     
-    public func setKey(key:String) -> AnimationPair {
-        self.key = key
-        return self
-    }
-    
     public func setDuration(d:CFTimeInterval) -> AnimationPair {
         animation.duration = d
         if let group = animation as? CAAnimationGroup {
@@ -85,6 +80,10 @@ public class AnimationPair {
             }
         }
         return self
+    }
+    
+    public func setBeginTime(gap:CFTimeInterval) -> AnimationPair {
+        return setBeginTime(1, gap:gap)
     }
     
     public func setBeginTime(index:Int, gap:CFTimeInterval) -> AnimationPair {
@@ -100,10 +99,16 @@ public class AnimationPair {
     
     public func apply() {
         if !CAAnimation.isStopping {
-            layer.addAnimation(animation, forKey:key)
             if let gradientLayer = layer.gradientLayer {
-                gradientLayer.addAnimation(animation, forKey:key)
+                let anim2 = animation.copy() as CAAnimation
+                anim2.delegate = AnimationDelagate()
+                if let layerid = layer.identifier {
+                    anim2.setValue(layerid + "_gradient", forKey:"layerID")
+                }
+                gradientLayer.addAnimation(anim2, forKey:key)
             }
+            animation.setValue(layer.identifier, forKey:"layerID")
+            layer.addAnimation(animation, forKey:key)
         }
     }
     
@@ -121,5 +126,27 @@ public class AnimationPair {
         setDuration(d)
         animation.didStop = didStop
         apply()
+    }
+}
+
+// MARK: setAnchorPoint just change anchorPoint, and not change position
+
+public extension CALayer {
+    public func setAnchorPoint(point:CGPoint, fromLayer:CALayer? = nil) {
+        let oldframe = self.frame
+        if let fromLayer = fromLayer {
+            let pt = convertPoint(point, fromLayer:fromLayer) / bounds.size
+            self.anchorPoint = pt
+        } else {
+            self.anchorPoint = point
+        }
+        self.frame = oldframe
+    }
+}
+
+public extension AnimationPair {
+    public func setAnchorPoint(point:CGPoint, fromLayer:CALayer? = nil) -> AnimationPair {
+        layer.setAnchorPoint(point, fromLayer:fromLayer)
+        return self
     }
 }
