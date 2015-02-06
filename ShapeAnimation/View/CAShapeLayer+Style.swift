@@ -15,17 +15,18 @@ private var LayerStyleKey = 10
 public extension CAShapeLayer {
     var paintStyle: PaintStyle {
         get {
-            let style = getAssociatedObject(self, &LayerStyleKey) as PaintStyle?
+            let style = getAssociatedWrappedObject(self, &LayerStyleKey) as PaintStyle?
             if let style = style {
                 return style
-            } else {
-                let style = PaintStyle.defaultStyle
-                setAssociatedObject(self, &LayerStyleKey, style)
+            }
+            else {
+                var style = Style.defaultStyle
+                setAssociatedWrappedObject(self, &LayerStyleKey, style)
                 return style
             }
         }
         set {
-            setAssociatedObject(self, &LayerStyleKey, newValue)
+            setAssociatedWrappedObject(self, &LayerStyleKey, newValue)
             apply(newValue)
         }
     }

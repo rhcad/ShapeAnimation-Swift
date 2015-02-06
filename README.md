@@ -42,6 +42,7 @@ With ShapeAnimation you can easily create various animations with a nice Swift b
 ![Jumping Ball](Documentation/jumpball.gif)
 
 ![Animation with Sliders](Documentation/ellipse_slider.gif)
+![Drag Layers](Documentation/drag.gif)
 
 ## Usage
 

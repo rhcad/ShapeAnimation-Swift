@@ -14,6 +14,7 @@ public class AnimationDelagate : NSObject {
     
     public var didStart:((CAAnimation!) -> Void)?
     public var didStop :(() -> Void)?
+    public var willStop :(() -> Void)?
     public var finished = true
     
     override public func animationDidStart(anim:CAAnimation!) {
@@ -21,11 +22,23 @@ public class AnimationDelagate : NSObject {
     }
     
     override public func animationDidStop(anim:CAAnimation!, finished:Bool) {
+        /*
+        let keypath = (anim as? CAPropertyAnimation)?.keyPath
+        let name = keypath != nil ? keypath! : anim.description
+        
+        if let layerid = anim.valueForKey("layerID") as? String {
+            println("animationDidStop \(layerid) \(name)")
+        } else {
+            println("animationDidStop \(name)")
+        }*/
+        
         self.finished = finished
         if finished {
+            self.willStop?()
             self.didStop?()
         } else {
             stopping++
+            self.willStop?()
             self.didStop?()
             stopping--
         }
@@ -78,6 +91,23 @@ public extension CAAnimation {
         }
     }
     
+    public var willStop:(() -> Void)? {
+        get {
+            let delegate = self.delegate as? AnimationDelagate
+            return delegate?.willStop
+        }
+        set {
+            if let delegate = self.delegate as? AnimationDelagate {
+                delegate.willStop = newValue
+            }
+            else if newValue != nil {
+                var delegate = AnimationDelagate()
+                delegate.willStop = newValue
+                self.delegate = delegate
+            }
+        }
+    }
+    
     public var finished:Bool {
         get {
             if let delegate = self.delegate as? AnimationDelagate {
@@ -103,4 +133,14 @@ public extension CAAnimation {
     }
     
     public class var isStopping:Bool { return stopping > 0 }
+}
+
+public func withDisableActions(layer:CALayer, animation:CAAnimation, block:() -> Void) {
+    let forwards = animation.fillMode == kCAFillModeForwards || animation.fillMode == kCAFillModeBoth
+    if !animation.autoreverses && forwards {
+        let old = CATransaction.disableActions()
+        CATransaction.setDisableActions(true)
+        block()
+        CATransaction.setDisableActions(old)
+    }
 }

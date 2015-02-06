@@ -14,10 +14,10 @@ private var GradientLayerKey = 12
 public extension CAShapeLayer {
     public var gradient: Gradient? {
         get {
-            return getAssociatedObject(self, &GradientInfoKey) as Gradient?
+            return getAssociatedWrappedObject(self, &GradientInfoKey) as Gradient?
         }
         set {
-            setAssociatedObject(self, &GradientInfoKey, newValue)
+            setAssociatedWrappedObject(self, &GradientInfoKey, newValue)
             apply(newValue)
         }
     }
@@ -59,11 +59,11 @@ public extension CALayer {
     public var gradientLayer: CAGradientLayer? {
         get {
             let defv:CAGradientLayer? = nil
-            return getAssociatedObject(self, &GradientLayerKey, defv)
+            return getAssociatedWrappedObject(self, &GradientLayerKey, defv)
         }
         set {
             weak var layer = newValue
-            setAssociatedObject(self, &GradientLayerKey, layer)
+            setAssociatedWrappedObject(self, &GradientLayerKey, layer)
         }
     }
 }

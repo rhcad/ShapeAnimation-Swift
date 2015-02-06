@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		02110E551A808D9600CDF254 /* libSVGKit-iOS.1.2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AED0AF351A7FB62D004E6271 /* libSVGKit-iOS.1.2.0.a */; };
+		02147CA11A836E2A001E5617 /* MasterViewController+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02147CA01A836E2A001E5617 /* MasterViewController+Drag.swift */; };
+		02147CAC1A847EA3001E5617 /* CALayer+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02147CAB1A847EA3001E5617 /* CALayer+Drag.swift */; };
+		02147CB51A848A79001E5617 /* SVGKSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 02147CB41A848A79001E5617 /* SVGKSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		022E98131A8071A70028A198 /* ShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E98091A8071A70028A198 /* ShapeView.swift */; };
 		022E98141A8071A70028A198 /* AnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E980B1A8071A70028A198 /* AnimationLayer.swift */; };
 		022E98151A8071A70028A198 /* AnimationPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E980C1A8071A70028A198 /* AnimationPair.swift */; };
@@ -135,6 +138,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02147CA01A836E2A001E5617 /* MasterViewController+Drag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MasterViewController+Drag.swift"; sourceTree = "<group>"; };
+		02147CAB1A847EA3001E5617 /* CALayer+Drag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Drag.swift"; sourceTree = "<group>"; };
+		02147CB41A848A79001E5617 /* SVGKSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGKSource.h; sourceTree = "<group>"; };
 		022E98091A8071A70028A198 /* ShapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeView.swift; sourceTree = "<group>"; };
 		022E980B1A8071A70028A198 /* AnimationLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationLayer.swift; sourceTree = "<group>"; };
 		022E980C1A8071A70028A198 /* AnimationPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationPair.swift; sourceTree = "<group>"; };
@@ -227,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				022E980E1A8071A70028A198 /* CALayer+Animation.swift */,
+				02147CAB1A847EA3001E5617 /* CALayer+Drag.swift */,
 				022E98101A8071A70028A198 /* CAShapeLayer+Animation.swift */,
 				022E980B1A8071A70028A198 /* AnimationLayer.swift */,
 				022E980F1A8071A70028A198 /* CALayer+Pause.swift */,
@@ -252,6 +259,7 @@
 				02C42D161A80868D00900C64 /* Parsers */,
 				02C42D221A80868D00900C64 /* QuartzCore additions */,
 				02C42D301A80868D00900C64 /* SVGKImage.h */,
+				02147CB41A848A79001E5617 /* SVGKSource.h */,
 			);
 			name = SVGKit;
 			path = Vendor/SVGKit/Source;
@@ -304,6 +312,7 @@
 			children = (
 				02CD3F081A70907600C83B5C /* AppDelegate.swift */,
 				02CD3F0A1A70907600C83B5C /* MasterViewController.swift */,
+				02147CA01A836E2A001E5617 /* MasterViewController+Drag.swift */,
 				02CD3F0C1A70907600C83B5C /* DetailViewController.swift */,
 				02E8A7EB1A7A3B9500EB03C3 /* EllipseViewController.swift */,
 				02CD3F0E1A70907600C83B5C /* Main.storyboard */,
@@ -410,6 +419,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02C42DAD1A80868D00900C64 /* SVGKParseResult.h in Headers */,
+				02147CB51A848A79001E5617 /* SVGKSource.h in Headers */,
 				02C42DAE1A80868D00900C64 /* SVGKParserExtension.h in Headers */,
 				02C42DB71A80868D00900C64 /* SVGKLayer.h in Headers */,
 				02C42DA31A80868D00900C64 /* SVGKExporterNSData.h in Headers */,
@@ -625,6 +635,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02CD3F0D1A70907600C83B5C /* DetailViewController.swift in Sources */,
+				02147CA11A836E2A001E5617 /* MasterViewController+Drag.swift in Sources */,
 				02E8A7EC1A7A3B9500EB03C3 /* EllipseViewController.swift in Sources */,
 				02CD3F0B1A70907600C83B5C /* MasterViewController.swift in Sources */,
 				02CD3F091A70907600C83B5C /* AppDelegate.swift in Sources */,
@@ -648,6 +659,7 @@
 				022E98161A8071A70028A198 /* AnimationPrivate.swift in Sources */,
 				022E98131A8071A70028A198 /* ShapeView.swift in Sources */,
 				022E98191A8071A70028A198 /* CAShapeLayer+Animation.swift in Sources */,
+				02147CAC1A847EA3001E5617 /* CALayer+Drag.swift in Sources */,
 				AEE57A151A81168F00420D54 /* ShapeView+Image.swift in Sources */,
 				022E98151A8071A70028A198 /* AnimationPair.swift in Sources */,
 				022E98201A8072270028A198 /* Gradient+Layer.swift in Sources */,

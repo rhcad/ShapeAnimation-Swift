@@ -18,14 +18,13 @@ public extension CALayer {
             if let svgid = valueForKey(svgkey) as? String {
                 return svgid
             }
-            let defv:String? = nil
-            return getAssociatedObject(self, &LayerIDKey, defv)
+            return getAssociatedObject(self, &LayerIDKey) as? String
         }
         set {
             if let svgid = valueForKey(svgkey) as? String {
                 setValue(newValue, forKey:svgkey)
             } else {
-                setAssociatedObject(self, &LayerIDKey, newValue)
+                setAssociatedObject(self, &LayerIDKey, newValue!)
             }
         }
     }

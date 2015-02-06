@@ -18,6 +18,7 @@ FOUNDATION_EXPORT const unsigned char ShapeAnimationVersionString[];
 
 #import "SVGKImage.h"
 #import "SVGKParser.h"
+#import "SVGKSource.h"
 #import "SVGKLayer.h"
 #import "CALayerExporter.h"
 #import "SVGKExporterNSData.h"
