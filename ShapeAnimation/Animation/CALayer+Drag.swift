@@ -13,7 +13,7 @@ public extension CALayer {
         let kEdgeBuffer:CGFloat = 4
         var constrain = superlayer.bounds.insetted(dx:kEdgeBuffer, dy:kEdgeBuffer)
         constrain.inset(dx: frame.width / 2, dy: frame.height / 2)
-        let pt = constrain.isEmpty ? superlayer.bounds.mid : center.clamped(constrain)
+        let pt = constrain.isEmpty ? superlayer.bounds.mid : center.clampedTo(constrain)
         moveAnimation(to: pt, relative:false).apply()
     }
     
