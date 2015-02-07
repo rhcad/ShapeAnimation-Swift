@@ -13,7 +13,8 @@ public extension ShapeView {
     public func addSVGLayer(image:SVGKImage!, maxSize:CGSize) -> SVGKLayer {
         let orgsize = image.size
         if orgsize.width > maxSize.width || orgsize.height > maxSize.height {
-            image.scaleToFitInside(maxSize)
+            let scale = min(maxSize.width / orgsize.width, maxSize.height / orgsize.height)
+            image.scaleToFitInside(orgsize * scale)
         }
         let frame = CGRect(w:round(image.size.width), h:round(image.size.height))
         let layer = SVGKLayer()
