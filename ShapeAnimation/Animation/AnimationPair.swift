@@ -159,3 +159,10 @@ public func withDisableActions(block:() -> Void) {
     block()
     CATransaction.setDisableActions(old)
 }
+
+public func withDisableActions(layer:CALayer, animation:CAAnimation, block:() -> Void) {
+    let forwards = animation.fillMode == kCAFillModeForwards || animation.fillMode == kCAFillModeBoth
+    if !animation.autoreverses && forwards {
+        withDisableActions(block)
+    }
+}

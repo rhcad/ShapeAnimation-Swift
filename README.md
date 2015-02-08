@@ -36,6 +36,8 @@ SVG animation development with [SVGKit](https://github.com/SVGKit/SVGKit) happen
   * Use AnimationLayer class to draw customized animations.
   * Animation with sliders example: [EllipseViewController.swift](ShapeAnimation_UITest/EllipseViewController.swift)
 
+![Scratch](Documentation/selection.gif)
+
 ![Stroke Lines](Documentation/strokelines.gif)
 ![Move on Path](Documentation/moveonpath.gif)
 ![Radar Circles](Documentation/radar.gif)

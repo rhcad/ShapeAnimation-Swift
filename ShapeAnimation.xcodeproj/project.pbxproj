@@ -23,6 +23,8 @@
 		027DC1B91A77998D00D3CF60 /* airship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 027DC1B81A77998D00D3CF60 /* airship@2x.png */; };
 		027E6C631A70CCB7002658F7 /* SwiftGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CD3EEE1A708C8D00C83B5C /* SwiftGraphics.framework */; };
 		02887B2B1A820CAC00E800A1 /* CALayer+ID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02887B2A1A820CAC00E800A1 /* CALayer+ID.swift */; };
+		028F67601A8760FA00634383 /* ShapeView+HitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F675F1A8760FA00634383 /* ShapeView+HitTest.swift */; };
+		02C8D5471A876DD200C18B4B /* GestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C8D5461A876DD200C18B4B /* GestureHandler.swift */; };
 		02CD3F091A70907600C83B5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD3F081A70907600C83B5C /* AppDelegate.swift */; };
 		02CD3F0B1A70907600C83B5C /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD3F0A1A70907600C83B5C /* MasterViewController.swift */; };
 		02CD3F0D1A70907600C83B5C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD3F0C1A70907600C83B5C /* DetailViewController.swift */; };
@@ -45,7 +47,6 @@
 		02EB74FA1A85C74700C07FA6 /* rect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02EB74F21A85C74700C07FA6 /* rect@2x.png */; };
 		02EB74FB1A85C74700C07FA6 /* select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02EB74F31A85C74700C07FA6 /* select@2x.png */; };
 		02EB74FC1A85C74700C07FA6 /* triangle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02EB74F41A85C74700C07FA6 /* triangle@2x.png */; };
-		02EB74FE1A85CF3300C07FA6 /* ShapeDoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EB74FD1A85CF3300C07FA6 /* ShapeDoc.swift */; };
 		4537991D19AA788B004DF99E /* DummyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4537991C19AA788B004DF99E /* DummyTests.swift */; };
 		45DA4AC919AA62A800133F32 /* ShapeAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 45DA4AC819AA62A800133F32 /* ShapeAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEE57A151A81168F00420D54 /* ShapeView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE57A141A81168F00420D54 /* ShapeView+Image.swift */; };
@@ -138,6 +139,8 @@
 		022E981F1A8072270028A198 /* CAShapeLayer+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Style.swift"; sourceTree = "<group>"; };
 		027DC1B81A77998D00D3CF60 /* airship@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "airship@2x.png"; sourceTree = "<group>"; };
 		02887B2A1A820CAC00E800A1 /* CALayer+ID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+ID.swift"; sourceTree = "<group>"; };
+		028F675F1A8760FA00634383 /* ShapeView+HitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ShapeView+HitTest.swift"; sourceTree = "<group>"; };
+		02C8D5461A876DD200C18B4B /* GestureHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureHandler.swift; sourceTree = "<group>"; };
 		02CD3EE31A708C8D00C83B5C /* SwiftGraphics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftGraphics.xcodeproj; path = Vendor/SwiftGraphics/SwiftGraphics.xcodeproj; sourceTree = "<group>"; };
 		02CD3F041A70907600C83B5C /* ShapeAnimation_UITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShapeAnimation_UITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02CD3F071A70907600C83B5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -164,7 +167,6 @@
 		02EB74F21A85C74700C07FA6 /* rect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rect@2x.png"; sourceTree = "<group>"; };
 		02EB74F31A85C74700C07FA6 /* select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select@2x.png"; sourceTree = "<group>"; };
 		02EB74F41A85C74700C07FA6 /* triangle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "triangle@2x.png"; sourceTree = "<group>"; };
-		02EB74FD1A85CF3300C07FA6 /* ShapeDoc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeDoc.swift; sourceTree = "<group>"; };
 		4537990519AA671E004DF99E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4537991C19AA788B004DF99E /* DummyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyTests.swift; sourceTree = "<group>"; };
 		454D551219AA5CE6000E3EB3 /* ShapeAnimationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShapeAnimationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -216,6 +218,7 @@
 			children = (
 				022E98091A8071A70028A198 /* ShapeView.swift */,
 				AEE57A141A81168F00420D54 /* ShapeView+Image.swift */,
+				028F675F1A8760FA00634383 /* ShapeView+HitTest.swift */,
 				02887B2A1A820CAC00E800A1 /* CALayer+ID.swift */,
 				022E981E1A8072270028A198 /* Gradient+Layer.swift */,
 				022E981F1A8072270028A198 /* CAShapeLayer+Style.swift */,
@@ -283,20 +286,12 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		02E8FBB61A85EDA80061D101 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				02EB74FD1A85CF3300C07FA6 /* ShapeDoc.swift */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
 		02EB74C01A85BC3E00C07FA6 /* Scratch */ = {
 			isa = PBXGroup;
 			children = (
-				02E8FBB61A85EDA80061D101 /* Model */,
 				02EB74C31A85BC3E00C07FA6 /* AppDelegate.swift */,
 				02EB74C51A85BC3E00C07FA6 /* ViewController.swift */,
+				02C8D5461A876DD200C18B4B /* GestureHandler.swift */,
 				02EB74C71A85BC3E00C07FA6 /* Main.storyboard */,
 				02EB74CA1A85BC3E00C07FA6 /* Images.xcassets */,
 				02EB74EC1A85C74700C07FA6 /* Images */,
@@ -642,8 +637,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				02EB74C61A85BC3E00C07FA6 /* ViewController.swift in Sources */,
+				02C8D5471A876DD200C18B4B /* GestureHandler.swift in Sources */,
 				02EB74C41A85BC3E00C07FA6 /* AppDelegate.swift in Sources */,
-				02EB74FE1A85CF3300C07FA6 /* ShapeDoc.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +659,7 @@
 				022E98161A8071A70028A198 /* AnimationPrivate.swift in Sources */,
 				022E98131A8071A70028A198 /* ShapeView.swift in Sources */,
 				022E98191A8071A70028A198 /* CAShapeLayer+Animation.swift in Sources */,
+				028F67601A8760FA00634383 /* ShapeView+HitTest.swift in Sources */,
 				02147CAC1A847EA3001E5617 /* CALayer+Drag.swift in Sources */,
 				AEE57A151A81168F00420D54 /* ShapeView+Image.swift in Sources */,
 				022E98151A8071A70028A198 /* AnimationPair.swift in Sources */,

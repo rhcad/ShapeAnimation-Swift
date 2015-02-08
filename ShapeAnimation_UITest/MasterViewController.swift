@@ -151,7 +151,7 @@ class MasterViewController: UITableViewController {
         gradient.orientation = (CGPoint(x:0.3, y:-0.3), CGPoint(x:0, y:1.4))
         
         return { (view) -> Void in
-            let layer = view.addAnimationLayer(frame:view.layer.bounds, properties:[("t", 0)]) {
+            let layer = view.addAnimationLayer(frame:view.bounds, properties:[("t", 0)]) {
                 (layer, ctx) -> Void in
                 let W = view.layer.bounds.width
                 let H = view.layer.bounds.height
