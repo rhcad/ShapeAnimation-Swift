@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		02147CA11A836E2A001E5617 /* MasterViewController+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02147CA01A836E2A001E5617 /* MasterViewController+Drag.swift */; };
 		02147CAC1A847EA3001E5617 /* CALayer+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02147CAB1A847EA3001E5617 /* CALayer+Drag.swift */; };
+		02265C3B1A875713002A1805 /* ShapeAnimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DA4AC419AA62A800133F32 /* ShapeAnimation.framework */; };
 		022E98131A8071A70028A198 /* ShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E98091A8071A70028A198 /* ShapeView.swift */; };
 		022E98141A8071A70028A198 /* AnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E980B1A8071A70028A198 /* AnimationLayer.swift */; };
 		022E98151A8071A70028A198 /* AnimationPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E980C1A8071A70028A198 /* AnimationPair.swift */; };
@@ -30,12 +31,34 @@
 		02CD3F151A70907600C83B5C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02CD3F131A70907600C83B5C /* LaunchScreen.xib */; };
 		02CD3F2A1A70929F00C83B5C /* ShapeAnimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DA4AC419AA62A800133F32 /* ShapeAnimation.framework */; };
 		02E8A7EC1A7A3B9500EB03C3 /* EllipseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E8A7EB1A7A3B9500EB03C3 /* EllipseViewController.swift */; };
+		02E8FBB81A85EF050061D101 /* erase@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E8FBB71A85EF050061D101 /* erase@2x.png */; };
+		02EB74C41A85BC3E00C07FA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EB74C31A85BC3E00C07FA6 /* AppDelegate.swift */; };
+		02EB74C61A85BC3E00C07FA6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EB74C51A85BC3E00C07FA6 /* ViewController.swift */; };
+		02EB74C91A85BC3E00C07FA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02EB74C71A85BC3E00C07FA6 /* Main.storyboard */; };
+		02EB74CB1A85BC3E00C07FA6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02EB74CA1A85BC3E00C07FA6 /* Images.xcassets */; };
+		02EB74CE1A85BC3E00C07FA6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02EB74CC1A85BC3E00C07FA6 /* LaunchScreen.xib */; };
+		02EB74F51A85C74700C07FA6 /* circle2p@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02EB74ED1A85C74700C07FA6 /* circle2p@2x.png */; };
+		02EB74F61A85C74700C07FA6 /* ellipse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02EB74EE1A85C74700C07FA6 /* ellipse@2x.png */; };
+		02EB74F71A85C74700C07FA6 /* line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02EB74EF1A85C74700C07FA6 /* line@2x.png */; };
+		02EB74F81A85C74700C07FA6 /* lines@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02EB74F01A85C74700C07FA6 /* lines@2x.png */; };
+		02EB74F91A85C74700C07FA6 /* polygon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02EB74F11A85C74700C07FA6 /* polygon@2x.png */; };
+		02EB74FA1A85C74700C07FA6 /* rect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02EB74F21A85C74700C07FA6 /* rect@2x.png */; };
+		02EB74FB1A85C74700C07FA6 /* select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02EB74F31A85C74700C07FA6 /* select@2x.png */; };
+		02EB74FC1A85C74700C07FA6 /* triangle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02EB74F41A85C74700C07FA6 /* triangle@2x.png */; };
+		02EB74FE1A85CF3300C07FA6 /* ShapeDoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EB74FD1A85CF3300C07FA6 /* ShapeDoc.swift */; };
 		4537991D19AA788B004DF99E /* DummyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4537991C19AA788B004DF99E /* DummyTests.swift */; };
 		45DA4AC919AA62A800133F32 /* ShapeAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 45DA4AC819AA62A800133F32 /* ShapeAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEE57A151A81168F00420D54 /* ShapeView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE57A141A81168F00420D54 /* ShapeView+Image.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		02265C391A87570B002A1805 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 454D54FE19AA5CE6000E3EB3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45DA4AC319AA62A800133F32;
+			remoteInfo = ShapeAnimation;
+		};
 		02478B071A70C69F00CCAC47 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 454D54FE19AA5CE6000E3EB3 /* Project object */;
@@ -125,6 +148,23 @@
 		02CD3F111A70907600C83B5C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		02CD3F141A70907600C83B5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		02E8A7EB1A7A3B9500EB03C3 /* EllipseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EllipseViewController.swift; sourceTree = "<group>"; };
+		02E8FBB71A85EF050061D101 /* erase@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "erase@2x.png"; sourceTree = "<group>"; };
+		02EB74BF1A85BC3E00C07FA6 /* Scratch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scratch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		02EB74C21A85BC3E00C07FA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		02EB74C31A85BC3E00C07FA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		02EB74C51A85BC3E00C07FA6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		02EB74C81A85BC3E00C07FA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		02EB74CA1A85BC3E00C07FA6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		02EB74CD1A85BC3E00C07FA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		02EB74ED1A85C74700C07FA6 /* circle2p@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle2p@2x.png"; sourceTree = "<group>"; };
+		02EB74EE1A85C74700C07FA6 /* ellipse@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ellipse@2x.png"; sourceTree = "<group>"; };
+		02EB74EF1A85C74700C07FA6 /* line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line@2x.png"; sourceTree = "<group>"; };
+		02EB74F01A85C74700C07FA6 /* lines@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lines@2x.png"; sourceTree = "<group>"; };
+		02EB74F11A85C74700C07FA6 /* polygon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "polygon@2x.png"; sourceTree = "<group>"; };
+		02EB74F21A85C74700C07FA6 /* rect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rect@2x.png"; sourceTree = "<group>"; };
+		02EB74F31A85C74700C07FA6 /* select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select@2x.png"; sourceTree = "<group>"; };
+		02EB74F41A85C74700C07FA6 /* triangle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "triangle@2x.png"; sourceTree = "<group>"; };
+		02EB74FD1A85CF3300C07FA6 /* ShapeDoc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeDoc.swift; sourceTree = "<group>"; };
 		4537990519AA671E004DF99E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4537991C19AA788B004DF99E /* DummyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyTests.swift; sourceTree = "<group>"; };
 		454D551219AA5CE6000E3EB3 /* ShapeAnimationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShapeAnimationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +181,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				02CD3F2A1A70929F00C83B5C /* ShapeAnimation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02EB74BC1A85BC3E00C07FA6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02265C3B1A875713002A1805 /* ShapeAnimation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +283,53 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		02E8FBB61A85EDA80061D101 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				02EB74FD1A85CF3300C07FA6 /* ShapeDoc.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		02EB74C01A85BC3E00C07FA6 /* Scratch */ = {
+			isa = PBXGroup;
+			children = (
+				02E8FBB61A85EDA80061D101 /* Model */,
+				02EB74C31A85BC3E00C07FA6 /* AppDelegate.swift */,
+				02EB74C51A85BC3E00C07FA6 /* ViewController.swift */,
+				02EB74C71A85BC3E00C07FA6 /* Main.storyboard */,
+				02EB74CA1A85BC3E00C07FA6 /* Images.xcassets */,
+				02EB74EC1A85C74700C07FA6 /* Images */,
+				02EB74CC1A85BC3E00C07FA6 /* LaunchScreen.xib */,
+				02EB74C11A85BC3E00C07FA6 /* Supporting Files */,
+			);
+			path = Scratch;
+			sourceTree = "<group>";
+		};
+		02EB74C11A85BC3E00C07FA6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				02EB74C21A85BC3E00C07FA6 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		02EB74EC1A85C74700C07FA6 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				02E8FBB71A85EF050061D101 /* erase@2x.png */,
+				02EB74ED1A85C74700C07FA6 /* circle2p@2x.png */,
+				02EB74EE1A85C74700C07FA6 /* ellipse@2x.png */,
+				02EB74EF1A85C74700C07FA6 /* line@2x.png */,
+				02EB74F01A85C74700C07FA6 /* lines@2x.png */,
+				02EB74F11A85C74700C07FA6 /* polygon@2x.png */,
+				02EB74F21A85C74700C07FA6 /* rect@2x.png */,
+				02EB74F31A85C74700C07FA6 /* select@2x.png */,
+				02EB74F41A85C74700C07FA6 /* triangle@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		4514F5F71A61D2D800CC9C26 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +345,7 @@
 				45DA4AC519AA62A800133F32 /* ShapeAnimation */,
 				454D551319AA5CE6000E3EB3 /* ShapeAnimation_UnitTests */,
 				02CD3F051A70907600C83B5C /* ShapeAnimation_UITest */,
+				02EB74C01A85BC3E00C07FA6 /* Scratch */,
 				4514F5F71A61D2D800CC9C26 /* Frameworks */,
 				454D550819AA5CE6000E3EB3 /* Products */,
 			);
@@ -261,6 +357,7 @@
 				454D551219AA5CE6000E3EB3 /* ShapeAnimationTests.xctest */,
 				45DA4AC419AA62A800133F32 /* ShapeAnimation.framework */,
 				02CD3F041A70907600C83B5C /* ShapeAnimation_UITest.app */,
+				02EB74BF1A85BC3E00C07FA6 /* Scratch.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -331,6 +428,24 @@
 			name = ShapeAnimation_UITest;
 			productName = ShapeAnimation_UITest;
 			productReference = 02CD3F041A70907600C83B5C /* ShapeAnimation_UITest.app */;
+			productType = "com.apple.product-type.application";
+		};
+		02EB74BE1A85BC3E00C07FA6 /* Scratch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02EB74E71A85BC3E00C07FA6 /* Build configuration list for PBXNativeTarget "Scratch" */;
+			buildPhases = (
+				02EB74BB1A85BC3E00C07FA6 /* Sources */,
+				02EB74BC1A85BC3E00C07FA6 /* Frameworks */,
+				02EB74BD1A85BC3E00C07FA6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				02265C3A1A87570B002A1805 /* PBXTargetDependency */,
+			);
+			name = Scratch;
+			productName = Scratch;
+			productReference = 02EB74BF1A85BC3E00C07FA6 /* Scratch.app */;
 			productType = "com.apple.product-type.application";
 		};
 		454D551119AA5CE6000E3EB3 /* ShapeAnimationTests */ = {
@@ -412,6 +527,7 @@
 				45DA4AC319AA62A800133F32 /* ShapeAnimation */,
 				454D551119AA5CE6000E3EB3 /* ShapeAnimationTests */,
 				02CD3F031A70907600C83B5C /* ShapeAnimation_UITest */,
+				02EB74BE1A85BC3E00C07FA6 /* Scratch */,
 			);
 		};
 /* End PBXProject section */
@@ -473,6 +589,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		02EB74BD1A85BC3E00C07FA6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02EB74F51A85C74700C07FA6 /* circle2p@2x.png in Resources */,
+				02EB74FA1A85C74700C07FA6 /* rect@2x.png in Resources */,
+				02EB74C91A85BC3E00C07FA6 /* Main.storyboard in Resources */,
+				02EB74FC1A85C74700C07FA6 /* triangle@2x.png in Resources */,
+				02EB74CE1A85BC3E00C07FA6 /* LaunchScreen.xib in Resources */,
+				02E8FBB81A85EF050061D101 /* erase@2x.png in Resources */,
+				02EB74F91A85C74700C07FA6 /* polygon@2x.png in Resources */,
+				02EB74F61A85C74700C07FA6 /* ellipse@2x.png in Resources */,
+				02EB74F71A85C74700C07FA6 /* line@2x.png in Resources */,
+				02EB74CB1A85BC3E00C07FA6 /* Images.xcassets in Resources */,
+				02EB74FB1A85C74700C07FA6 /* select@2x.png in Resources */,
+				02EB74F81A85C74700C07FA6 /* lines@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		454D551019AA5CE6000E3EB3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -499,6 +634,16 @@
 				02E8A7EC1A7A3B9500EB03C3 /* EllipseViewController.swift in Sources */,
 				02CD3F0B1A70907600C83B5C /* MasterViewController.swift in Sources */,
 				02CD3F091A70907600C83B5C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02EB74BB1A85BC3E00C07FA6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02EB74C61A85BC3E00C07FA6 /* ViewController.swift in Sources */,
+				02EB74C41A85BC3E00C07FA6 /* AppDelegate.swift in Sources */,
+				02EB74FE1A85CF3300C07FA6 /* ShapeDoc.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,6 +677,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		02265C3A1A87570B002A1805 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45DA4AC319AA62A800133F32 /* ShapeAnimation */;
+			targetProxy = 02265C391A87570B002A1805 /* PBXContainerItemProxy */;
+		};
 		02478B081A70C69F00CCAC47 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 45DA4AC319AA62A800133F32 /* ShapeAnimation */;
@@ -566,6 +716,22 @@
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
+		02EB74C71A85BC3E00C07FA6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				02EB74C81A85BC3E00C07FA6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		02EB74CC1A85BC3E00C07FA6 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				02EB74CD1A85BC3E00C07FA6 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -593,6 +759,41 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ShapeAnimation_UITest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		02EB74DB1A85BC3E00C07FA6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libc++";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Scratch/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		02EB74DC1A85BC3E00C07FA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libc++";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = Scratch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -772,6 +973,15 @@
 			buildConfigurations = (
 				02CD3F231A70907600C83B5C /* Debug */,
 				02CD3F241A70907600C83B5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		02EB74E71A85BC3E00C07FA6 /* Build configuration list for PBXNativeTarget "Scratch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02EB74DB1A85BC3E00C07FA6 /* Debug */,
+				02EB74DC1A85BC3E00C07FA6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

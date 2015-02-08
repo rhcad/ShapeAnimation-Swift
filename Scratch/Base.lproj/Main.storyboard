@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Scratch" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGA-Ba-dHb" customClass="ShapeView" customModule="ShapeAnimation">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gf2-dy-MtW">
+                                <rect key="frame" x="-6" y="556" width="606" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="DFI-J6-BwV"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem image="select.png" id="89e-Cl-TYp" userLabel="Select">
+                                        <connections>
+                                            <action selector="onSelect:" destination="BYZ-38-t0r" id="IJ9-eI-UB7"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem image="line.png" id="jcq-rd-NFi" userLabel="Line">
+                                        <connections>
+                                            <action selector="onLine:" destination="BYZ-38-t0r" id="v0N-55-FoR"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem image="lines.png" id="Fti-dV-pG1" userLabel="Lines">
+                                        <connections>
+                                            <action selector="onLines:" destination="BYZ-38-t0r" id="Rbq-Gc-jIq"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem image="triangle.png" id="4kr-uS-Ys9" userLabel="Triangle">
+                                        <connections>
+                                            <action selector="onTriangle:" destination="BYZ-38-t0r" id="sfz-pE-aK4"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem image="rect.png" id="UTm-q5-UPg" userLabel="Rect">
+                                        <connections>
+                                            <action selector="onRect:" destination="BYZ-38-t0r" id="CiF-BY-9bH"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem image="polygon.png" id="Gwn-35-NxO" userLabel="Polygon">
+                                        <connections>
+                                            <action selector="onPolygon:" destination="BYZ-38-t0r" id="UBY-p7-dbL"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem image="circle2p.png" id="G28-rm-DJo" userLabel="Circle">
+                                        <connections>
+                                            <action selector="onCircle:" destination="BYZ-38-t0r" id="ErU-ed-nSW"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem image="ellipse.png" id="QS2-gA-uuE" userLabel="Ellipse">
+                                        <connections>
+                                            <action selector="onEllipse:" destination="BYZ-38-t0r" id="3BK-Lr-7ha"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem image="erase.png" id="M4t-It-hHT" userLabel="Erase">
+                                        <connections>
+                                            <action selector="onErase:" destination="BYZ-38-t0r" id="uBU-mw-TQN"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="AGA-Ba-dHb" secondAttribute="bottom" id="1Xg-qb-Epa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="AGA-Ba-dHb" secondAttribute="trailing" constant="-16" id="Q1F-Yp-Kc4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Gf2-dy-MtW" secondAttribute="trailing" constant="-16" id="QZd-Cs-pXh"/>
+                            <constraint firstItem="AGA-Ba-dHb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="Ue0-sQ-gYX"/>
+                            <constraint firstItem="AGA-Ba-dHb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="YzV-lS-Zc0"/>
+                            <constraint firstItem="Gf2-dy-MtW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-22" id="hE7-GI-Kn7"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Gf2-dy-MtW" secondAttribute="bottom" id="lhE-Qr-tql"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="shapeView" destination="AGA-Ba-dHb" id="Tjp-lx-SWb"/>
+                        <outlet property="toolbar" destination="Gf2-dy-MtW" id="qe2-Ih-XjA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="circle2p.png" width="25" height="25"/>
+        <image name="ellipse.png" width="25" height="25"/>
+        <image name="erase.png" width="25" height="25"/>
+        <image name="line.png" width="25" height="25"/>
+        <image name="lines.png" width="25" height="25"/>
+        <image name="polygon.png" width="25" height="25"/>
+        <image name="rect.png" width="25" height="25"/>
+        <image name="select.png" width="25" height="25"/>
+        <image name="triangle.png" width="25" height="25"/>
+    </resources>
+</document>
