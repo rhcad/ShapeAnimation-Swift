@@ -7,6 +7,7 @@
 //
 
 import SwiftGraphics
+import ShapeAnimation
 
 extension MasterViewController {
     
@@ -19,23 +20,36 @@ extension MasterViewController {
                 layer.identifier = "airship2"
             }
             
-            let handler = DragGestureHandler()
-            viewController.data = handler
-            view.addGestureRecognizer(handler.createPanGesture())
+            viewController.data = DragGestureHandler(view)
         }
     }
     
 }
 
-class DragGestureHandler : NSObject, UIGestureRecognizerDelegate {
+class DragGestureHandler : NSObject {
     private let kVelocityDampening:CGFloat = 10
     var currentLayer:CALayer?
     
-    func createPanGesture() -> UIPanGestureRecognizer {
+    init(_ view:UIView) {
+        super.init()
         let panGesture = UIPanGestureRecognizer(target:self, action:Selector("handlePanGesture:"))
-        panGesture.delegate = self
-        panGesture.delaysTouchesBegan = true
-        return panGesture
+        let tapGesture = UITapGestureRecognizer(target:self, action:Selector("handleTapGesture:"))
+        tapGesture.requireGestureRecognizerToFail(panGesture)
+        view.addGestureRecognizer(panGesture)
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    func hitTest(view:UIView, point:CGPoint) -> CALayer? {
+        currentLayer = nil
+        if let sublayers = view.layer.sublayers {
+            for layer in sublayers {
+                let layer = layer as CALayer
+                if layer.hitTest(point) != nil {
+                    currentLayer = layer
+                }
+            }
+        }
+        return currentLayer
     }
     
     func handlePanGesture(sender:UIPanGestureRecognizer) {
@@ -43,19 +57,12 @@ class DragGestureHandler : NSObject, UIGestureRecognizerDelegate {
         
         switch sender.state {
         case .Began:
-            if let sublayers = view.layer.sublayers {
-                let pt = sender.locationInView(view)
-                currentLayer = nil
-                for layer in sublayers {
-                    let layer = layer as CALayer
-                    if layer.hitTest(pt) != nil {
-                        currentLayer = layer
-                    }
-                }
-            }
+            hitTest(view, point:sender.locationInView(view))
         case .Changed:
             if let layer = currentLayer {
-                layer.position += sender.translationInView(view)
+                withDisableActions {
+                    layer.position += sender.translationInView(view)
+                }
                 sender.setTranslation(CGPoint.zeroPoint, inView:view)
             }
         case .Ended:
@@ -70,6 +77,15 @@ class DragGestureHandler : NSObject, UIGestureRecognizerDelegate {
                 }
             }
         default: ()
+        }
+    }
+    
+    func handleTapGesture(sender:UIPanGestureRecognizer) {
+        let view = sender.view!
+        if sender.state == .Ended {
+            if let layer = hitTest(view, point:sender.locationInView(view)) {
+                layer.tapAnimation().apply()
+            }
         }
     }
 }

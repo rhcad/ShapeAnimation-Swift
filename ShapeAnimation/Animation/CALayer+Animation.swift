@@ -64,6 +64,10 @@ public extension CALayer {
         }
     }
     
+    func tapAnimation(didStop:(() -> Void)? = nil) -> AnimationPair {
+        return scaleAnimation(from:1, to:1.25, didStop:didStop).set {$0.autoreverses = true;$0.duration=0.3}
+    }
+    
     func rotate360Degrees(didStop:(() -> Void)? = nil) -> AnimationPair {
         return rotationAnimation(angle:CGFloat(2 * M_PI), didStop:didStop)
     }

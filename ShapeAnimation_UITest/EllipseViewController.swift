@@ -75,19 +75,8 @@ class EllipseViewController: DetailViewController {
         ballLayer?.apply(gradient)
         
         let ellipse = self.makeEllipse(animationLayer)
-        let (a,b,c,d) = ellipse.asBezierCurves
-        
-        var path = CGPathCreateMutable()
-        path.move(a.start!)
-        
-        path.addCurve(BezierCurve(controls: a.controls, end: a.end))
-        path.addCurve(BezierCurve(controls: b.controls, end: b.end))
-        path.addCurve(BezierCurve(controls: c.controls, end: c.end))
-        path.addCurve(BezierCurve(controls: d.controls, end: d.end))
-        
-        ballLayer!.moveOnPathAnimation(path).set{
-            $0.repeatCount=HUGE
+        ballLayer!.moveOnPathAnimation(ellipse.cgpath).set{
             $0.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
-            }.apply()
+            $0.repeatCount=HUGE}.apply()
     }
 }

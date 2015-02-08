@@ -78,13 +78,6 @@
 			remoteGlobalIDString = 45CFDC9E1A61CE3500053F96;
 			remoteInfo = SwiftGraphics_OSX_UITest;
 		};
-		02CD3EF71A708C8D00C83B5C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 02CD3EE31A708C8D00C83B5C /* SwiftGraphics.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4501557F1A62F9F600D7FB7B;
-			remoteInfo = SwiftGraphicsPlayground_OSX_UnitTests;
-		};
 		02CD3EFB1A708EBC00C83B5C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 02CD3EE31A708C8D00C83B5C /* SwiftGraphics.xcodeproj */;
@@ -98,6 +91,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 45DA4AC319AA62A800133F32;
 			remoteInfo = ShapeAnimation;
+		};
+		02EB74E51A85BC3E00C07FA6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02CD3EE31A708C8D00C83B5C /* SwiftGraphics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 455AC2C31A76130B00BCC373;
+			remoteInfo = SwiftGraphics_OSX_Scratch;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -202,10 +202,10 @@
 			children = (
 				02CD3EEE1A708C8D00C83B5C /* SwiftGraphics.framework */,
 				02CD3EF01A708C8D00C83B5C /* SwiftGraphics.framework */,
-				02CD3EF21A708C8D00C83B5C /* SwiftGraphicsTests.xctest */,
 				02CD3EF41A708C8D00C83B5C /* SwiftGraphicsPlayground.framework */,
 				02CD3EF61A708C8D00C83B5C /* SwiftGraphics_OSX_UITest.app */,
-				02CD3EF81A708C8D00C83B5C /* SwiftGraphicsPlayground_OSX_UnitTests.xctest */,
+				02EB74E61A85BC3E00C07FA6 /* SwiftGraphics_OSX_Scratch.app */,
+				02CD3EF21A708C8D00C83B5C /* SwiftGraphicsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -452,11 +452,11 @@
 			remoteRef = 02CD3EF51A708C8D00C83B5C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		02CD3EF81A708C8D00C83B5C /* SwiftGraphicsPlayground_OSX_UnitTests.xctest */ = {
+		02EB74E61A85BC3E00C07FA6 /* SwiftGraphics_OSX_Scratch.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SwiftGraphicsPlayground_OSX_UnitTests.xctest;
-			remoteRef = 02CD3EF71A708C8D00C83B5C /* PBXContainerItemProxy */;
+			fileType = wrapper.application;
+			path = SwiftGraphics_OSX_Scratch.app;
+			remoteRef = 02EB74E51A85BC3E00C07FA6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

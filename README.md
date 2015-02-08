@@ -21,7 +21,7 @@ SVG animation development with [SVGKit](https://github.com/SVGKit/SVGKit) happen
 
 * Animation extension functions of CALayer and CAShapeLayer.
   * opacityAnimation, flashAnimation
-  * scaleAnimation
+  * scaleAnimation, tapAnimation
   * rotate360Degrees, rotationAnimation
   * shakeAnimation
   * moveAnimation, moveOnPathAnimation

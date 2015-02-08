@@ -138,9 +138,6 @@ public extension CAAnimation {
 public func withDisableActions(layer:CALayer, animation:CAAnimation, block:() -> Void) {
     let forwards = animation.fillMode == kCAFillModeForwards || animation.fillMode == kCAFillModeBoth
     if !animation.autoreverses && forwards {
-        let old = CATransaction.disableActions()
-        CATransaction.setDisableActions(true)
-        block()
-        CATransaction.setDisableActions(old)
+        withDisableActions(block)
     }
 }

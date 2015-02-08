@@ -150,3 +150,12 @@ public extension AnimationPair {
         return self
     }
 }
+
+// MARK: withDisableActions
+
+public func withDisableActions(block:() -> Void) {
+    let old = CATransaction.disableActions()
+    CATransaction.setDisableActions(true)
+    block()
+    CATransaction.setDisableActions(old)
+}
