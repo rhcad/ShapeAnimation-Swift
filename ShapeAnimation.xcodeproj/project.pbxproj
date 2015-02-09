@@ -17,7 +17,7 @@
 		022E98171A8071A70028A198 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E980E1A8071A70028A198 /* CALayer+Animation.swift */; };
 		022E98181A8071A70028A198 /* CALayer+Pause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E980F1A8071A70028A198 /* CALayer+Pause.swift */; };
 		022E98191A8071A70028A198 /* CAShapeLayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E98101A8071A70028A198 /* CAShapeLayer+Animation.swift */; };
-		022E98201A8072270028A198 /* Gradient+Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E981E1A8072270028A198 /* Gradient+Layer.swift */; };
+		022E98201A8072270028A198 /* CAShapeLayer+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E981E1A8072270028A198 /* CAShapeLayer+Gradient.swift */; };
 		022E98211A8072270028A198 /* CAShapeLayer+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E981F1A8072270028A198 /* CAShapeLayer+Style.swift */; };
 		02478B091A70C6A200CCAC47 /* ShapeAnimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DA4AC419AA62A800133F32 /* ShapeAnimation.framework */; };
 		027DC1B91A77998D00D3CF60 /* airship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 027DC1B81A77998D00D3CF60 /* airship@2x.png */; };
@@ -49,6 +49,7 @@
 		02EB74FC1A85C74700C07FA6 /* triangle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02EB74F41A85C74700C07FA6 /* triangle@2x.png */; };
 		4537991D19AA788B004DF99E /* DummyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4537991C19AA788B004DF99E /* DummyTests.swift */; };
 		45DA4AC919AA62A800133F32 /* ShapeAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 45DA4AC819AA62A800133F32 /* ShapeAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AED21A2D1A88EDE2004EFD25 /* CAShapeLayer+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED21A2C1A88EDE2004EFD25 /* CAShapeLayer+Path.swift */; };
 		AEE57A151A81168F00420D54 /* ShapeView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE57A141A81168F00420D54 /* ShapeView+Image.swift */; };
 /* End PBXBuildFile section */
 
@@ -135,7 +136,7 @@
 		022E980E1A8071A70028A198 /* CALayer+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Animation.swift"; sourceTree = "<group>"; };
 		022E980F1A8071A70028A198 /* CALayer+Pause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Pause.swift"; sourceTree = "<group>"; };
 		022E98101A8071A70028A198 /* CAShapeLayer+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Animation.swift"; sourceTree = "<group>"; };
-		022E981E1A8072270028A198 /* Gradient+Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Gradient+Layer.swift"; sourceTree = "<group>"; };
+		022E981E1A8072270028A198 /* CAShapeLayer+Gradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Gradient.swift"; sourceTree = "<group>"; };
 		022E981F1A8072270028A198 /* CAShapeLayer+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Style.swift"; sourceTree = "<group>"; };
 		027DC1B81A77998D00D3CF60 /* airship@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "airship@2x.png"; sourceTree = "<group>"; };
 		02887B2A1A820CAC00E800A1 /* CALayer+ID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+ID.swift"; sourceTree = "<group>"; };
@@ -174,6 +175,7 @@
 		45DA4AC419AA62A800133F32 /* ShapeAnimation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ShapeAnimation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45DA4AC719AA62A800133F32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45DA4AC819AA62A800133F32 /* ShapeAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShapeAnimation.h; sourceTree = "<group>"; };
+		AED21A2C1A88EDE2004EFD25 /* CAShapeLayer+Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Path.swift"; sourceTree = "<group>"; };
 		AEE57A141A81168F00420D54 /* ShapeView+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ShapeView+Image.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -220,8 +222,9 @@
 				AEE57A141A81168F00420D54 /* ShapeView+Image.swift */,
 				028F675F1A8760FA00634383 /* ShapeView+HitTest.swift */,
 				02887B2A1A820CAC00E800A1 /* CALayer+ID.swift */,
-				022E981E1A8072270028A198 /* Gradient+Layer.swift */,
+				022E981E1A8072270028A198 /* CAShapeLayer+Gradient.swift */,
 				022E981F1A8072270028A198 /* CAShapeLayer+Style.swift */,
+				AED21A2C1A88EDE2004EFD25 /* CAShapeLayer+Path.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -660,10 +663,11 @@
 				022E98131A8071A70028A198 /* ShapeView.swift in Sources */,
 				022E98191A8071A70028A198 /* CAShapeLayer+Animation.swift in Sources */,
 				028F67601A8760FA00634383 /* ShapeView+HitTest.swift in Sources */,
+				AED21A2D1A88EDE2004EFD25 /* CAShapeLayer+Path.swift in Sources */,
 				02147CAC1A847EA3001E5617 /* CALayer+Drag.swift in Sources */,
 				AEE57A151A81168F00420D54 /* ShapeView+Image.swift in Sources */,
 				022E98151A8071A70028A198 /* AnimationPair.swift in Sources */,
-				022E98201A8072270028A198 /* Gradient+Layer.swift in Sources */,
+				022E98201A8072270028A198 /* CAShapeLayer+Gradient.swift in Sources */,
 				022E98211A8072270028A198 /* CAShapeLayer+Style.swift in Sources */,
 				022E98181A8071A70028A198 /* CALayer+Pause.swift in Sources */,
 				022E98141A8071A70028A198 /* AnimationLayer.swift in Sources */,

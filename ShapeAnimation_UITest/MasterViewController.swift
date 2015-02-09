@@ -81,7 +81,7 @@ class MasterViewController: UITableViewController {
             
             // Show the path with vary dash phase and color
             let pathLayer = view.addLinesLayer([CGPoint.zeroPoint])
-            pathLayer.transformedPath = path
+            pathLayer.pathToSuperlayer = path
             pathLayer.lineDashPattern = [5, 5]
             let a4 = pathLayer.strokeColorAnimation(from:CGColor.lightGrayColor(), to:CGColor.greenColor())
                 .set{$0.autoreverses=true;$0.repeatCount=HUGE}

@@ -44,9 +44,11 @@ public extension CALayer {
     
     func scaleAnimation(#from:Float, to:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"transform.scale")
+        let oldxf = affineTransform(), oldscale = Float(hypot(oldxf.a, oldxf.b))
+        
         animation.duration = 0.8
-        animation.fromValue = from
-        animation.toValue = to
+        animation.fromValue = from * oldscale
+        animation.toValue = to * oldscale
         animation.removedOnCompletion = false
         animation.fillMode = kCAFillModeForwards
         animation.didStop = didStop
@@ -164,7 +166,11 @@ public extension CALayer {
 
 public extension CALayer {
     
-    func slideToRight(subtype:String = kCATransitionFromLeft, didStop:(() -> Void)? = nil) -> AnimationPair {
+    func slideToRight(didStop:(() -> Void)? = nil) -> AnimationPair {
+        return slideAnimation(kCATransitionFromLeft, didStop:didStop)
+    }
+    
+    func slideAnimation(subtype:String, didStop:(() -> Void)? = nil) -> AnimationPair {
         let slide = CATransition()
         
         slide.type = kCATransitionPush

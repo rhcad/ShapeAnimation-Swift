@@ -18,6 +18,11 @@ extension MasterViewController {
             }
             if let layer = view.addImageLayer(named:"airship.png", center:CGPoint(x:200, y:200)) {
                 layer.identifier = "airship2"
+                layer.setAffineTransform(CGAffineTransform(scale:1.5))
+            }
+            if let layer = view.addImageLayer(named:"airship.png", center:CGPoint(x:300, y:200)) {
+                layer.identifier = "airship3"
+                layer.setAffineTransform(CGAffineTransform(rotation:DegreesToRadians(-30)))
             }
             
             viewController.data = DragGestureHandler(view)

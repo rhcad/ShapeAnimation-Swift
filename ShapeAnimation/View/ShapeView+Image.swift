@@ -41,6 +41,12 @@ public extension ShapeView {
         return layer
     }
     
+    public func addTextLayer(text:String, center:CGPoint, fontSize:CGFloat) -> CATextLayer {
+        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(fontSize)]
+        let size = text.sizeWithAttributes(attr)
+        return addTextLayer(text, frame:CGRect(center:center, size:size), fontSize:fontSize)
+    }
+    
     public func addImageLayer(image:UIImage!, center:CGPoint) -> CALayer {
         let layer = CALayer()
         layer.contents = image.CGImage

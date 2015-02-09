@@ -2,3 +2,5 @@ language: objective-c
 osx_image: xcode61
 script:
     - xctool -project ShapeAnimation.xcodeproj -scheme ShapeAnimation -sdk iphonesimulator test
+    - xctool -project ShapeAnimation.xcodeproj -scheme ShapeAnimation_UITest -sdk iphonesimulator build
+    - xctool -project ShapeAnimation.xcodeproj -scheme Scratch -sdk iphonesimulator build

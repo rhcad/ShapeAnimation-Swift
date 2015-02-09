@@ -55,15 +55,13 @@ public class ShapeView : UIView {
     override public func layoutSubviews() {
         super.layoutSubviews()
         
-        let bounds = self.bounds
-        
         if lastBounds != bounds {
             enumerateLayers {
                 if $0.frame == self.lastBounds {
-                    $0.frame = bounds
+                    $0.frame = self.bounds
                 }
             }
-            lastBounds = bounds
+            lastBounds = self.bounds
         }
     }
 }
@@ -73,28 +71,8 @@ public class ShapeView : UIView {
 public extension CALayer {
     
     public func removeLayer() {
-        gradientLayer?.removeAllAnimations()
         gradientLayer = nil
         self.removeAllAnimations()
         self.removeFromSuperlayer()
     }
-}
-
-// MARK: CAShapeLayer.transformedPath
-
-public extension CAShapeLayer {
-    
-    //! The path used to create this layer initially and mapped to the parent layer's coordinate systems.
-    public var transformedPath:CGPath {
-        get {
-            var xf = CGAffineTransform(translation:frame.origin)
-            return CGPathCreateCopyByTransformingPath(path, &xf)
-        }
-        set(v) {
-            frame = v.boundingBox
-            var xf = CGAffineTransform(translation:-frame.origin)
-            path = CGPathCreateCopyByTransformingPath(v, &xf)
-        }
-    }
-    
 }
