@@ -39,25 +39,12 @@ class DragGestureHandler : NSObject {
         view.addGestureRecognizer(tapGesture)
     }
     
-    func hitTest(view:UIView, point:CGPoint) -> CALayer? {
-        currentLayer = nil
-        if let sublayers = view.layer.sublayers {
-            for layer in sublayers {
-                let layer = layer as CALayer
-                if layer.hitTest(point) != nil {
-                    currentLayer = layer
-                }
-            }
-        }
-        return currentLayer
-    }
-    
     func handlePanGesture(sender:UIPanGestureRecognizer) {
-        let view = sender.view!
+        let view = sender.view as ShapeView!
         
         switch sender.state {
         case .Began:
-            hitTest(view, point:sender.locationInView(view))
+            currentLayer = view.hitTest(sender.locationInView(view))
         case .Changed:
             if let layer = currentLayer {
                 withDisableActions {
@@ -81,9 +68,9 @@ class DragGestureHandler : NSObject {
     }
     
     func handleTapGesture(sender:UIPanGestureRecognizer) {
-        let view = sender.view!
+        let view = sender.view as ShapeView!
         if sender.state == .Ended {
-            if let layer = hitTest(view, point:sender.locationInView(view)) {
+            if let layer = view.hitTest(sender.locationInView(view)) {
                 layer.tapAnimation().apply()
             }
         }
