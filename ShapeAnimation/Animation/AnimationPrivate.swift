@@ -134,10 +134,3 @@ public extension CAAnimation {
     
     public class var isStopping:Bool { return stopping > 0 }
 }
-
-public func withDisableActions(layer:CALayer, animation:CAAnimation, block:() -> Void) {
-    let forwards = animation.fillMode == kCAFillModeForwards || animation.fillMode == kCAFillModeBoth
-    if !animation.autoreverses && forwards {
-        withDisableActions(block)
-    }
-}

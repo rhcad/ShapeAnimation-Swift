@@ -10,6 +10,22 @@ import SwiftGraphics
 
 public extension ShapeView {
     
+    public func addCircleLayer(center c:CGPoint, radius:CGFloat) -> CAShapeLayer {
+        return addShapeLayer(CGPathCreateWithEllipseInRect(CGRect(center:c, radius:radius), nil))
+    }
+    
+    public func addRegularPolygonLayer(nside:Int, center:CGPoint, radius:CGFloat) -> CAShapeLayer {
+        return addLinesLayer(RegularPolygon(nside:nside, center:center, radius:radius).points, closed:true)
+    }
+    
+    public func addLinesLayer(points:[CGPoint], closed:Bool = false) -> CAShapeLayer {
+        return addShapeLayer(Path(vertices:points, closed:closed).cgPath)
+    }
+    
+}
+
+public extension ShapeView {
+    
     public func addTextLayer(text:String, frame:CGRect, fontSize:CGFloat) -> CATextLayer {
         let layer = CATextLayer()
         

@@ -39,3 +39,9 @@ public extension CALayer {
         return layer.layerWithIdentifier(identifier)
     }
 }
+
+public extension ShapeView {
+    public func layerWithIdentifier(identifier:String) -> CALayer? {
+        return self.layer.layerWithIdentifier(identifier)
+    }
+}

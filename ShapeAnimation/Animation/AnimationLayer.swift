@@ -42,6 +42,8 @@ public class AnimationLayer : CALayer {
         setValue(value, forKey:key)
     }
     
+    // MARK: Implementation
+    
     private func minValue(key:String) -> CGFloat {
         for (k, min) in properties {
             if key == k {

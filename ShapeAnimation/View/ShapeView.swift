@@ -38,12 +38,10 @@ public class ShapeView : UIView {
         return layer
     }
     
+    // MARK: override from UIView
+    
     override public func removeFromSuperview() {
-        if let sublayers = self.layer.sublayers {
-            for layer in sublayers {
-                layer.removeLayer()
-            }
-        }
+        enumerateLayers { $0.removeLayer() }
         super.removeFromSuperview()
     }
     
@@ -59,18 +57,18 @@ public class ShapeView : UIView {
         
         let bounds = self.bounds
         
-        if lastBounds != bounds && self.layer.sublayers != nil {
-            for layer in self.layer.sublayers {
-                if let layer = layer as? CALayer {
-                    if layer.frame == lastBounds {
-                        layer.frame = bounds
-                    }
+        if lastBounds != bounds {
+            enumerateLayers {
+                if $0.frame == self.lastBounds {
+                    $0.frame = bounds
                 }
             }
             lastBounds = bounds
         }
     }
 }
+
+// MARK: CALayer.removeLayer
 
 public extension CALayer {
     
@@ -82,21 +80,7 @@ public extension CALayer {
     }
 }
 
-public extension ShapeView {
-    
-    public func addCircleLayer(center c:CGPoint, radius:CGFloat) -> CAShapeLayer {
-        return addShapeLayer(CGPathCreateWithEllipseInRect(CGRect(center:c, radius:radius), nil))
-    }
-    
-    public func addRegularPolygonLayer(nside:Int, center:CGPoint, radius:CGFloat) -> CAShapeLayer {
-        return addLinesLayer(RegularPolygon(nside:nside, center:center, radius:radius).points, closed:true)
-    }
-    
-    public func addLinesLayer(points:[CGPoint], closed:Bool = false) -> CAShapeLayer {
-        return addShapeLayer(Path(vertices:points, closed:closed).cgPath)
-    }
-    
-}
+// MARK: CAShapeLayer.transformedPath
 
 public extension CAShapeLayer {
     

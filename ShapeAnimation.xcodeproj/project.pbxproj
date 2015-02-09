@@ -22,6 +22,7 @@
 		027DC1B91A77998D00D3CF60 /* airship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 027DC1B81A77998D00D3CF60 /* airship@2x.png */; };
 		027E6C631A70CCB7002658F7 /* SwiftGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CD3EEE1A708C8D00C83B5C /* SwiftGraphics.framework */; };
 		02887B2B1A820CAC00E800A1 /* CALayer+ID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02887B2A1A820CAC00E800A1 /* CALayer+ID.swift */; };
+		02C8D54C1A8840FF00C18B4B /* ShapeView+HitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C8D54B1A8840FF00C18B4B /* ShapeView+HitTest.swift */; };
 		02CD3F091A70907600C83B5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD3F081A70907600C83B5C /* AppDelegate.swift */; };
 		02CD3F0B1A70907600C83B5C /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD3F0A1A70907600C83B5C /* MasterViewController.swift */; };
 		02CD3F0D1A70907600C83B5C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD3F0C1A70907600C83B5C /* DetailViewController.swift */; };
@@ -115,6 +116,7 @@
 		022E981F1A8072270028A198 /* CAShapeLayer+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Style.swift"; sourceTree = "<group>"; };
 		027DC1B81A77998D00D3CF60 /* airship@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "airship@2x.png"; sourceTree = "<group>"; };
 		02887B2A1A820CAC00E800A1 /* CALayer+ID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+ID.swift"; sourceTree = "<group>"; };
+		02C8D54B1A8840FF00C18B4B /* ShapeView+HitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ShapeView+HitTest.swift"; sourceTree = "<group>"; };
 		02CD3EE31A708C8D00C83B5C /* SwiftGraphics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftGraphics.xcodeproj; path = Vendor/SwiftGraphics/SwiftGraphics.xcodeproj; sourceTree = "<group>"; };
 		02CD3F041A70907600C83B5C /* ShapeAnimation_UITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShapeAnimation_UITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02CD3F071A70907600C83B5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			children = (
 				022E98091A8071A70028A198 /* ShapeView.swift */,
 				AEE57A141A81168F00420D54 /* ShapeView+Image.swift */,
+				02C8D54B1A8840FF00C18B4B /* ShapeView+HitTest.swift */,
 				02887B2A1A820CAC00E800A1 /* CALayer+ID.swift */,
 				022E981E1A8072270028A198 /* Gradient+Layer.swift */,
 				022E981F1A8072270028A198 /* CAShapeLayer+Style.swift */,
@@ -519,6 +522,7 @@
 				022E98161A8071A70028A198 /* AnimationPrivate.swift in Sources */,
 				022E98131A8071A70028A198 /* ShapeView.swift in Sources */,
 				022E98191A8071A70028A198 /* CAShapeLayer+Animation.swift in Sources */,
+				02C8D54C1A8840FF00C18B4B /* ShapeView+HitTest.swift in Sources */,
 				02147CAC1A847EA3001E5617 /* CALayer+Drag.swift in Sources */,
 				AEE57A151A81168F00420D54 /* ShapeView+Image.swift in Sources */,
 				022E98151A8071A70028A198 /* AnimationPair.swift in Sources */,

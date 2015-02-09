@@ -36,7 +36,7 @@ class MasterViewController: UITableViewController {
     
     // Demo about strokeEndAnimation, lineWidthAnimation, scaleAnimation, shakeAnimation and flashAnimation.
     private func testAddLines(viewController:DetailViewController) -> AnimationBlock {
-        return { (view) -> Void in
+        return { (view:ShapeView) -> Void in
             view.style.lineWidth = 7
             
             let points1 = [(10.0,20.0),(150.0,40.0),(120.0,320.0)].map{ CGPoint($0) }
@@ -61,7 +61,7 @@ class MasterViewController: UITableViewController {
     // Demo about moveOnPathAnimation, moveAnimation, rotationAnimation, dashPhaseAnimation and animationGroup.
     // Rotate and move a picture and polygon with gradient fill along the path.
     private func testMoveLines(viewController:DetailViewController) -> AnimationBlock {
-        return { (view) -> Void in
+        return { (view:ShapeView) -> Void in
             // Create a smooth path
             var path = CGPathCreateMutable()
             path.move(CGPoint(x:120, y:70))
@@ -99,7 +99,7 @@ class MasterViewController: UITableViewController {
     // Demo about polygon with text and gradient fill moving and rotating one by one.
     // Modified from http://zulko.github.io/blog/2014/09/20/vector-animations-with-python/
     private func testRotatePolygons(viewController:DetailViewController) -> AnimationBlock {
-        return { (view) -> Void in
+        return { (view:ShapeView) -> Void in
             view.gradient.setColors([(0, 0.5, 1, 1), (0, 1, 1, 1)])
             view.gradient.orientation = (CGPoint.zeroPoint, CGPoint(x:1, y:1))
             
@@ -128,7 +128,7 @@ class MasterViewController: UITableViewController {
     
     // Demo about growing circles.
     private func testRadarCircles(viewController:DetailViewController) -> AnimationBlock {
-        return { (view) -> Void in
+        return { (view:ShapeView) -> Void in
             let count = 6
             let duration: Double = 2
             
@@ -150,8 +150,8 @@ class MasterViewController: UITableViewController {
         var gradient = Gradient(colors:[(1.0,0.0,0.0), (0.1,0.0,0.0)], axial:true)
         gradient.orientation = (CGPoint(x:0.3, y:-0.3), CGPoint(x:0, y:1.4))
         
-        return { (view) -> Void in
-            let layer = view.addAnimationLayer(frame:view.layer.bounds, properties:[("t", 0)]) {
+        return { (view:ShapeView) -> Void in
+            let layer = view.addAnimationLayer(frame:view.bounds, properties:[("t", 0)]) {
                 (layer, ctx) -> Void in
                 let W = view.layer.bounds.width
                 let H = view.layer.bounds.height

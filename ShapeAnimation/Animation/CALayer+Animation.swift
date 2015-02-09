@@ -11,6 +11,8 @@ import SwiftGraphics
 public extension CALayer {
     typealias Radians = CGFloat
     
+    // MARK: opacityAnimation and flashAnimation
+    
     func opacityAnimation(#from:Float, to:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"opacity")
         animation.duration = 0.8
@@ -37,6 +39,8 @@ public extension CALayer {
             $0.duration = 0.2
         }
     }
+    
+    // MARK: scaleAnimation and tapAnimation
     
     func scaleAnimation(#from:Float, to:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"transform.scale")
@@ -68,6 +72,8 @@ public extension CALayer {
         return scaleAnimation(from:1, to:1.25, didStop:didStop).set {$0.autoreverses = true;$0.duration=0.3}
     }
     
+    // MARK: rotate360Degrees and rotationAnimation
+    
     func rotate360Degrees(didStop:(() -> Void)? = nil) -> AnimationPair {
         return rotationAnimation(angle:CGFloat(2 * M_PI), didStop:didStop)
     }
@@ -90,6 +96,8 @@ public extension CALayer {
         }
         return AnimationPair(self, animation, key:"rotation")
     }
+    
+    // MARK: shakeAnimation, moveAnimation and moveOnPathAnimation
     
     func shakeAnimation(didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CAKeyframeAnimation()
@@ -150,15 +158,20 @@ public extension CALayer {
         return AnimationPair(self, animation, key:"moveOnPath")
     }
     
-    func slideToRight(didStop:(() -> Void)? = nil) -> AnimationPair {
+}
+
+// MARK: Slide animations
+
+public extension CALayer {
+    
+    func slideToRight(subtype:String = kCATransitionFromLeft, didStop:(() -> Void)? = nil) -> AnimationPair {
         let slide = CATransition()
         
         slide.type = kCATransitionPush
-        slide.subtype = kCATransitionFromLeft
+        slide.subtype = subtype
         slide.duration = 0.8
         slide.didStop = didStop
         slide.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         return AnimationPair(self, slide, key:"slide")
     }
-    
 }
