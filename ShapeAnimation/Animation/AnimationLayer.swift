@@ -20,7 +20,7 @@ public class AnimationLayer : CALayer {
             }
         }
     }
-    public var draw:((AnimationLayer, CGContext) -> Void)! = nil
+    public var draw:((AnimationLayer, CGContext) -> Void)?
     public var animationCreated:((String, CABasicAnimation) -> Void)?
     public var didStart:(() -> Void)?
     public var didStop :(() -> Void)?
@@ -117,7 +117,7 @@ public class AnimationLayer : CALayer {
     // Layer Drawing
     override public func drawInContext(ctx: CGContext!) {
         super.drawInContext(ctx)
-        draw!(self, ctx)
+        draw?(self, ctx)
     }
     
 }

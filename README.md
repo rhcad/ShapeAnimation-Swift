@@ -18,19 +18,26 @@ SVG animation development with [SVGKit](https://github.com/SVGKit/SVGKit) happen
 * ShapeView class which contains vector shape layers.
   * Helper functions to add image, text, circle, regular polygon, lines and other shapes.
   * Support gradient fill with animation.
+  * Enumerate, hit-test or find layers.
 
-* Animation extension functions of CALayer and CAShapeLayer.
+* Animation extension functions of CALayer.
   * opacityAnimation, flashAnimation
   * scaleAnimation, tapAnimation
   * rotate360Degrees, rotationAnimation
-  * shakeAnimation
-  * moveAnimation, moveOnPathAnimation
-  * slideToRight
+  * shakeAnimation, moveAnimation, moveOnPathAnimation
+  * slideToRight, slideAnimation, flipHorizontally, flipVertically
+  * Layer dragging: constrainCenterToSuperview, bringOnScreen
+
+* Animation extension functions of CAShapeLayer.
   * strokeEndAnimation
   * strokeColorAnimation, lineWidthAnimation, dashPhaseAnimation
   * switchPathAnimation
+
+* Group animation and cascaded animation.
   * animationGroup for the same layer
   * applyAnimations for multiple layers
+  * Use the block-based function in apply() to play cascaded animations.
+  * Pause, resume or stop animations.
 
 * Animations with customized properties
   * Use AnimationLayer class to draw customized animations.

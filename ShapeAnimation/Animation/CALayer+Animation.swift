@@ -44,9 +44,11 @@ public extension CALayer {
     
     func scaleAnimation(#from:Float, to:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"transform.scale")
+        let oldxf = affineTransform(), oldscale = Float(hypot(oldxf.a, oldxf.b))
+        
         animation.duration = 0.8
-        animation.fromValue = from
-        animation.toValue = to
+        animation.fromValue = from * oldscale
+        animation.toValue = to * oldscale
         animation.removedOnCompletion = false
         animation.fillMode = kCAFillModeForwards
         animation.didStop = didStop
@@ -75,10 +77,10 @@ public extension CALayer {
     // MARK: rotate360Degrees and rotationAnimation
     
     func rotate360Degrees(didStop:(() -> Void)? = nil) -> AnimationPair {
-        return rotationAnimation(angle:CGFloat(2 * M_PI), didStop:didStop)
+        return rotationAnimation(CGFloat(2 * M_PI), didStop:didStop)
     }
     
-    func rotationAnimation(#angle:Radians, didStop:(() -> Void)? = nil) -> AnimationPair {
+    func rotationAnimation(angle:Radians, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"transform.rotation")
         animation.duration = 0.8
         animation.additive = true
@@ -158,20 +160,4 @@ public extension CALayer {
         return AnimationPair(self, animation, key:"moveOnPath")
     }
     
-}
-
-// MARK: Slide animations
-
-public extension CALayer {
-    
-    func slideToRight(subtype:String = kCATransitionFromLeft, didStop:(() -> Void)? = nil) -> AnimationPair {
-        let slide = CATransition()
-        
-        slide.type = kCATransitionPush
-        slide.subtype = subtype
-        slide.duration = 0.8
-        slide.didStop = didStop
-        slide.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        return AnimationPair(self, slide, key:"slide")
-    }
 }

@@ -31,7 +31,7 @@ class MasterViewController: UITableViewController {
             viewController.animationBlock = testDragLayer(viewController)
         default: ()
         }
-        viewController.title = NSLocalizedString(segue.identifier! as NSString, comment:"")
+        viewController.title = NSLocalizedString(segue.identifier! as NSString as String, comment:"")
     }
     
     // Demo about strokeEndAnimation, lineWidthAnimation, scaleAnimation, shakeAnimation and flashAnimation.
@@ -39,14 +39,14 @@ class MasterViewController: UITableViewController {
         return { (view:ShapeView) -> Void in
             view.style.lineWidth = 7
             
-            let points1 = [(10.0,20.0),(150.0,40.0),(120.0,320.0)].map{ CGPoint($0) }
+            let points1 = [CGPoint((10,20)),CGPoint((150,40)),CGPoint((120,320))]
             let la1 = view.addLinesLayer(points1, closed:true, color:CGColor.redColor())
             la1.identifier = "triangle1"
             animationGroup([la1.strokeEndAnimation(), la1.lineWidthAnimation(from:0, to:5)]).apply() {
                 la1.shakeAnimation().apply()
             }
             
-            let xf2 = CGAffineTransform(tx:100.0, ty:0.0)
+            let xf2 = CGAffineTransform(tx:100, ty:0)
             let la2 = view.addLinesLayer(points1.map { $0 * xf2 }, closed:true, color:CGColor.purpleColor())
             let la3 = view.addLinesLayer(points1.map { $0 * xf2 * xf2 }, closed:true, color:CGColor.greenColor())
             
@@ -71,7 +71,7 @@ class MasterViewController: UITableViewController {
             
             // Add a triangle with gradient fill
             view.gradient.setColors([(0.5, 0.5, 0.9, 1.0), (0.9, 0.9, 0.3, 1.0)])
-            let points = [(10.0, 20.0), (150.0, 40.0), (120.0, 120.0)].map{ CGPoint($0) }
+            let points = [CGPoint((10, 20)), CGPoint((150, 40)), CGPoint((120, 120))]
             let layer1 = view.addLinesLayer(points, closed:true)
             
             // Move and rotate the triangle along the path
@@ -81,7 +81,7 @@ class MasterViewController: UITableViewController {
             
             // Show the path with vary dash phase and color
             let pathLayer = view.addLinesLayer([CGPoint.zeroPoint])
-            pathLayer.transformedPath = path
+            pathLayer.pathToSuperlayer = path
             pathLayer.lineDashPattern = [5, 5]
             let a4 = pathLayer.strokeColorAnimation(from:CGColor.lightGrayColor(), to:CGColor.greenColor())
                 .set{$0.autoreverses=true;$0.repeatCount=HUGE}
@@ -112,9 +112,9 @@ class MasterViewController: UITableViewController {
                 
                 edgeLayer.identifier = "polygon\(i)"
                 textLayer.identifier = "text\(i)"
-                animations.append(edgeLayer.rotationAnimation(angle: CGFloat(2 * M_PI))
+                animations.append(edgeLayer.rotationAnimation(CGFloat(2 * M_PI))
                     .setBeginTime(i, gap:0.3, duration:1.5))
-                animations.append(textLayer.rotationAnimation(angle: CGFloat(2 * M_PI))
+                animations.append(textLayer.rotationAnimation(CGFloat(2 * M_PI))
                     .setBeginTime(i, gap:0.3, duration:1.5))
             }
             applyAnimations(animations) {

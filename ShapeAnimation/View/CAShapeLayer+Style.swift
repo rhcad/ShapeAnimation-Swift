@@ -10,23 +10,39 @@ import SwiftGraphics
 
 public typealias PaintStyle = SwiftGraphics.Style
 
-private var LayerStyleKey = 10
-
 public extension CAShapeLayer {
-    var paintStyle: PaintStyle {
+    var paintStyle: PaintStyle! {
         get {
-            let style = getAssociatedWrappedObject(self, &LayerStyleKey) as PaintStyle?
-            if let style = style {
-                return style
+            var style = PaintStyle()
+            style.fillColor = self.fillColor
+            style.strokeColor = self.strokeColor
+            style.lineWidth = self.lineWidth
+            style.miterLimit = self.miterLimit
+            style.lineDash = self.lineDashPattern.map{ CGFloat($0 as NSNumber) }
+            style.lineDashPhase = self.lineDashPhase
+            style.alpha = CGFloat(self.opacity)
+            style.miterLimit = self.miterLimit
+            // TODO flatness, blendMode
+            
+            switch self.lineCap {
+                case kCALineCapRound:
+                    style.lineCap = kCGLineCapRound
+                case kCALineCapSquare:
+                    style.lineCap = kCGLineCapSquare
+                default:
+                    style.lineCap = kCGLineCapButt
             }
-            else {
-                var style = Style.defaultStyle
-                setAssociatedWrappedObject(self, &LayerStyleKey, style)
-                return style
+            switch self.lineJoin {
+                case kCALineJoinMiter:
+                    style.lineJoin = kCGLineJoinMiter
+                case kCALineJoinBevel:
+                    style.lineJoin = kCGLineJoinBevel
+                default:
+                    style.lineJoin = kCGLineJoinRound
             }
+            return style
         }
         set {
-            setAssociatedWrappedObject(self, &LayerStyleKey, newValue)
             apply(newValue)
         }
     }

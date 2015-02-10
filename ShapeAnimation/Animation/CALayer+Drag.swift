@@ -8,6 +8,8 @@
 
 import SwiftGraphics
 
+private var LayerTapKey = 14
+
 public extension CALayer {
     func constrainCenterToSuperview(center:CGPoint) {
         let kEdgeBuffer:CGFloat = 4
@@ -20,6 +22,22 @@ public extension CALayer {
     func bringOnScreen() {
         if !superlayer.bounds.contains(frame) {
             constrainCenterToSuperview(position)
+        }
+    }
+    
+    public var didTap: (() -> Void)? {
+        get {
+            let defv:(() -> Void)? = nil
+            return getAssociatedWrappedObject(self, &LayerTapKey, defv)
+        }
+        set {
+            if let oldlayer = self.gradientLayer {
+                oldlayer.removeAllAnimations()
+                oldlayer.removeFromSuperlayer()
+            } else if newValue == nil {
+                return
+            }
+            setAssociatedWrappedObject(self, &LayerTapKey, newValue)
         }
     }
 }

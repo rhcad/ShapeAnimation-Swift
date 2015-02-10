@@ -28,7 +28,7 @@ public func animationGroup(animations:[AnimationPair], didStop:(() -> Void)? = n
 
 public func applyAnimations(animations:[AnimationPair], completion:(() -> Void)?) {
     CATransaction.begin()
-    CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut.substringFromIndex(0)))
+    CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut))
     if completion != nil {
         CATransaction.setCompletionBlock {
             var finished = true
