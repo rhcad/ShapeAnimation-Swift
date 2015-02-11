@@ -22,6 +22,11 @@ public extension ShapeView {
         return addShapeLayer(Path(vertices:points, closed:closed).cgPath)
     }
     
+    //! Add shape layer with path string as the ‘d’ attribute of SVG path.
+    //! It can contain instructions ‘MmLlCcQqSsTtZz’ as described in http://www.w3.org/TR/SVGTiny12/paths.html
+    public func addSVGPathLayer(d:String) -> CAShapeLayer! {
+        return addShapeLayer(CGPathFromSVGPath(d))
+    }
 }
 
 public extension ShapeView {

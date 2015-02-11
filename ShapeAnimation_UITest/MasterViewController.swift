@@ -62,12 +62,7 @@ class MasterViewController: UITableViewController {
     // Rotate and move a picture and polygon with gradient fill along the path.
     private func testMoveLines(viewController:DetailViewController) -> AnimationBlock {
         return { (view:ShapeView) in
-            // Create a smooth path
-            var path = CGPathCreateMutable()
-            path.move(CGPoint(x:120, y:70))
-            path.addCubicCurveToPoint(CGPoint(x:250, y:220),
-                control1:CGPoint(x:0, y:200), control2:CGPoint(x:150, y:375))
-            path.addSmoothQuadCurveToPoint(CGPoint(x:500, y:220))
+            let path = CGPathFromSVGPath("M120,70 C0,200 150,375 250,220 T500,220")
             
             // Add a triangle with gradient fill
             view.gradient.setColors([(0.5, 0.5, 0.9, 1.0), (0.9, 0.9, 0.3, 1.0)])
