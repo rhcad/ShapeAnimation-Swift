@@ -101,7 +101,6 @@ public class AnimationLayer : CALayer {
             animation.fromValue = getProperty(event)
             animation.delegate = self
             animation.duration = 1.0
-            animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
             animationCreated?(event, animation)
             self.addAnimation(animation, forKey:event)
             return animation
@@ -110,7 +109,7 @@ public class AnimationLayer : CALayer {
     }
     
     // Timer Callback
-    func animationLoop(timer:CADisplayLink) {
+    internal func animationLoop(timer:CADisplayLink) {
         self.setNeedsDisplay()
     }
     

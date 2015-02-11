@@ -70,9 +70,9 @@ let la3 = self.addLinesLayer(view, points:points3, color: UIColor.greenColor())
 la3.flashAnimation(repeatCount:6).apply()
 
 let la4 = self.addLinesLayer(view, points:[(10.0,20.0), (150.0,40.0), (120.0,120.0)])
-let a1 = la4.moveOnPathAnimation(path).set {$0.duration=1.6}
-let a2 = la4.rotate360Degrees().set {$0.repeatCount=2}
-animationGroup([a1, a2]).set {$0.autoreverses=true}.apply()
+let a1 = la4.moveOnPathAnimation(path).setDuration(1.6)
+let a2 = la4.rotate360Degrees().setRepeatCount(2)
+animationGroup([a1, a2]).autoreverses().apply()
 ```
 
 ## Help Wanted

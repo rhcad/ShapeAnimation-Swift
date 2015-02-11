@@ -12,7 +12,7 @@ import ShapeAnimation
 extension MasterViewController {
     
     func testDragLayer(viewController:DetailViewController) -> AnimationBlock {
-        return { (view) -> Void in
+        return { view in
             let imageName = "airship.png"
             if let layer = view.addImageLayer(named:imageName, center:CGPoint(x:100, y:200)) {
                 layer.identifier = "airship1"

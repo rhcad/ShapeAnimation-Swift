@@ -8,14 +8,20 @@
 
 import SwiftGraphics
 
-public extension ShapeView {
-    
+public extension CALayer {
     public func enumerateLayers(block:(CALayer) -> Void) {
-        if let sublayers = self.layer.sublayers {
+        if let sublayers = self.sublayers {
             for layer in sublayers {
                 block(layer as CALayer)
             }
         }
+    }
+}
+
+public extension ShapeView {
+    
+    public func enumerateLayers(block:(CALayer) -> Void) {
+        self.layer.enumerateLayers(block)
     }
     
     public func hitTest(point:CGPoint) -> CALayer? {
@@ -23,8 +29,8 @@ public extension ShapeView {
         var minFrame:CGRect!
         func area(rect:CGRect) -> CGFloat { return rect.width * rect.height }
         
-        enumerateLayers {
-            if let shape = $0 as? CAShapeLayer {
+        enumerateLayers { layer in
+            if let shape = layer as? CAShapeLayer {
                 if shape.frame.contains(point) && shape.hitTestPath(point) {
                     if ret == nil || shape.isFilled || area(shape.frame) < area(minFrame) {
                         ret = shape
@@ -32,9 +38,9 @@ public extension ShapeView {
                     }
                 }
             }
-            else if $0.frame.contains(point) {
-                ret = $0
-                minFrame = $0.frame
+            else if layer.frame.contains(point) {
+                ret = layer
+                minFrame = layer.frame
             }
         }
         return ret
@@ -43,14 +49,14 @@ public extension ShapeView {
     public func intersects(rect:CGRect) -> [CALayer] {
         var ret:[CALayer] = []
         
-        enumerateLayers {
-            if let shape = $0 as? CAShapeLayer {
+        enumerateLayers { layer in
+            if let shape = layer as? CAShapeLayer {
                 if shape.intersects(rect) {
                     ret.append(shape)
                 }
             }
-            else if $0.frame.contains(rect) {
-                ret.append($0)
+            else if layer.frame.contains(rect) {
+                ret.append(layer)
             }
         }
         return ret

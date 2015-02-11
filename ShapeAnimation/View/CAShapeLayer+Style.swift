@@ -11,7 +11,7 @@ import SwiftGraphics
 public typealias PaintStyle = SwiftGraphics.Style
 
 public extension CAShapeLayer {
-    var paintStyle: PaintStyle! {
+    public var paintStyle: PaintStyle! {
         get {
             var style = PaintStyle()
             style.fillColor = self.fillColor
@@ -47,7 +47,7 @@ public extension CAShapeLayer {
         }
     }
     
-    func apply(newStyle:PaintStyle) {
+    public func apply(newStyle:PaintStyle) {
         self.fillColor = newStyle.fillColor
         if let strokeColor = newStyle.strokeColor {
             self.strokeColor = strokeColor

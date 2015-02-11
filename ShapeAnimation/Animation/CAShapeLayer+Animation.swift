@@ -22,13 +22,10 @@ public extension CAShapeLayer {
     
     func strokeColorAnimation(#from:CGColor, to:CGColor, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"strokeColor")
-        animation.duration = 0.8
+        setDefaultProperties(animation, didStop)
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.fromValue = from
         animation.toValue = to
-        animation.removedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
-        animation.didStop = didStop
         animation.willStop = {
             withDisableActions(self, animation) {
                 self.strokeColor = to
@@ -40,13 +37,10 @@ public extension CAShapeLayer {
     
     func fillColorAnimation(#from:CGColor, to:CGColor, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"fillColor")
-        animation.duration = 0.8
+        setDefaultProperties(animation, didStop)
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.fromValue = from
         animation.toValue = to
-        animation.removedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
-        animation.didStop = didStop
         animation.willStop = {
             withDisableActions(self, animation) {
                 self.fillColor = to
@@ -58,13 +52,10 @@ public extension CAShapeLayer {
     
     func lineWidthAnimation(#from:CGFloat, to:CGFloat, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"lineWidth")
-        animation.duration = 0.8
+        setDefaultProperties(animation, didStop)
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.fromValue = from
         animation.toValue = to
-        animation.removedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
-        animation.didStop = didStop
         animation.willStop = {
             withDisableActions(self, animation) {
                 self.lineWidth = to
@@ -85,13 +76,9 @@ public extension CAShapeLayer {
     
     func switchPathAnimation(to:CGPath, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"path")
-        animation.duration = 0.8
+        setDefaultProperties(animation, didStop)
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.toValue = path
-        animation.didStop = didStop
-        animation.removedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
-        animation.didStop = didStop
         animation.willStop = {
             withDisableActions(self, animation) {
                 self.path = to

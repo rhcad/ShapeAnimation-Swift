@@ -22,7 +22,7 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction func stop(sender: AnyObject) {
-        animationView.removeAllAnimations()
+        animationView.stop()
     }
     
     @IBAction func pause(sender: UIBarButtonItem) {

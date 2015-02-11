@@ -15,12 +15,9 @@ public extension CALayer {
     
     func opacityAnimation(#from:Float, to:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"opacity")
-        animation.duration = 0.8
+        setDefaultProperties(animation, didStop)
         animation.fromValue = from
         animation.toValue = to
-        animation.removedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
-        animation.didStop = didStop
         animation.willStop = {
             withDisableActions(self, animation) {
                 self.opacity = to
@@ -31,13 +28,8 @@ public extension CALayer {
     }
     
     func flashAnimation(repeatCount n:Float = 2, didStop:(() -> Void)? = nil) -> AnimationPair {
-        let anim = opacityAnimation(from:0, to:1, didStop:didStop)
-        return anim.set {
-            $0.repeatCount = n
-            $0.autoreverses = true
-            $0.removedOnCompletion = true
-            $0.duration = 0.2
-        }
+        let apair = opacityAnimation(from:0, to:1, didStop:didStop)
+        return apair.autoreverses().setRepeatCount(n).setDuration(0.2)
     }
     
     // MARK: scaleAnimation and tapAnimation
@@ -46,12 +38,9 @@ public extension CALayer {
         let animation = CABasicAnimation(keyPath:"transform.scale")
         let oldxf = affineTransform(), oldscale = Float(hypot(oldxf.a, oldxf.b))
         
-        animation.duration = 0.8
+        setDefaultProperties(animation, didStop)
         animation.fromValue = from * oldscale
         animation.toValue = to * oldscale
-        animation.removedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
-        animation.didStop = didStop
         animation.willStop = {
             withDisableActions(self, animation) {
                 let xf = CGAffineTransform(scale:CGFloat(to))
@@ -62,16 +51,15 @@ public extension CALayer {
         return AnimationPair(self, animation, key:"scale")
     }
     
-    func scaleAnimation(#from:Float, to:Float, repeatCount:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
-        return scaleAnimation(from:from, to:to, didStop:didStop).set {
-            $0.repeatCount=repeatCount
-            $0.autoreverses = repeatCount > 1
-            $0.fillMode = kCAFillModeRemoved
+    func scaleAnimation(#from:Float, to:Float, repeatCount n:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
+        return scaleAnimation(from:from, to:to, didStop:didStop).setRepeatCount(n).set { anim in
+            anim.autoreverses = n > 1
+            anim.fillMode = kCAFillModeRemoved
         }
     }
     
     func tapAnimation(didStop:(() -> Void)? = nil) -> AnimationPair {
-        return scaleAnimation(from:1, to:1.25, didStop:didStop).set {$0.autoreverses = true;$0.duration=0.3}
+        return scaleAnimation(from:1, to:1.25, didStop:didStop).autoreverses().set {$0.duration=0.3}
     }
     
     // MARK: rotate360Degrees and rotationAnimation
@@ -82,13 +70,10 @@ public extension CALayer {
     
     func rotationAnimation(angle:Radians, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"transform.rotation")
-        animation.duration = 0.8
+        setDefaultProperties(animation, didStop)
         animation.additive = true
         animation.fromValue = 0.0
         animation.toValue = angle
-        animation.removedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
-        animation.didStop = didStop
         animation.willStop = {
             withDisableActions(self, animation) {
                 let xf = CGAffineTransform(rotation:angle)
@@ -118,14 +103,11 @@ public extension CALayer {
     
     func moveAnimation(#from:CGPoint, to:CGPoint, relative:Bool = true, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"position")
-        animation.duration = 0.3
+        setDefaultProperties(animation, didStop)
         animation.additive = relative
         animation.fromValue = NSValue(CGPoint: from)
         animation.toValue = NSValue(CGPoint: to)
-        animation.removedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseOut)
-        animation.didStop = didStop
         animation.willStop = {
             withDisableActions(self, animation) {
                 self.position = relative ? self.position + to : to
@@ -139,14 +121,11 @@ public extension CALayer {
         let animation = CAKeyframeAnimation()
         animation.keyPath = "position"
         animation.path = path
-        animation.duration = 0.8
-        animation.removedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
+        setDefaultProperties(animation, didStop)
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         if autoRotate {
             animation.rotationMode = kCAAnimationRotateAuto
         }
-        animation.didStop = didStop
         animation.willStop = {
             self.removeAnimationForKey("moveOnPath")
             withDisableActions(self, animation) {
@@ -160,4 +139,11 @@ public extension CALayer {
         return AnimationPair(self, animation, key:"moveOnPath")
     }
     
+}
+
+internal func setDefaultProperties(animation:CAAnimation, didStop:(() -> Void)?) {
+    animation.duration = 0.8
+    animation.removedOnCompletion = false
+    animation.fillMode = kCAFillModeForwards
+    animation.didStop = didStop
 }

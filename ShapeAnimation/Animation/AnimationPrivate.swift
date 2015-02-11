@@ -10,18 +10,18 @@ import SwiftGraphics
 
 private var stopping = 0
 
-public class AnimationDelagate : NSObject {
+internal class AnimationDelagate : NSObject {
     
-    public var didStart:((CAAnimation!) -> Void)?
-    public var didStop :(() -> Void)?
-    public var willStop :(() -> Void)?
-    public var finished = true
+    internal var didStart:((CAAnimation!) -> Void)?
+    internal var didStop :(() -> Void)?
+    internal var willStop :(() -> Void)?
+    internal var finished = true
     
-    override public func animationDidStart(anim:CAAnimation!) {
+    override internal func animationDidStart(anim:CAAnimation!) {
         didStart?(anim)
     }
     
-    override public func animationDidStop(anim:CAAnimation!, finished:Bool) {
+    override internal func animationDidStop(anim:CAAnimation!, finished:Bool) {
         /*
         let keypath = (anim as? CAPropertyAnimation)?.keyPath
         let name = keypath != nil ? keypath! : anim.description
@@ -44,7 +44,7 @@ public class AnimationDelagate : NSObject {
         }
     }
     
-    public class func groupDidStop(completion:() -> Void, finished:Bool) {
+    internal class func groupDidStop(completion:() -> Void, finished:Bool) {
         if finished {
             completion()
         } else {
@@ -108,7 +108,7 @@ public extension CAAnimation {
         }
     }
     
-    public var finished:Bool {
+    internal var finished:Bool {
         get {
             if let delegate = self.delegate as? AnimationDelagate {
                 if let p = self as? CAPropertyAnimation {
@@ -132,5 +132,5 @@ public extension CAAnimation {
         }
     }
     
-    public class var isStopping:Bool { return stopping > 0 }
+    internal class var isStopping:Bool { return stopping > 0 }
 }

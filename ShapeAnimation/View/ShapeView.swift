@@ -56,9 +56,9 @@ public class ShapeView : UIView {
         super.layoutSubviews()
         
         if lastBounds != bounds {
-            enumerateLayers {
-                if $0.frame == self.lastBounds {
-                    $0.frame = self.bounds
+            enumerateLayers { layer in
+                if layer.frame == self.lastBounds {
+                    layer.frame = self.bounds
                 }
             }
             lastBounds = self.bounds

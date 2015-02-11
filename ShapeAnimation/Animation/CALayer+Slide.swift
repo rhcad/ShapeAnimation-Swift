@@ -43,14 +43,11 @@ public extension CALayer {
         xf = CATransform3DRotate(xf, CGFloat(M_PI), x, y, 0.0)
         
         let animation = CABasicAnimation(keyPath:"transform")
-        animation.duration = 0.8
+        setDefaultProperties(animation, didStop)
         animation.additive = true
         animation.fromValue = NSValue(CATransform3D:CATransform3DIdentity)
         animation.toValue = NSValue(CATransform3D:xf)
-        animation.removedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        animation.didStop = didStop
         animation.willStop = {
             withDisableActions(self, animation) {
                 self.transform = CATransform3DConcat(xf, self.transform)
