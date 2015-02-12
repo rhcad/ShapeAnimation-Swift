@@ -22,15 +22,15 @@ SVG animation development with [SVGKit](https://github.com/SVGKit/SVGKit) happen
 
 * Animation extension functions of CALayer.
   * opacityAnimation, flashAnimation
-  * scaleAnimation, tapAnimation
+  * scaleAnimation, tapAnimation, transformAnimation
   * rotate360Degrees, rotationAnimation
   * shakeAnimation, moveAnimation, moveOnPathAnimation
   * slideToRight, slideAnimation, flipHorizontally, flipVertically
   * Layer dragging: constrainCenterToSuperview, bringOnScreen
 
 * Animation extension functions of CAShapeLayer.
-  * strokeEndAnimation
-  * strokeColorAnimation, lineWidthAnimation, dashPhaseAnimation
+  * strokeStartAnimation, strokeEndAnimation, lineWidthAnimation, dashPhaseAnimation
+  * strokeColorAnimation, fillColorAnimation, backColorAnimation
   * switchPathAnimation
 
 * Group animation and cascaded animation.
@@ -64,7 +64,7 @@ layer1.strokeEndAnimation().apply() {
 }
 
 let la2 = self.addLinesLayer(view, points:points2, color: UIColor.blueColor())
-lla2.scaleAnimation(from:1, to:1.1, repeatCount:3).apply(duration:0.3)
+lla2.scaleAnimation(#from:1, to:1.1, repeatCount:3).apply(duration:0.3)
 
 let la3 = self.addLinesLayer(view, points:points3, color: UIColor.greenColor())
 la3.flashAnimation(repeatCount:6).apply()

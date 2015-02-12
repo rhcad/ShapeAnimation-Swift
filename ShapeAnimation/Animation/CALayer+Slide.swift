@@ -43,17 +43,36 @@ public extension CALayer {
         xf = CATransform3DRotate(xf, CGFloat(M_PI), x, y, 0.0)
         
         let animation = CABasicAnimation(keyPath:"transform")
-        setDefaultProperties(animation, didStop)
         animation.additive = true
         animation.fromValue = NSValue(CATransform3D:CATransform3DIdentity)
         animation.toValue = NSValue(CATransform3D:xf)
+        setDefaultProperties(animation, NSNull(), didStop)
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         animation.willStop = {
             withDisableActions(self, animation) {
                 self.transform = CATransform3DConcat(xf, self.transform)
             }
-            self.removeAnimationForKey("flipHorz")
+            self.removeAnimationForKey("flip")
         }
-        return AnimationPair(self, animation, key:"flipHorz")
+        return AnimationPair(self, animation, key:"flip")
+    }
+    
+    // MARK: transform animation
+    
+    func transformAnimation(from:CATransform3D? = nil, to:CATransform3D, didStop:(() -> Void)? = nil) -> AnimationPair {
+        let animation = CABasicAnimation(keyPath:"transform")
+        if let from = from {
+            animation.fromValue = NSValue(CATransform3D:from)
+        }
+        animation.toValue = NSValue(CATransform3D:to)
+        setDefaultProperties(animation, NSValue(CATransform3D:CATransform3DIdentity), didStop)
+        animation.willStop = {
+            withDisableActions(self, animation) {
+                self.transform = to
+            }
+            self.removeAnimationForKey(animation.keyPath)
+        }
+        animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
+        return AnimationPair(self, animation, key:animation.keyPath)
     }
 }

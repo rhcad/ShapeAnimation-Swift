@@ -130,11 +130,10 @@ class MasterViewController: UITableViewController {
             view.style.lineWidth = 1
             for i in 0..<count {
                 let la1 = view.addCircleLayer(center:CGPoint(x:100, y:100), radius:15)
-                let anim = animationGroup([la1.scaleAnimation(from:0, to:5),
-                                           la1.opacityAnimation(from:1, to:0)])
+                animationGroup([la1.scaleAnimation(from:0, to:5),
+                    la1.opacityAnimation(from:1, to:0)])
                     .setBeginTime(i, gap:duration / Double(count), duration:duration)
-                    .forever().set {$0.fillMode = kCAFillModeBackwards}
-                anim.apply()
+                    .forever().setFillMode(kCAFillModeBackwards).apply()
             }
         }
     }

@@ -95,6 +95,16 @@ public extension AnimationPair {
         return self
     }
     
+    public func set(timingFunction:CAMediaTimingFunction) -> AnimationPair {
+        animation.timingFunction = timingFunction
+        return self
+    }
+    
+    public func setFillMode(fillMode:NSString) -> AnimationPair {
+        animation.fillMode = fillMode
+        return self
+    }
+    
     public func setDuration(d:CFTimeInterval) -> AnimationPair {
         animation.duration = d
         if let group = animation as? CAAnimationGroup {
@@ -106,8 +116,9 @@ public extension AnimationPair {
         return self
     }
     
-    public func setBeginTime(gap:CFTimeInterval) -> AnimationPair {
-        return setBeginTime(1, gap:gap)
+    public func setBeginTime(time:CFTimeInterval) -> AnimationPair {
+        animation.beginTime = CACurrentMediaTime() + time
+        return self
     }
     
     public func setBeginTime(index:Int, gap:CFTimeInterval) -> AnimationPair {
@@ -116,9 +127,8 @@ public extension AnimationPair {
     }
     
     public func setBeginTime(index:Int, gap:CFTimeInterval, duration:CFTimeInterval) -> AnimationPair {
-        animation.beginTime = CACurrentMediaTime() + Double(index) * gap
         setDuration(duration)
-        return self
+        return setBeginTime(index, gap:gap)
     }
     
     public func setRepeatCount(count:Float) -> AnimationPair {

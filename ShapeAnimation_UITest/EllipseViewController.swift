@@ -75,7 +75,7 @@ class EllipseViewController: DetailViewController {
         ballLayer?.apply(gradient)
         
         let ellipse = self.makeEllipse(animationLayer)
-        ballLayer!.moveOnPathAnimation(ellipse.cgpath).forever().set{ anim in
-            anim.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear) }.apply()
+        ballLayer!.moveOnPathAnimation(ellipse.cgpath).forever()
+            .set(CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)).apply()
     }
 }

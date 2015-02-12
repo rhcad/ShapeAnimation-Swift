@@ -9,6 +9,7 @@
 import SwiftGraphics
 
 private var LayerTapKey = 14
+private var LayerSelectedKey = 15
 
 public extension CALayer {
     func constrainCenterToSuperview(center:CGPoint) {
@@ -38,6 +39,19 @@ public extension CALayer {
                 return
             }
             setAssociatedWrappedObject(self, &LayerTapKey, newValue)
+        }
+    }
+    
+    public var selected: Bool {
+        get {
+            let defv:NSObject? = nil
+            return getAssociatedWrappedObject(self, &LayerSelectedKey, defv) != nil
+        }
+        set {
+            if (newValue != selected) {
+                weak var value = self
+                setAssociatedWrappedObject(self, &LayerSelectedKey, newValue ? value : nil)
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ public extension ShapeView {
         self.layer.enumerateLayers(block)
     }
     
-    public func hitTest(point:CGPoint) -> CALayer? {
+    public func hitTest(point:CGPoint, filter:((CALayer) -> Bool)? = nil) -> CALayer? {
         var ret:CALayer?
         var minFrame:CGRect!
         func area(rect:CGRect) -> CGFloat { return rect.width * rect.height }
@@ -33,12 +33,14 @@ public extension ShapeView {
             if let shape = layer as? CAShapeLayer {
                 if shape.frame.contains(point) && shape.hitTestPath(point) {
                     if ret == nil || shape.isFilled || area(shape.frame) < area(minFrame) {
-                        ret = shape
-                        minFrame = shape.frame
+                        if filter == nil || filter!(shape) {
+                            ret = shape
+                            minFrame = shape.frame
+                        }
                     }
                 }
             }
-            else if layer.frame.contains(point) {
+            else if layer.frame.contains(point) && (filter == nil || filter!(layer)) {
                 ret = layer
                 minFrame = layer.frame
             }
@@ -46,16 +48,16 @@ public extension ShapeView {
         return ret
     }
     
-    public func intersects(rect:CGRect) -> [CALayer] {
+    public func intersects(rect:CGRect, filter:((CALayer) -> Bool)? = nil) -> [CALayer] {
         var ret:[CALayer] = []
         
         enumerateLayers { layer in
             if let shape = layer as? CAShapeLayer {
-                if shape.intersects(rect) {
+                if shape.intersects(rect) && (filter == nil || filter!(shape)) {
                     ret.append(shape)
                 }
             }
-            else if layer.frame.contains(rect) {
+            else if layer.frame.contains(rect) && (filter == nil || filter!(layer)) {
                 ret.append(layer)
             }
         }

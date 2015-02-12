@@ -10,6 +10,10 @@ import SwiftGraphics
 
 public extension ShapeView {
     
+    public func addRectangleLayer(frame:CGRect) -> CAShapeLayer! {
+        return addShapeLayer(CGPathCreateWithRect(frame, nil))
+    }
+    
     public func addCircleLayer(center c:CGPoint, radius:CGFloat) -> CAShapeLayer! {
         return addShapeLayer(CGPathCreateWithEllipseInRect(CGRect(center:c, radius:radius), nil))
     }
@@ -24,8 +28,8 @@ public extension ShapeView {
     
     //! Add shape layer with path string as the ‘d’ attribute of SVG path.
     //! It can contain instructions ‘MmLlCcQqSsTtZz’ as described in http://www.w3.org/TR/SVGTiny12/paths.html
-    public func addSVGPathLayer(d:String) -> CAShapeLayer! {
-        return addShapeLayer(CGPathFromSVGPath(d))
+    public func addSVGPathLayer(d:String, position:CGPoint? = nil) -> CAShapeLayer! {
+        return addShapeLayer(CGPathFromSVGPath(d), position:position)
     }
 }
 

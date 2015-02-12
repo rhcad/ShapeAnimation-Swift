@@ -17,7 +17,9 @@ public extension CALayer {
             return getAssociatedObject(self, &LayerIDKey) as? String
         }
         set {
-            setAssociatedObject(self, &LayerIDKey, newValue!)
+            if newValue != identifier {
+                setAssociatedObject(self, &LayerIDKey, newValue!)
+            }
         }
     }
     
