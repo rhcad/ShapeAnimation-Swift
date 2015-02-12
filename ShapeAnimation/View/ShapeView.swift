@@ -39,7 +39,7 @@ public class ShapeView : UIView {
     
     public func addShapeLayer(path:CGPath, position:CGPoint?, superlayer:CALayer? = nil) -> CAShapeLayer! {
         let box   = path.boundingBox
-        let size  = CGSize(w: max(box.width, 1), h: max(box.height, 1))
+        let size  = CGSize(w: max(box.width, 0.01), h: max(box.height, 0.01))
         let frame = CGRect(origin:position != nil ? position! : box.origin, size:size)
         var xf    = CGAffineTransform(translation:-box.origin)
         let layer = CAShapeLayer()

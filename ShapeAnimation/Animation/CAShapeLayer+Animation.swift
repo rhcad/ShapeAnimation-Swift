@@ -10,7 +10,7 @@ import SwiftGraphics
 
 public extension CAShapeLayer {
     
-    func strokeStartAnimation(from:CGFloat? = 0, to:CGFloat = 1, didStop:(() -> Void)? = nil) -> AnimationPair {
+    func strokeStartAnimation(from:CGFloat? = nil, to:CGFloat = 1, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"strokeStart")
         animation.duration = 0.8
         animation.fromValue = from
@@ -19,12 +19,18 @@ public extension CAShapeLayer {
         if from != nil {
             animation.fillMode = kCAFillModeRemoved
         }
+        animation.willStop = {
+            withDisableActions(self, animation) {
+                self.strokeStart = to
+            }
+            self.removeAnimationForKey(animation.keyPath)
+        }
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.didStop = didStop
         return AnimationPair(self, animation, key:animation.keyPath)
     }
     
-    func strokeEndAnimation(from:CGFloat? = 0, to:CGFloat = 1, didStop:(() -> Void)? = nil) -> AnimationPair {
+    func strokeEndAnimation(from:CGFloat? = nil, to:CGFloat = 1, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"strokeEnd")
         animation.duration = 0.8
         animation.fromValue = from
@@ -32,6 +38,12 @@ public extension CAShapeLayer {
         setDefaultProperties(animation, 0, didStop)
         if from != nil {
             animation.fillMode = kCAFillModeRemoved
+        }
+        animation.willStop = {
+            withDisableActions(self, animation) {
+                self.strokeEnd = to
+            }
+            self.removeAnimationForKey(animation.keyPath)
         }
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.didStop = didStop
