@@ -32,12 +32,6 @@ public extension CALayer {
             return getAssociatedWrappedObject(self, &LayerTapKey, defv)
         }
         set {
-            if let oldlayer = self.gradientLayer {
-                oldlayer.removeAllAnimations()
-                oldlayer.removeFromSuperlayer()
-            } else if newValue == nil {
-                return
-            }
             setAssociatedWrappedObject(self, &LayerTapKey, newValue)
         }
     }

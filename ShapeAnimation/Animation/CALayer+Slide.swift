@@ -49,10 +49,9 @@ public extension CALayer {
         setDefaultProperties(animation, NSNull(), didStop)
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         animation.willStop = {
-            withDisableActions(self, animation) {
-                self.transform = CATransform3DConcat(xf, self.transform)
+            withDisableActions(self, animation, "flip") { layer in
+                layer.transform = CATransform3DConcat(xf, layer.transform)
             }
-            self.removeAnimationForKey("flip")
         }
         return AnimationPair(self, animation, key:"flip")
     }
@@ -67,10 +66,9 @@ public extension CALayer {
         animation.toValue = NSValue(CATransform3D:to)
         setDefaultProperties(animation, NSValue(CATransform3D:CATransform3DIdentity), didStop)
         animation.willStop = {
-            withDisableActions(self, animation) {
-                self.transform = to
+            withDisableActions(self, animation, animation.keyPath) { layer in
+                layer.transform = to
             }
-            self.removeAnimationForKey(animation.keyPath)
         }
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         return AnimationPair(self, animation, key:animation.keyPath)

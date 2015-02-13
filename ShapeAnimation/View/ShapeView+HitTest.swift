@@ -12,7 +12,9 @@ public extension CALayer {
     public func enumerateLayers(block:(CALayer) -> Void) {
         if let sublayers = self.sublayers {
             for layer in sublayers {
-                block(layer as CALayer)
+                if !layer.isKindOfClass(CAGradientLayer) {
+                    block(layer as CALayer)
+                }
             }
         }
     }
@@ -26,26 +28,28 @@ public extension ShapeView {
     
     public func hitTest(point:CGPoint, filter:((CALayer) -> Bool)? = nil) -> CALayer? {
         var ret:CALayer?
+        var defaultShape:CALayer?
         var minFrame:CGRect!
         func area(rect:CGRect) -> CGFloat { return rect.width * rect.height }
         
         enumerateLayers { layer in
-            if let shape = layer as? CAShapeLayer {
-                if shape.frame.contains(point) && shape.hitTestPath(point) {
-                    if ret == nil || shape.isFilled || area(shape.frame) < area(minFrame) {
-                        if filter == nil || filter!(shape) {
+            if layer.frame.contains(point) && (filter == nil || filter!(layer)) {
+                defaultShape = layer
+                if let shape = layer as? CAShapeLayer {
+                    if shape.hitTestPath(point) {
+                        if ret == nil || shape.isFilled || area(shape.frame) < area(minFrame) {
                             ret = shape
                             minFrame = shape.frame
                         }
                     }
                 }
-            }
-            else if layer.frame.contains(point) && (filter == nil || filter!(layer)) {
-                ret = layer
-                minFrame = layer.frame
+                else {
+                    ret = layer
+                    minFrame = layer.frame
+                }
             }
         }
-        return ret
+        return ret != nil ? ret : defaultShape
     }
     
     public func intersects(rect:CGRect, filter:((CALayer) -> Bool)? = nil) -> [CALayer] {

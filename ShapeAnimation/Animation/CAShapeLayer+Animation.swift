@@ -20,10 +20,11 @@ public extension CAShapeLayer {
             animation.fillMode = kCAFillModeRemoved
         }
         animation.willStop = {
-            withDisableActions(self, animation) {
-                self.strokeStart = to
+            withDisableActions(self, animation, animation.keyPath) { layer in
+                if let layer = layer as? CAShapeLayer {
+                    layer.strokeStart = to
+                }
             }
-            self.removeAnimationForKey(animation.keyPath)
         }
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.didStop = didStop
@@ -40,10 +41,11 @@ public extension CAShapeLayer {
             animation.fillMode = kCAFillModeRemoved
         }
         animation.willStop = {
-            withDisableActions(self, animation) {
-                self.strokeEnd = to
+            withDisableActions(self, animation, animation.keyPath) { layer in
+                if let layer = layer as? CAShapeLayer {
+                    layer.strokeEnd = to
+                }
             }
-            self.removeAnimationForKey(animation.keyPath)
         }
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.didStop = didStop
@@ -57,10 +59,11 @@ public extension CAShapeLayer {
         setDefaultProperties(animation, strokeColor, didStop)
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.willStop = {
-            withDisableActions(self, animation) {
-                self.strokeColor = to
+            withDisableActions(self, animation, animation.keyPath) { layer in
+                if let layer = layer as? CAShapeLayer {
+                    layer.strokeColor = to
+                }
             }
-            self.removeAnimationForKey(animation.keyPath)
         }
         return AnimationPair(self, animation, key:animation.keyPath)
     }
@@ -71,27 +74,13 @@ public extension CAShapeLayer {
         animation.toValue = to
         setDefaultProperties(animation, fillColor, didStop)
         animation.willStop = {
-            withDisableActions(self, animation) {
-                self.fillColor = to
+            withDisableActions(self, animation, animation.keyPath) { layer in
+                if let layer = layer as? CAShapeLayer {
+                    layer.fillColor = to
+                }
             }
-            self.removeAnimationForKey(animation.keyPath)
         }
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
-        return AnimationPair(self, animation, key:animation.keyPath)
-    }
-    
-    func backColorAnimation(from:CGColor? = nil, to:CGColor, didStop:(() -> Void)? = nil) -> AnimationPair {
-        let animation = CABasicAnimation(keyPath:"backgroundColor")
-        animation.fromValue = from
-        animation.toValue = to
-        setDefaultProperties(animation, backgroundColor, didStop)
-        animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
-        animation.willStop = {
-            withDisableActions(self, animation) {
-                self.backgroundColor = to
-            }
-            self.removeAnimationForKey(animation.keyPath)
-        }
         return AnimationPair(self, animation, key:animation.keyPath)
     }
     
@@ -102,10 +91,11 @@ public extension CAShapeLayer {
         setDefaultProperties(animation, lineWidth, didStop)
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.willStop = {
-            withDisableActions(self, animation) {
-                self.lineWidth = to
+            withDisableActions(self, animation, animation.keyPath) { layer in
+                if let layer = layer as? CAShapeLayer {
+                    layer.lineWidth = to
+                }
             }
-            self.removeAnimationForKey(animation.keyPath)
         }
         return AnimationPair(self, animation, key:animation.keyPath)
     }
@@ -121,14 +111,18 @@ public extension CAShapeLayer {
     
     func switchPathAnimation(to:CGPath, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"path")
-        animation.toValue = path
+        animation.toValue = to
         setDefaultProperties(animation, path, didStop)
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.willStop = {
-            withDisableActions(self, animation) {
-                self.path = to
+            withDisableActions(self, animation, animation.keyPath) { layer in
+                if let layer = layer as? CAShapeLayer {
+                    let box = to.boundingBox, frame = self.frame
+                    layer.path = to
+                    layer.frame = CGRect(x:frame.origin.x, y:frame.origin.y, w:box.maxX, h:box.maxY)
+                    layer.apply(layer.gradient)
+                }
             }
-            self.removeAnimationForKey(animation.keyPath)
         }
         return AnimationPair(self, animation, key:animation.keyPath)
     }

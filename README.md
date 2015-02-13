@@ -21,7 +21,7 @@ SVG animation development with [SVGKit](https://github.com/SVGKit/SVGKit) happen
   * Enumerate, hit-test or find layers.
 
 * Animation extension functions of CALayer.
-  * opacityAnimation, flashAnimation
+  * opacityAnimation, flashAnimation, backColorAnimation
   * scaleAnimation, tapAnimation, transformAnimation
   * rotate360Degrees, rotationAnimation
   * shakeAnimation, moveAnimation, moveOnPathAnimation
@@ -29,8 +29,8 @@ SVG animation development with [SVGKit](https://github.com/SVGKit/SVGKit) happen
   * Layer dragging: constrainCenterToSuperview, bringOnScreen
 
 * Animation extension functions of CAShapeLayer.
-  * strokeStartAnimation, strokeEndAnimation, lineWidthAnimation, dashPhaseAnimation
-  * strokeColorAnimation, fillColorAnimation, backColorAnimation
+  * strokeStartAnimation, strokeEndAnimation, lineWidthAnimation
+  * strokeColorAnimation, fillColorAnimation, dashPhaseAnimation
   * switchPathAnimation
 
 * Group animation and cascaded animation.

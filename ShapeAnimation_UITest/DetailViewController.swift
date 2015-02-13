@@ -12,13 +12,19 @@ typealias AnimationBlock = ((view:ShapeView) -> Void)
 
 class DetailViewController: UIViewController {
     
-    @IBOutlet var animationView: ShapeView!
+    @IBOutlet weak var animationView: ShapeView!
     var animationBlock : AnimationBlock?
     var data : AnyObject?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         animationBlock?(view: animationView)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        animationBlock = nil
+        data = nil
     }
     
     @IBAction func stop(sender: AnyObject) {

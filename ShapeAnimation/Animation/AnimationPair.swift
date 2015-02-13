@@ -68,7 +68,11 @@ public class AnimationPair {
                 if let layerid = layer.identifier {
                     anim2.setValue(layerid + "_gradient", forKey:"layerID")
                 }
-                gradientLayer.addAnimation(anim2, forKey:key)
+                if key == "path" {
+                    gradientLayer.mask.addAnimation(anim2, forKey:key)
+                } else {
+                    gradientLayer.addAnimation(anim2, forKey:key)
+                }
             }
             animation.setValue(layer.identifier, forKey:"layerID")
             layer.addAnimation(animation, forKey:key)
@@ -189,9 +193,19 @@ public func withDisableActions(block:() -> Void) {
     CATransaction.setDisableActions(old)
 }
 
-public func withDisableActions(layer:CALayer, animation:CAAnimation, block:() -> Void) {
+public func withDisableActions(layer:CALayer, animation:CAAnimation, key:String, block:(CALayer) -> Void) {
     let forwards = animation.fillMode == kCAFillModeForwards || animation.fillMode == kCAFillModeBoth
     if !animation.autoreverses && forwards {
-        withDisableActions(block)
+        let old = CATransaction.disableActions()
+        CATransaction.setDisableActions(true)
+        block(layer)
+        if let gradientLayer = layer.gradientLayer {
+            block(gradientLayer)
+        }
+        CATransaction.setDisableActions(old)
+    }
+    layer.removeAnimationForKey(key)
+    if let gradientLayer = layer.gradientLayer {
+        gradientLayer.removeAnimationForKey(key)
     }
 }

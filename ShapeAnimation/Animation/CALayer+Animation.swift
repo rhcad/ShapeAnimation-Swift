@@ -19,10 +19,9 @@ public extension CALayer {
         animation.toValue = to
         setDefaultProperties(animation, 0, didStop)
         animation.willStop = {
-            withDisableActions(self, animation) {
-                self.opacity = Float(to)
+            withDisableActions(self, animation, animation.keyPath) { layer in
+                layer.opacity = Float(to)
             }
-            self.removeAnimationForKey(animation.keyPath)
         }
         return AnimationPair(self, animation, key:animation.keyPath)
     }
@@ -30,6 +29,20 @@ public extension CALayer {
     func flashAnimation(repeatCount n:Float = 2, didStop:(() -> Void)? = nil) -> AnimationPair {
         let apair = opacityAnimation(from:0, to:1, didStop:didStop)
         return apair.autoreverses().setRepeatCount(n).setDuration(0.2)
+    }
+    
+    func backColorAnimation(from:CGColor? = nil, to:CGColor, didStop:(() -> Void)? = nil) -> AnimationPair {
+        let animation = CABasicAnimation(keyPath:"backgroundColor")
+        animation.fromValue = from
+        animation.toValue = to
+        setDefaultProperties(animation, backgroundColor, didStop)
+        animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
+        animation.willStop = {
+            withDisableActions(self, animation, animation.keyPath) { layer in
+                layer.backgroundColor = to
+            }
+        }
+        return AnimationPair(self, animation, key:animation.keyPath)
     }
     
     // MARK: scaleAnimation and tapAnimation
@@ -44,11 +57,10 @@ public extension CALayer {
         animation.toValue = to * oldscale
         setDefaultProperties(animation, 1, didStop)
         animation.willStop = {
-            withDisableActions(self, animation) {
+            withDisableActions(self, animation, animation.keyPath) { layer in
                 let xf = CGAffineTransform(scale:to)
-                self.setAffineTransform(self.affineTransform() + xf)
+                layer.setAffineTransform(layer.affineTransform() + xf)
             }
-            self.removeAnimationForKey(animation.keyPath)
         }
         return AnimationPair(self, animation, key:animation.keyPath)
     }
@@ -75,11 +87,10 @@ public extension CALayer {
         animation.toValue = angle
         setDefaultProperties(animation, 0, didStop)
         animation.willStop = {
-            withDisableActions(self, animation) {
+            withDisableActions(self, animation, animation.keyPath) { layer in
                 let xf = CGAffineTransform(rotation:angle)
-                self.setAffineTransform(self.affineTransform() + xf)
+                layer.setAffineTransform(layer.affineTransform() + xf)
             }
-            self.removeAnimationForKey(animation.keyPath)
         }
         return AnimationPair(self, animation, key:animation.keyPath)
     }
@@ -107,10 +118,9 @@ public extension CALayer {
         setDefaultProperties(animation, NSNull(), didStop)
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseOut)
         animation.willStop = {
-            withDisableActions(self, animation) {
-                self.position = relative ? self.position + to : to
+            withDisableActions(self, animation, animation.keyPath) { layer in
+                layer.position = relative ? layer.position + to : to
             }
-            self.removeAnimationForKey(animation.keyPath)
         }
         return AnimationPair(self, animation, key:animation.keyPath)
     }
@@ -125,12 +135,11 @@ public extension CALayer {
             animation.rotationMode = kCAAnimationRotateAuto
         }
         animation.willStop = {
-            self.removeAnimationForKey(animation.keyPath)
-            withDisableActions(self, animation) {
-                self.position = path.endPoint
+            withDisableActions(self, animation, animation.keyPath) { layer in
+                layer.position = path.endPoint
                 if autoRotate {
                     let xf = CGAffineTransform(rotation:path.endTangent.direction)
-                    self.setAffineTransform(self.affineTransform() + xf)
+                    layer.setAffineTransform(layer.affineTransform() + xf)
                 }
             }
         }
