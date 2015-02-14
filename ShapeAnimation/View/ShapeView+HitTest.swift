@@ -37,7 +37,7 @@ public extension ShapeView {
                 defaultShape = layer
                 if let shape = layer as? CAShapeLayer {
                     if shape.hitTestPath(point) {
-                        if ret == nil || shape.isFilled || area(shape.frame) < area(minFrame) {
+                        if ret == nil || area(shape.frame) < area(minFrame) {
                             ret = shape
                             minFrame = shape.frame
                         }
@@ -76,8 +76,9 @@ public extension CAShapeLayer {
     }
     
     public func hitTestPath(point:CGPoint) -> Bool {
+        let path = isFilled ? self.path : self.strokingPath(max(lineWidth, 10))
         var xf = affineTransform().inverted() + CGAffineTransform(translation: -position)
-        return CGPathContainsPoint(self.path, &xf, point, false)
+        return CGPathContainsPoint(path, &xf, point, false)
     }
     
     public func intersects(rect:CGRect) -> Bool {

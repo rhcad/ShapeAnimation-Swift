@@ -18,7 +18,9 @@ public extension CAShapeLayer {
             style.strokeColor = self.strokeColor
             style.lineWidth = self.lineWidth
             style.miterLimit = self.miterLimit
-            style.lineDash = self.lineDashPattern.map{ CGFloat($0 as NSNumber) }
+            if let lineDashPattern = self.lineDashPattern {
+                style.lineDash = lineDashPattern.map{ CGFloat($0 as NSNumber) }
+            }
             style.lineDashPhase = self.lineDashPhase
             style.alpha = CGFloat(self.opacity)
             style.miterLimit = self.miterLimit

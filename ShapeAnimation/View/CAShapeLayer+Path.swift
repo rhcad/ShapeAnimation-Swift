@@ -23,4 +23,12 @@ public extension CAShapeLayer {
         }
     }
     
+    public func strokingPath(lineWidth:CGFloat) -> CGPath {
+        if path == nil {
+            return path
+        }
+        let s = self.paintStyle
+        return CGPathCreateCopyByStrokingPath(path, nil, lineWidth,
+            s.lineCap!, s.lineJoin!, miterLimit)
+    }
 }
