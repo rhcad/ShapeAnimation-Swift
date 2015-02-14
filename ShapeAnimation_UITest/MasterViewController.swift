@@ -14,7 +14,7 @@ class MasterViewController: UITableViewController {
     // MARK: Segues
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let viewController = segue.destinationViewController as DetailViewController
+        let viewController = segue.destinationViewController as! DetailViewController
         
         switch segue.identifier! as NSString {
         case "Add Lines":

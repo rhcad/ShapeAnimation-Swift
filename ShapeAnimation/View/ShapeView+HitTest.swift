@@ -13,7 +13,7 @@ public extension CALayer {
         if let sublayers = self.sublayers {
             for layer in sublayers {
                 if !layer.isKindOfClass(CAGradientLayer) {
-                    block(layer as CALayer)
+                    block(layer as! CALayer)
                 }
             }
         }

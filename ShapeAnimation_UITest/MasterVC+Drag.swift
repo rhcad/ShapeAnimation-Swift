@@ -67,7 +67,7 @@ class DragGestureHandler : NSObject {
     }
     
     func handlePanGesture(sender:UIPanGestureRecognizer) {
-        let view = sender.view as ShapeView!
+        let view = sender.view as! ShapeView!
         
         switch sender.state {
         case .Began:
@@ -98,7 +98,7 @@ class DragGestureHandler : NSObject {
     }
     
     func handleTapGesture(sender:UIPanGestureRecognizer) {
-        let view = sender.view as ShapeView!
+        let view = sender.view as! ShapeView!
         if sender.state == .Ended {
             if let layer = view.hitTest(sender.locationInView(view)) {
                 layer.didTap?()

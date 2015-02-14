@@ -63,7 +63,7 @@ public class AnimationPair {
     public func apply() {
         if !CAAnimation.isStopping {
             if let gradientLayer = layer.gradientLayer {
-                let anim2 = animation.copy() as CAAnimation
+                let anim2 = animation.copy() as! CAAnimation
                 anim2.delegate = AnimationDelagate()
                 if let layerid = layer.identifier {
                     anim2.setValue(layerid + "_gradient", forKey:"layerID")
@@ -104,7 +104,7 @@ public extension AnimationPair {
         return self
     }
     
-    public func setFillMode(fillMode:NSString) -> AnimationPair {
+    public func setFillMode(fillMode:String) -> AnimationPair {
         animation.fillMode = fillMode
         return self
     }
@@ -113,7 +113,7 @@ public extension AnimationPair {
         animation.duration = d
         if let group = animation as? CAAnimationGroup {
             for sub in group.animations {
-                let subanim = sub as CAAnimation
+                let subanim = sub as! CAAnimation
                 subanim.duration = d
             }
         }

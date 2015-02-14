@@ -16,9 +16,9 @@ public extension CAShapeLayer {
             if let layer = self.gradientLayer {
                 if path.isClosed {
                     var style = Gradient()
-                    style.colors = layer.colors as [CGColor]!
+                    style.colors = layer.colors as! [CGColor]!
                     if let locations = layer.locations {
-                        style.locations = locations.map {CGFloat($0 as NSNumber)}
+                        style.locations = locations.map {CGFloat($0 as! NSNumber)}
                     }
                     style.orientation = (layer.startPoint, layer.endPoint)
                     style.axial = layer.type == kCAGradientLayerAxial

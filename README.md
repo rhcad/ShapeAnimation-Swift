@@ -7,11 +7,13 @@ With ShapeAnimation you can easily create various animations with a nice Swift b
 [![Travis][travis_img]][travis]
 
 [travis]: https://travis-ci.org/rhcad/ShapeAnimation-Swift
-[travis_img]: https://travis-ci.org/rhcad/ShapeAnimation-Swift.svg?branch=develop
+[travis_img]: https://travis-ci.org/rhcad/ShapeAnimation-Swift.svg?branch=master
 
 SVG animation development with [SVGKit](https://github.com/SVGKit/SVGKit) happens on the [SVG][svg_branch] branch.
 
 [svg_branch]: https://github.com/rhcad/ShapeAnimation-Swift/tree/SVG
+
+Also note this project is moving to Swift 1.2, which requires Xcode 6.3.
 
 ## What's included
 
@@ -64,7 +66,7 @@ layer1.strokeEndAnimation().apply() {
 }
 
 let la2 = self.addLinesLayer(view, points:points2, color: UIColor.blueColor())
-lla2.scaleAnimation(#from:1, to:1.1, repeatCount:3).apply(duration:0.3)
+lla2.scaleAnimation(from:1, to:1.1, repeatCount:3).apply(duration:0.3)
 
 let la3 = self.addLinesLayer(view, points:points3, color: UIColor.greenColor())
 la3.flashAnimation(repeatCount:6).apply()

@@ -146,7 +146,7 @@ public extension CALayer {
         return AnimationPair(self, animation, key:animation.keyPath)
     }
     
-    internal func setDefaultProperties(animation:CAAnimation, _ defaultFromValue:AnyObject, didStop:(() -> Void)?) {
+    internal func setDefaultProperties(animation:CAAnimation, _ defaultFromValue:AnyObject, _ didStop:(() -> Void)?) {
         animation.duration = 0.8
         animation.removedOnCompletion = false
         animation.fillMode = kCAFillModeForwards
