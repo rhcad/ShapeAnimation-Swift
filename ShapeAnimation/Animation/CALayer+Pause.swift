@@ -40,29 +40,21 @@ public extension ShapeView {
     public var paused:Bool {
         get {
             var ret = false
-            if let sublayers = self.layer.sublayers {
-                for layer in sublayers {
-                    let layer = layer as CALayer
-                    ret = ret || layer.paused
-                }
+            enumerateLayers { layer in
+                ret = ret || layer.paused
             }
             return ret
         }
         set {
-            if let sublayers = self.layer.sublayers {
-                for layer in sublayers {
-                    let layer = layer as CALayer
-                    layer.paused = newValue
-                }
+            enumerateLayers { layer in
+                layer.paused = newValue
             }
         }
     }
     
-    public func removeAllAnimations() {
-        if let sublayers = self.layer.sublayers {
-            for layer in sublayers {
-                layer.removeAllAnimations()
-            }
+    public func stop() {
+        enumerateLayers { layer in
+            layer.removeAllAnimations()
         }
     }
     

@@ -1,5 +1,5 @@
 //
-//  Gradient.swift
+//  CAShapeLayer+Gradient.swift
 //  ShapeAnimation
 //
 //  Created by Zhang Yungui on 15/1/29.
@@ -8,16 +8,26 @@
 
 import SwiftGraphics
 
-private var GradientInfoKey = 11
 private var GradientLayerKey = 12
 
 public extension CAShapeLayer {
     public var gradient: Gradient? {
         get {
-            return getAssociatedWrappedObject(self, &GradientInfoKey) as Gradient?
+            if let layer = self.gradientLayer {
+                if path.isClosed {
+                    var style = Gradient()
+                    style.colors = layer.colors as [CGColor]!
+                    if let locations = layer.locations {
+                        style.locations = locations.map {CGFloat($0 as NSNumber)}
+                    }
+                    style.orientation = (layer.startPoint, layer.endPoint)
+                    style.axial = layer.type == kCAGradientLayerAxial
+                    return style
+                }
+            }
+            return nil
         }
         set {
-            setAssociatedWrappedObject(self, &GradientInfoKey, newValue)
             apply(newValue)
         }
     }
@@ -44,6 +54,7 @@ public extension CAShapeLayer {
             gradientLayer.frame = frame
             gradientLayer.mask = maskLayer
             gradientLayer.contentsScale = UIScreen.mainScreen().scale
+            gradientLayer.setAffineTransform(affineTransform())
             
             self.superlayer.addSublayer(gradientLayer)
             self.fillColor = nil
@@ -62,6 +73,12 @@ public extension CALayer {
             return getAssociatedWrappedObject(self, &GradientLayerKey, defv)
         }
         set {
+            if let oldlayer = self.gradientLayer {
+                oldlayer.removeAllAnimations()
+                oldlayer.removeFromSuperlayer()
+            } else if newValue == nil {
+                return
+            }
             weak var layer = newValue
             setAssociatedWrappedObject(self, &GradientLayerKey, layer)
         }

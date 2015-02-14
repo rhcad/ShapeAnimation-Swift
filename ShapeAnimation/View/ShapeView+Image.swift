@@ -10,7 +10,32 @@ import SwiftGraphics
 
 public extension ShapeView {
     
-    public func addTextLayer(text:String, frame:CGRect, fontSize:CGFloat) -> CATextLayer {
+    public func addRectangleLayer(frame:CGRect) -> CAShapeLayer! {
+        return addShapeLayer(CGPathCreateWithRect(frame, nil))
+    }
+    
+    public func addCircleLayer(center c:CGPoint, radius:CGFloat) -> CAShapeLayer! {
+        return addShapeLayer(CGPathCreateWithEllipseInRect(CGRect(center:c, radius:radius), nil))
+    }
+    
+    public func addRegularPolygonLayer(nside:Int, center:CGPoint, radius:CGFloat) -> CAShapeLayer! {
+        return addLinesLayer(RegularPolygon(nside:nside, center:center, radius:radius).points, closed:true)
+    }
+    
+    public func addLinesLayer(points:[CGPoint], closed:Bool = false) -> CAShapeLayer! {
+        return addShapeLayer(Path(vertices:points, closed:closed).cgPath)
+    }
+    
+    //! Add shape layer with path string as the ‘d’ attribute of SVG path.
+    //! It can contain instructions ‘MmLlCcQqSsTtZz’ as described in http://www.w3.org/TR/SVGTiny12/paths.html
+    public func addSVGPathLayer(d:String, position:CGPoint? = nil) -> CAShapeLayer! {
+        return addShapeLayer(CGPathFromSVGPath(d), position:position)
+    }
+}
+
+public extension ShapeView {
+    
+    public func addTextLayer(text:String, frame:CGRect, fontSize:CGFloat) -> CATextLayer! {
         let layer = CATextLayer()
         
         layer.string = text
@@ -25,7 +50,13 @@ public extension ShapeView {
         return layer
     }
     
-    public func addImageLayer(image:UIImage!, center:CGPoint) -> CALayer {
+    public func addTextLayer(text:String, center:CGPoint, fontSize:CGFloat) -> CATextLayer! {
+        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(fontSize)]
+        let size = text.sizeWithAttributes(attr)
+        return addTextLayer(text, frame:CGRect(center:center, size:size), fontSize:fontSize)
+    }
+    
+    public func addImageLayer(image:UIImage!, center:CGPoint) -> CALayer! {
         let layer = CALayer()
         layer.contents = image.CGImage
         self.addSublayer(layer, frame:CGRect(center:center, size:image.size))

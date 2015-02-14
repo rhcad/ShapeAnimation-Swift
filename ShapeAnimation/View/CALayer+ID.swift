@@ -17,25 +17,31 @@ public extension CALayer {
             return getAssociatedObject(self, &LayerIDKey) as? String
         }
         set {
-            setAssociatedObject(self, &LayerIDKey, newValue!)
+            if newValue != identifier {
+                setAssociatedObject(self, &LayerIDKey, newValue!)
+            }
         }
     }
     
     public func layerWithIdentifier(identifier:String) -> CALayer? {
-        if let sublayers = self.sublayers {
-            for layer in sublayers {
-                let layer = layer as CALayer
-                if let lid = layer.identifier {
-                    if lid == identifier {
-                        return layer
-                    }
+        var ret:CALayer?
+        enumerateLayers { layer in
+            if let lid = layer.identifier {
+                if lid == identifier {
+                    ret = layer
                 }
             }
         }
-        return nil
+        return ret
     }
     
     public func layerWithIdentifier(identifier:String, layer:CALayer) -> CALayer? {
         return layer.layerWithIdentifier(identifier)
+    }
+}
+
+public extension ShapeView {
+    public func layerWithIdentifier(identifier:String) -> CALayer? {
+        return self.layer.layerWithIdentifier(identifier)
     }
 }

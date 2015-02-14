@@ -19,31 +19,43 @@ public class ShapeView : UIView {
         }()
     public var gradient = Gradient()
     
-    public func addSublayer(layer:CALayer, frame:CGRect) {
+    public func addSublayer(layer:CALayer, frame:CGRect, superlayer:CALayer? = nil) {
         layer.frame = frame
         layer.contentsScale = UIScreen.mainScreen().scale
-        self.layer.addSublayer(layer)
+        if let superlayer = superlayer {
+            superlayer.addSublayer(layer)
+        } else {
+            self.layer.addSublayer(layer)
+        }
     }
     
-    public func addShapeLayer(path:CGPath) -> CAShapeLayer {
-        let frame = path.boundingBox
-        var xf    = CGAffineTransform(translation:-frame.origin)
+    public func addShapeLayer(path:CGPath, superlayer:CALayer? = nil) -> CAShapeLayer! {
+        return addShapeLayer(path, position:nil, superlayer:superlayer)
+    }
+    
+    public func addShapeLayer(path:CGPath, center:CGPoint, superlayer:CALayer? = nil) -> CAShapeLayer! {
+        return addShapeLayer(path, position:center - CGPoint(size:path.boundingBox.size / 2), superlayer:superlayer)
+    }
+    
+    public func addShapeLayer(path:CGPath, position:CGPoint?, superlayer:CALayer? = nil) -> CAShapeLayer! {
+        let box   = path.boundingBox
+        let size  = CGSize(w: max(box.width, 0.01), h: max(box.height, 0.01))
+        let frame = CGRect(origin:position != nil ? position! : box.origin, size:size)
+        var xf    = CGAffineTransform(translation:-box.origin)
         let layer = CAShapeLayer()
         
-        layer.path = frame.isEmpty ? path : CGPathCreateCopyByTransformingPath(path, &xf)
-        self.addSublayer(layer, frame:frame)
+        layer.path = box.isNull || position != nil ? path : CGPathCreateCopyByTransformingPath(path, &xf)
+        self.addSublayer(layer, frame:frame, superlayer:superlayer)
         layer.apply(style)
         layer.apply(gradient)
         
         return layer
     }
     
+    // MARK: override from UIView
+    
     override public func removeFromSuperview() {
-        if let sublayers = self.layer.sublayers {
-            for layer in sublayers {
-                layer.removeLayer()
-            }
-        }
+        enumerateLayers { $0.removeLayer() }
         super.removeFromSuperview()
     }
     
@@ -57,60 +69,24 @@ public class ShapeView : UIView {
     override public func layoutSubviews() {
         super.layoutSubviews()
         
-        let bounds = self.bounds
-        
-        if lastBounds != bounds && self.layer.sublayers != nil {
-            for layer in self.layer.sublayers {
-                if let layer = layer as? CALayer {
-                    if layer.frame == lastBounds {
-                        layer.frame = bounds
-                    }
+        if lastBounds != bounds {
+            enumerateLayers { layer in
+                if layer.frame == self.lastBounds {
+                    layer.frame = self.bounds
                 }
             }
-            lastBounds = bounds
+            lastBounds = self.bounds
         }
     }
 }
+
+// MARK: CALayer.removeLayer
 
 public extension CALayer {
     
     public func removeLayer() {
-        gradientLayer?.removeAllAnimations()
         gradientLayer = nil
         self.removeAllAnimations()
         self.removeFromSuperlayer()
     }
-}
-
-public extension ShapeView {
-    
-    public func addCircleLayer(center c:CGPoint, radius:CGFloat) -> CAShapeLayer {
-        return addShapeLayer(CGPathCreateWithEllipseInRect(CGRect(center:c, radius:radius), nil))
-    }
-    
-    public func addRegularPolygonLayer(nside:Int, center:CGPoint, radius:CGFloat) -> CAShapeLayer {
-        return addLinesLayer(RegularPolygon(nside:nside, center:center, radius:radius).points, closed:true)
-    }
-    
-    public func addLinesLayer(points:[CGPoint], closed:Bool = false) -> CAShapeLayer {
-        return addShapeLayer(Path(vertices:points, closed:closed).cgPath)
-    }
-    
-}
-
-public extension CAShapeLayer {
-    
-    //! The path used to create this layer initially and mapped to the parent layer's coordinate systems.
-    public var transformedPath:CGPath {
-        get {
-            var xf = CGAffineTransform(translation:frame.origin)
-            return CGPathCreateCopyByTransformingPath(path, &xf)
-        }
-        set(v) {
-            frame = v.boundingBox
-            var xf = CGAffineTransform(translation:-frame.origin)
-            path = CGPathCreateCopyByTransformingPath(v, &xf)
-        }
-    }
-    
 }

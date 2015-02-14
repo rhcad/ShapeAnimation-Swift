@@ -21,19 +21,26 @@ SVG animation development with [SVGKit](https://github.com/SVGKit/SVGKit) happen
 * ShapeView class which contains vector shape layers.
   * Helper functions to add image, text, circle, regular polygon, lines and other shapes.
   * Support gradient fill with animation.
+  * Enumerate, hit-test or find layers.
 
-* Animation extension functions of CALayer and CAShapeLayer.
-  * opacityAnimation, flashAnimation
-  * scaleAnimation
+* Animation extension functions of CALayer.
+  * opacityAnimation, flashAnimation, backColorAnimation
+  * scaleAnimation, tapAnimation, transformAnimation
   * rotate360Degrees, rotationAnimation
-  * shakeAnimation
-  * moveAnimation, moveOnPathAnimation
-  * slideToRight
-  * strokeEndAnimation
-  * strokeColorAnimation, lineWidthAnimation, dashPhaseAnimation
+  * shakeAnimation, moveAnimation, moveOnPathAnimation
+  * slideToRight, slideAnimation, flipHorizontally, flipVertically
+  * Layer dragging: constrainCenterToSuperview, bringOnScreen
+
+* Animation extension functions of CAShapeLayer.
+  * strokeStartAnimation, strokeEndAnimation, lineWidthAnimation
+  * strokeColorAnimation, fillColorAnimation, dashPhaseAnimation
   * switchPathAnimation
+
+* Group animation and cascaded animation.
   * animationGroup for the same layer
   * applyAnimations for multiple layers
+  * Use the block-based function in apply() to play cascaded animations.
+  * Pause, resume or stop animations.
 
 * Animations with customized properties
   * Use AnimationLayer class to draw customized animations.
@@ -66,9 +73,9 @@ let la3 = self.addLinesLayer(view, points:points3, color: UIColor.greenColor())
 la3.flashAnimation(repeatCount:6).apply()
 
 let la4 = self.addLinesLayer(view, points:[(10.0,20.0), (150.0,40.0), (120.0,120.0)])
-let a1 = la4.moveOnPathAnimation(path).set {$0.duration=1.6}
-let a2 = la4.rotate360Degrees().set {$0.repeatCount=2}
-animationGroup([a1, a2]).set {$0.autoreverses=true}.apply()
+let a1 = la4.moveOnPathAnimation(path).setDuration(1.6)
+let a2 = la4.rotate360Degrees().setRepeatCount(2)
+animationGroup([a1, a2]).autoreverses().apply()
 ```
 
 ## Help Wanted

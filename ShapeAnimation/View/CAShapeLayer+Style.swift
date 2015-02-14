@@ -10,28 +10,46 @@ import SwiftGraphics
 
 public typealias PaintStyle = SwiftGraphics.Style
 
-private var LayerStyleKey = 10
-
 public extension CAShapeLayer {
-    var paintStyle: PaintStyle {
+    public var paintStyle: PaintStyle! {
         get {
-            let style = getAssociatedWrappedObject(self, &LayerStyleKey) as PaintStyle?
-            if let style = style {
-                return style
+            var style = PaintStyle()
+            style.fillColor = self.fillColor
+            style.strokeColor = self.strokeColor
+            style.lineWidth = self.lineWidth
+            style.miterLimit = self.miterLimit
+            if let lineDashPattern = self.lineDashPattern {
+                style.lineDash = lineDashPattern.map{ CGFloat($0 as NSNumber) }
             }
-            else {
-                var style = Style.defaultStyle
-                setAssociatedWrappedObject(self, &LayerStyleKey, style)
-                return style
+            style.lineDashPhase = self.lineDashPhase
+            style.alpha = CGFloat(self.opacity)
+            style.miterLimit = self.miterLimit
+            // TODO flatness, blendMode
+            
+            switch self.lineCap {
+                case kCALineCapRound:
+                    style.lineCap = kCGLineCapRound
+                case kCALineCapSquare:
+                    style.lineCap = kCGLineCapSquare
+                default:
+                    style.lineCap = kCGLineCapButt
             }
+            switch self.lineJoin {
+                case kCALineJoinMiter:
+                    style.lineJoin = kCGLineJoinMiter
+                case kCALineJoinBevel:
+                    style.lineJoin = kCGLineJoinBevel
+                default:
+                    style.lineJoin = kCGLineJoinRound
+            }
+            return style
         }
         set {
-            setAssociatedWrappedObject(self, &LayerStyleKey, newValue)
             apply(newValue)
         }
     }
     
-    func apply(newStyle:PaintStyle) {
+    public func apply(newStyle:PaintStyle) {
         self.fillColor = newStyle.fillColor
         if let strokeColor = newStyle.strokeColor {
             self.strokeColor = strokeColor

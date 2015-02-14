@@ -20,7 +20,7 @@ public class AnimationLayer : CALayer {
             }
         }
     }
-    public var draw:((AnimationLayer, CGContext) -> Void)! = nil
+    public var draw:((AnimationLayer, CGContext) -> Void)?
     public var animationCreated:((String, CABasicAnimation) -> Void)?
     public var didStart:(() -> Void)?
     public var didStop :(() -> Void)?
@@ -41,6 +41,8 @@ public class AnimationLayer : CALayer {
     public func setProperty(value: AnyObject?, key: String) {
         setValue(value, forKey:key)
     }
+    
+    // MARK: Implementation
     
     private func minValue(key:String) -> CGFloat {
         for (k, min) in properties {
@@ -99,7 +101,6 @@ public class AnimationLayer : CALayer {
             animation.fromValue = getProperty(event)
             animation.delegate = self
             animation.duration = 1.0
-            animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
             animationCreated?(event, animation)
             self.addAnimation(animation, forKey:event)
             return animation
@@ -108,14 +109,14 @@ public class AnimationLayer : CALayer {
     }
     
     // Timer Callback
-    func animationLoop(timer:CADisplayLink) {
+    internal func animationLoop(timer:CADisplayLink) {
         self.setNeedsDisplay()
     }
     
     // Layer Drawing
     override public func drawInContext(ctx: CGContext!) {
         super.drawInContext(ctx)
-        draw!(self, ctx)
+        draw?(self, ctx)
     }
     
 }

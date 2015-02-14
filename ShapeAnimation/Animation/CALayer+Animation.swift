@@ -11,81 +11,91 @@ import SwiftGraphics
 public extension CALayer {
     typealias Radians = CGFloat
     
-    func opacityAnimation(#from:Float, to:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
+    // MARK: opacityAnimation and flashAnimation
+    
+    func opacityAnimation(#from:CGFloat?, to:CGFloat, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"opacity")
-        animation.duration = 0.8
         animation.fromValue = from
         animation.toValue = to
-        animation.removedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
-        animation.didStop = didStop
+        setDefaultProperties(animation, 0, didStop)
         animation.willStop = {
-            withDisableActions(self, animation) {
-                self.opacity = to
+            withDisableActions(self, animation, animation.keyPath) { layer in
+                layer.opacity = Float(to)
             }
-            self.removeAnimationForKey("opacity")
         }
-        return AnimationPair(self, animation, key:"opacity")
+        return AnimationPair(self, animation, key:animation.keyPath)
     }
     
     func flashAnimation(repeatCount n:Float = 2, didStop:(() -> Void)? = nil) -> AnimationPair {
-        let anim = opacityAnimation(from:0, to:1, didStop:didStop)
-        return anim.set {
-            $0.repeatCount = n
-            $0.autoreverses = true
-            $0.removedOnCompletion = true
-            $0.duration = 0.2
-        }
+        let apair = opacityAnimation(from:0, to:1, didStop:didStop)
+        return apair.autoreverses().setRepeatCount(n).setDuration(0.2)
     }
     
-    func scaleAnimation(#from:Float, to:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
-        let animation = CABasicAnimation(keyPath:"transform.scale")
-        animation.duration = 0.8
+    func backColorAnimation(from:CGColor? = nil, to:CGColor, didStop:(() -> Void)? = nil) -> AnimationPair {
+        let animation = CABasicAnimation(keyPath:"backgroundColor")
         animation.fromValue = from
         animation.toValue = to
-        animation.removedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
-        animation.didStop = didStop
+        setDefaultProperties(animation, backgroundColor, didStop)
+        animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.willStop = {
-            withDisableActions(self, animation) {
-                let xf = CGAffineTransform(scale:CGFloat(to))
-                self.setAffineTransform(self.affineTransform() + xf)
+            withDisableActions(self, animation, animation.keyPath) { layer in
+                layer.backgroundColor = to
             }
-            self.removeAnimationForKey("scale")
         }
-        return AnimationPair(self, animation, key:"scale")
+        return AnimationPair(self, animation, key:animation.keyPath)
     }
     
-    func scaleAnimation(#from:Float, to:Float, repeatCount:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
-        return scaleAnimation(from:from, to:to, didStop:didStop).set {
-            $0.repeatCount=repeatCount
-            $0.autoreverses = repeatCount > 1
-            $0.fillMode = kCAFillModeRemoved
+    // MARK: scaleAnimation and tapAnimation
+    
+    func scaleAnimation(#from:CGFloat?, to:CGFloat, didStop:(() -> Void)? = nil) -> AnimationPair {
+        let animation = CABasicAnimation(keyPath:"transform.scale")
+        let oldxf = affineTransform(), oldscale = hypot(oldxf.a, oldxf.b)
+        
+        if let from = from {
+            animation.fromValue = from * oldscale
         }
+        animation.toValue = to * oldscale
+        setDefaultProperties(animation, 1, didStop)
+        animation.willStop = {
+            withDisableActions(self, animation, animation.keyPath) { layer in
+                let xf = CGAffineTransform(scale:to)
+                layer.setAffineTransform(layer.affineTransform() + xf)
+            }
+        }
+        return AnimationPair(self, animation, key:animation.keyPath)
     }
+    
+    func scaleAnimation(#from:CGFloat?, to:CGFloat, repeatCount n:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
+        return scaleAnimation(from:from, to:to, didStop:didStop)
+            .setRepeatCount(n).setFillMode(kCAFillModeRemoved).set { $0.autoreverses = n > 1 }
+    }
+    
+    func tapAnimation(didStop:(() -> Void)? = nil) -> AnimationPair {
+        return scaleAnimation(from:1, to:1.25, didStop:didStop).autoreverses().set {$0.duration=0.3}
+    }
+    
+    // MARK: rotate360Degrees and rotationAnimation
     
     func rotate360Degrees(didStop:(() -> Void)? = nil) -> AnimationPair {
-        return rotationAnimation(angle:CGFloat(2 * M_PI), didStop:didStop)
+        return rotationAnimation(CGFloat(2 * M_PI), didStop:didStop)
     }
     
-    func rotationAnimation(#angle:Radians, didStop:(() -> Void)? = nil) -> AnimationPair {
+    func rotationAnimation(angle:Radians, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"transform.rotation")
-        animation.duration = 0.8
         animation.additive = true
         animation.fromValue = 0.0
         animation.toValue = angle
-        animation.removedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
-        animation.didStop = didStop
+        setDefaultProperties(animation, 0, didStop)
         animation.willStop = {
-            withDisableActions(self, animation) {
+            withDisableActions(self, animation, animation.keyPath) { layer in
                 let xf = CGAffineTransform(rotation:angle)
-                self.setAffineTransform(self.affineTransform() + xf)
+                layer.setAffineTransform(layer.affineTransform() + xf)
             }
-            self.removeAnimationForKey("rotation")
         }
-        return AnimationPair(self, animation, key:"rotation")
+        return AnimationPair(self, animation, key:animation.keyPath)
     }
+    
+    // MARK: shakeAnimation, moveAnimation and moveOnPathAnimation
     
     func shakeAnimation(didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CAKeyframeAnimation()
@@ -98,63 +108,57 @@ public extension CALayer {
         return AnimationPair(self, animation, key:"shake")
     }
     
-    func moveAnimation(#to:CGPoint, relative:Bool = true) -> AnimationPair {
-        return moveAnimation(from:relative ? CGPoint.zeroPoint : position, to:to, relative:relative)
-    }
-    
-    func moveAnimation(#from:CGPoint, to:CGPoint, relative:Bool = true, didStop:(() -> Void)? = nil) -> AnimationPair {
+    func moveAnimation(from:CGPoint? = nil, to:CGPoint, relative:Bool = true, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"position")
-        animation.duration = 0.3
         animation.additive = relative
-        animation.fromValue = NSValue(CGPoint: from)
-        animation.toValue = NSValue(CGPoint: to)
-        animation.removedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
-        animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseOut)
-        animation.didStop = didStop
-        animation.willStop = {
-            withDisableActions(self, animation) {
-                self.position = relative ? self.position + to : to
-            }
-            self.removeAnimationForKey("move")
+        if let from = from {
+            animation.fromValue = NSValue(CGPoint: from)
         }
-        return AnimationPair(self, animation, key:"move")
+        animation.toValue = NSValue(CGPoint: to)
+        setDefaultProperties(animation, NSNull(), didStop)
+        animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseOut)
+        animation.willStop = {
+            withDisableActions(self, animation, animation.keyPath) { layer in
+                layer.position = relative ? layer.position + to : to
+            }
+        }
+        return AnimationPair(self, animation, key:animation.keyPath)
     }
     
     func moveOnPathAnimation(path:CGPath, autoRotate:Bool = false, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CAKeyframeAnimation()
         animation.keyPath = "position"
         animation.path = path
-        animation.duration = 0.8
-        animation.removedOnCompletion = false
-        animation.fillMode = kCAFillModeForwards
+        setDefaultProperties(animation, NSNull(), didStop)
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         if autoRotate {
             animation.rotationMode = kCAAnimationRotateAuto
         }
-        animation.didStop = didStop
         animation.willStop = {
-            self.removeAnimationForKey("moveOnPath")
-            withDisableActions(self, animation) {
-                self.position = path.endPoint
+            withDisableActions(self, animation, animation.keyPath) { layer in
+                layer.position = path.endPoint
                 if autoRotate {
                     let xf = CGAffineTransform(rotation:path.endTangent.direction)
-                    self.setAffineTransform(self.affineTransform() + xf)
+                    layer.setAffineTransform(layer.affineTransform() + xf)
                 }
             }
         }
-        return AnimationPair(self, animation, key:"moveOnPath")
+        return AnimationPair(self, animation, key:animation.keyPath)
     }
     
-    func slideToRight(didStop:(() -> Void)? = nil) -> AnimationPair {
-        let slide = CATransition()
-        
-        slide.type = kCATransitionPush
-        slide.subtype = kCATransitionFromLeft
-        slide.duration = 0.8
-        slide.didStop = didStop
-        slide.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        return AnimationPair(self, slide, key:"slide")
+    internal func setDefaultProperties(animation:CAAnimation, _ defaultFromValue:AnyObject, didStop:(() -> Void)?) {
+        animation.duration = 0.8
+        animation.removedOnCompletion = false
+        animation.fillMode = kCAFillModeForwards
+        animation.didStop = didStop
+        if let basic = animation as? CABasicAnimation {
+            if basic.fromValue == nil {
+                if let presentation = self.presentationLayer() as? CALayer {
+                    basic.fromValue = presentation.valueForKeyPath(basic.keyPath)
+                } else {
+                    basic.fromValue = defaultFromValue
+                }
+            }
+        }
     }
-    
 }

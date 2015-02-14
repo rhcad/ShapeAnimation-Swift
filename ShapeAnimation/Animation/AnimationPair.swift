@@ -22,13 +22,12 @@ public func animationGroup(animations:[AnimationPair], didStop:(() -> Void)? = n
     for anim in animation.animations {
         animation.duration = max(animation.duration, anim.duration)
     }
-    animation.removedOnCompletion = false
     return AnimationPair(layer, animation, key:"group")
 }
 
 public func applyAnimations(animations:[AnimationPair], completion:(() -> Void)?) {
     CATransaction.begin()
-    CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut.substringFromIndex(0)))
+    CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut))
     if completion != nil {
         CATransaction.setCompletionBlock {
             var finished = true
@@ -61,6 +60,35 @@ public class AnimationPair {
         self.key = key
     }
     
+    public func apply() {
+        if !CAAnimation.isStopping {
+            if let gradientLayer = layer.gradientLayer {
+                let anim2 = animation.copy() as CAAnimation
+                anim2.delegate = AnimationDelagate()
+                if let layerid = layer.identifier {
+                    anim2.setValue(layerid + "_gradient", forKey:"layerID")
+                }
+                if key == "path" {
+                    gradientLayer.mask.addAnimation(anim2, forKey:key)
+                } else {
+                    gradientLayer.addAnimation(anim2, forKey:key)
+                }
+            }
+            animation.setValue(layer.identifier, forKey:"layerID")
+            layer.addAnimation(animation, forKey:key)
+        }
+    }
+    
+    public func apply(didStop:(() -> Void)) {
+        animation.didStop = didStop
+        apply()
+    }
+}
+
+// MARK: Convenience setters of AnimationPair
+
+public extension AnimationPair {
+    
     public func set(did:(CAAnimation) -> Void) -> AnimationPair {
         did(self.animation)
         return self
@@ -68,6 +96,16 @@ public class AnimationPair {
     
     public func setStop(didStop:() -> Void) -> AnimationPair {
         animation.didStop = didStop
+        return self
+    }
+    
+    public func set(timingFunction:CAMediaTimingFunction) -> AnimationPair {
+        animation.timingFunction = timingFunction
+        return self
+    }
+    
+    public func setFillMode(fillMode:NSString) -> AnimationPair {
+        animation.fillMode = fillMode
         return self
     }
     
@@ -82,8 +120,9 @@ public class AnimationPair {
         return self
     }
     
-    public func setBeginTime(gap:CFTimeInterval) -> AnimationPair {
-        return setBeginTime(1, gap:gap)
+    public func setBeginTime(time:CFTimeInterval) -> AnimationPair {
+        animation.beginTime = CACurrentMediaTime() + time
+        return self
     }
     
     public func setBeginTime(index:Int, gap:CFTimeInterval) -> AnimationPair {
@@ -92,29 +131,23 @@ public class AnimationPair {
     }
     
     public func setBeginTime(index:Int, gap:CFTimeInterval, duration:CFTimeInterval) -> AnimationPair {
-        animation.beginTime = CACurrentMediaTime() + Double(index) * gap
         setDuration(duration)
+        return setBeginTime(index, gap:gap)
+    }
+    
+    public func setRepeatCount(count:Float) -> AnimationPair {
+        animation.repeatCount = count
         return self
     }
     
-    public func apply() {
-        if !CAAnimation.isStopping {
-            if let gradientLayer = layer.gradientLayer {
-                let anim2 = animation.copy() as CAAnimation
-                anim2.delegate = AnimationDelagate()
-                if let layerid = layer.identifier {
-                    anim2.setValue(layerid + "_gradient", forKey:"layerID")
-                }
-                gradientLayer.addAnimation(anim2, forKey:key)
-            }
-            animation.setValue(layer.identifier, forKey:"layerID")
-            layer.addAnimation(animation, forKey:key)
-        }
+    public func forever() -> AnimationPair {
+        animation.repeatCount = HUGE
+        return self
     }
     
-    public func apply(didStop:(() -> Void)?) {
-        animation.didStop = didStop
-        apply()
+    public func autoreverses() -> AnimationPair {
+        animation.autoreverses = true
+        return self
     }
     
     public func apply(duration d:CFTimeInterval) {
@@ -122,7 +155,7 @@ public class AnimationPair {
         apply()
     }
     
-    public func apply(duration d:CFTimeInterval, didStop:(() -> Void)?) {
+    public func apply(duration d:CFTimeInterval, didStop:(() -> Void)) {
         setDuration(d)
         animation.didStop = didStop
         apply()
@@ -148,5 +181,31 @@ public extension AnimationPair {
     public func setAnchorPoint(point:CGPoint, fromLayer:CALayer? = nil) -> AnimationPair {
         layer.setAnchorPoint(point, fromLayer:fromLayer)
         return self
+    }
+}
+
+// MARK: withDisableActions
+
+public func withDisableActions(block:() -> Void) {
+    let old = CATransaction.disableActions()
+    CATransaction.setDisableActions(true)
+    block()
+    CATransaction.setDisableActions(old)
+}
+
+public func withDisableActions(layer:CALayer, animation:CAAnimation, key:String, block:(CALayer) -> Void) {
+    let forwards = animation.fillMode == kCAFillModeForwards || animation.fillMode == kCAFillModeBoth
+    if !animation.autoreverses && forwards {
+        let old = CATransaction.disableActions()
+        CATransaction.setDisableActions(true)
+        block(layer)
+        if let gradientLayer = layer.gradientLayer {
+            block(gradientLayer)
+        }
+        CATransaction.setDisableActions(old)
+    }
+    layer.removeAnimationForKey(key)
+    if let gradientLayer = layer.gradientLayer {
+        gradientLayer.removeAnimationForKey(key)
     }
 }

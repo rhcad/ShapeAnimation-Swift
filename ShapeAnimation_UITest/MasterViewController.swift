@@ -31,22 +31,22 @@ class MasterViewController: UITableViewController {
             viewController.animationBlock = testDragLayer(viewController)
         default: ()
         }
-        viewController.title = NSLocalizedString(segue.identifier! as NSString, comment:"")
+        viewController.title = NSLocalizedString(segue.identifier! as NSString as String, comment:"")
     }
     
     // Demo about strokeEndAnimation, lineWidthAnimation, scaleAnimation, shakeAnimation and flashAnimation.
     private func testAddLines(viewController:DetailViewController) -> AnimationBlock {
-        return { (view) -> Void in
+        return { (view:ShapeView) -> Void in
             view.style.lineWidth = 7
             
-            let points1 = [(10.0,20.0),(150.0,40.0),(120.0,320.0)].map{ CGPoint($0) }
+            let points1 = [CGPoint((10,20)),CGPoint((150,40)),CGPoint((120,320))]
             let la1 = view.addLinesLayer(points1, closed:true, color:CGColor.redColor())
             la1.identifier = "triangle1"
             animationGroup([la1.strokeEndAnimation(), la1.lineWidthAnimation(from:0, to:5)]).apply() {
                 la1.shakeAnimation().apply()
             }
             
-            let xf2 = CGAffineTransform(tx:100.0, ty:0.0)
+            let xf2 = CGAffineTransform(tx:100, ty:0)
             let la2 = view.addLinesLayer(points1.map { $0 * xf2 }, closed:true, color:CGColor.purpleColor())
             let la3 = view.addLinesLayer(points1.map { $0 * xf2 * xf2 }, closed:true, color:CGColor.greenColor())
             
@@ -61,32 +61,27 @@ class MasterViewController: UITableViewController {
     // Demo about moveOnPathAnimation, moveAnimation, rotationAnimation, dashPhaseAnimation and animationGroup.
     // Rotate and move a picture and polygon with gradient fill along the path.
     private func testMoveLines(viewController:DetailViewController) -> AnimationBlock {
-        return { (view) -> Void in
-            // Create a smooth path
-            var path = CGPathCreateMutable()
-            path.move(CGPoint(x:120, y:70))
-            path.addCubicCurveToPoint(CGPoint(x:250, y:220),
-                control1:CGPoint(x:0, y:200), control2:CGPoint(x:150, y:375))
-            path.addSmoothQuadCurveToPoint(CGPoint(x:500, y:220))
+        return { (view:ShapeView) in
+            let path = CGPathFromSVGPath("M120,70 C0,200 150,375 250,220 T500,220")
             
             // Add a triangle with gradient fill
             view.gradient.setColors([(0.5, 0.5, 0.9, 1.0), (0.9, 0.9, 0.3, 1.0)])
-            let points = [(10.0, 20.0), (150.0, 40.0), (120.0, 120.0)].map{ CGPoint($0) }
+            let points = [CGPoint((10, 20)), CGPoint((150, 40)), CGPoint((120, 120))]
             let layer1 = view.addLinesLayer(points, closed:true)
             
             // Move and rotate the triangle along the path
-            let a1 = layer1.moveOnPathAnimation(path).set {$0.duration=1.6}
-            let a2 = layer1.rotate360Degrees().set {$0.repeatCount=2}
-            animationGroup([a1, a2]).set {$0.autoreverses=true;$0.repeatCount=HUGE}.apply()
+            let a1 = layer1.moveOnPathAnimation(path).setDuration(1.6)
+            let a2 = layer1.rotate360Degrees().setRepeatCount(2)
+            animationGroup([a1, a2]).autoreverses().forever().apply()
             
             // Show the path with vary dash phase and color
             let pathLayer = view.addLinesLayer([CGPoint.zeroPoint])
-            pathLayer.transformedPath = path
+            pathLayer.pathToSuperlayer = path
             pathLayer.lineDashPattern = [5, 5]
             let a4 = pathLayer.strokeColorAnimation(from:CGColor.lightGrayColor(), to:CGColor.greenColor())
-                .set{$0.autoreverses=true;$0.repeatCount=HUGE}
+                .autoreverses().forever()
             let a5 = pathLayer.dashPhaseAnimation(from:0, to:20)
-            animationGroup([a4, a5]).set{$0.repeatCount=HUGE}.apply()
+            animationGroup([a4, a5]).forever().apply()
             
             // Rotate and move a picture along the path
             if let imageLayer = view.addImageLayer(named:"airship.png", center:CGPoint(x:200, y:200)) {
@@ -99,7 +94,7 @@ class MasterViewController: UITableViewController {
     // Demo about polygon with text and gradient fill moving and rotating one by one.
     // Modified from http://zulko.github.io/blog/2014/09/20/vector-animations-with-python/
     private func testRotatePolygons(viewController:DetailViewController) -> AnimationBlock {
-        return { (view) -> Void in
+        return { view in
             view.gradient.setColors([(0, 0.5, 1, 1), (0, 1, 1, 1)])
             view.gradient.orientation = (CGPoint.zeroPoint, CGPoint(x:1, y:1))
             
@@ -112,9 +107,9 @@ class MasterViewController: UITableViewController {
                 
                 edgeLayer.identifier = "polygon\(i)"
                 textLayer.identifier = "text\(i)"
-                animations.append(edgeLayer.rotationAnimation(angle: CGFloat(2 * M_PI))
+                animations.append(edgeLayer.rotationAnimation(CGFloat(2 * M_PI))
                     .setBeginTime(i, gap:0.3, duration:1.5))
-                animations.append(textLayer.rotationAnimation(angle: CGFloat(2 * M_PI))
+                animations.append(textLayer.rotationAnimation(CGFloat(2 * M_PI))
                     .setBeginTime(i, gap:0.3, duration:1.5))
             }
             applyAnimations(animations) {
@@ -128,18 +123,17 @@ class MasterViewController: UITableViewController {
     
     // Demo about growing circles.
     private func testRadarCircles(viewController:DetailViewController) -> AnimationBlock {
-        return { (view) -> Void in
+        return { view in
             let count = 6
             let duration: Double = 2
             
             view.style.lineWidth = 1
             for i in 0..<count {
                 let la1 = view.addCircleLayer(center:CGPoint(x:100, y:100), radius:15)
-                let anim = animationGroup([la1.scaleAnimation(from:0, to:5),
-                                           la1.opacityAnimation(from:1, to:0)])
+                animationGroup([la1.scaleAnimation(from:0, to:5),
+                    la1.opacityAnimation(from:1, to:0)])
                     .setBeginTime(i, gap:duration / Double(count), duration:duration)
-                    .set {$0.repeatCount=HUGE; $0.fillMode = kCAFillModeBackwards}
-                anim.apply()
+                    .forever().setFillMode(kCAFillModeBackwards).apply()
             }
         }
     }
@@ -150,8 +144,8 @@ class MasterViewController: UITableViewController {
         var gradient = Gradient(colors:[(1.0,0.0,0.0), (0.1,0.0,0.0)], axial:true)
         gradient.orientation = (CGPoint(x:0.3, y:-0.3), CGPoint(x:0, y:1.4))
         
-        return { (view) -> Void in
-            let layer = view.addAnimationLayer(frame:view.layer.bounds, properties:[("t", 0)]) {
+        return { view in
+            let layer = view.addAnimationLayer(frame:view.bounds, properties:[("t", 0)]) {
                 (layer, ctx) -> Void in
                 let W = view.layer.bounds.width
                 let H = view.layer.bounds.height
