@@ -1,7 +1,6 @@
 # ShapeAnimation-Swift
 
-Vector animation framework in Swift based on [SwiftGraphics](https://github.com/schwa/SwiftGraphics) for iOS 8.
-
+Vector animation framework in Swift based on [SwiftGraphics][SwiftGraphics] for iOS 8.
 With ShapeAnimation you can easily create various animations with a nice Swift based syntax.
 
 [![Travis][travis_img]][travis]
@@ -9,11 +8,12 @@ With ShapeAnimation you can easily create various animations with a nice Swift b
 [travis]: https://travis-ci.org/rhcad/ShapeAnimation-Swift
 [travis_img]: https://travis-ci.org/rhcad/ShapeAnimation-Swift.svg?branch=master
 
-SVG animation development with [SVGKit](https://github.com/SVGKit/SVGKit) happens on the [SVG][svg_branch] branch.
-
-[svg_branch]: https://github.com/rhcad/ShapeAnimation-Swift/tree/SVG
-
+SVG animation development with [SVGKit][SVGKit] happens on the [SVG][svg_branch] branch.
 Also note this project is moving to Swift 1.2, which requires Xcode 6.3.
+
+[SwiftGraphics]: https://github.com/schwa/SwiftGraphics
+[SVGKit]: https://github.com/SVGKit/SVGKit
+[svg_branch]: https://github.com/rhcad/ShapeAnimation-Swift/tree/SVG
 
 ## What's included
 
@@ -57,7 +57,9 @@ Also note this project is moving to Swift 1.2, which requires Xcode 6.3.
 
 ## Usage
 
-Please see the examples in [MasterViewController.swift](ShapeAnimation_UITest/MasterViewController.swift).
+Please see the examples in [MasterViewController.swift][MasterVC].
+
+[MasterVC]: ShapeAnimation_UITest/MasterViewController.swift
 
 ``` Swift
 let layer1 = self.addLinesLayer(view, points:[(10.0,20.0),(150.0,40.0),(120.0,320.0)])
