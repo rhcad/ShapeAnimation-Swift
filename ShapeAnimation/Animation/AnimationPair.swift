@@ -106,6 +106,9 @@ public extension AnimationPair {
     
     public func setFillMode(fillMode:NSString) -> AnimationPair {
         animation.fillMode = fillMode
+        if fillMode == kCAFillModeForwards {
+            animation.removedOnCompletion = false
+        }
         return self
     }
     

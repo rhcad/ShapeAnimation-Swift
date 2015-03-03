@@ -276,7 +276,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U8y-u5-mzA">
-                                <rect key="frame" x="289" y="76" width="22" height="22"/>
+                                <rect key="frame" x="290" y="79" width="22" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="MG5-j1-WCK"/>
                                     <constraint firstAttribute="width" constant="22" id="PfJ-KF-n8m"/>
@@ -289,8 +289,8 @@
                         <color key="backgroundColor" red="0.098039215686274508" green="0.43529411764705883" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="esk-3e-xCN" firstAttribute="top" secondItem="ggr-I3-oNg" secondAttribute="bottom" constant="8" id="1lZ-ZM-kgM"/>
-                            <constraint firstItem="esk-3e-xCN" firstAttribute="centerX" secondItem="U8y-u5-mzA" secondAttribute="centerX" id="9Im-nG-Wdd"/>
-                            <constraint firstItem="esk-3e-xCN" firstAttribute="centerY" secondItem="U8y-u5-mzA" secondAttribute="centerY" id="9J9-eg-GwX"/>
+                            <constraint firstItem="esk-3e-xCN" firstAttribute="centerX" secondItem="U8y-u5-mzA" secondAttribute="centerX" constant="-1" id="9Im-nG-Wdd"/>
+                            <constraint firstItem="esk-3e-xCN" firstAttribute="centerY" secondItem="U8y-u5-mzA" secondAttribute="centerY" constant="-3" id="9J9-eg-GwX"/>
                             <constraint firstAttribute="centerX" secondItem="esk-3e-xCN" secondAttribute="centerX" id="aVV-8R-Uyp"/>
                         </constraints>
                     </view>
