@@ -53,6 +53,8 @@ SVG animation development with [SVGKit](https://github.com/SVGKit/SVGKit) happen
 ![Animation with Sliders](Documentation/ellipse_slider.gif)
 ![Drag Layers](Documentation/drag.gif)
 
+![SearchMenu](Documentation/searchmenu.gif)
+
 ## Usage
 
 Please see the examples in [MasterViewController.swift](ShapeAnimation_UITest/MasterViewController.swift).
