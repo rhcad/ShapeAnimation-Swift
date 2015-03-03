@@ -7,7 +7,7 @@ With ShapeAnimation you can easily create various animations with a nice Swift b
 [![Travis][travis_img]][travis]
 
 [travis]: https://travis-ci.org/rhcad/ShapeAnimation-Swift
-[travis_img]: https://travis-ci.org/rhcad/ShapeAnimation-Swift.svg?branch=develop
+[travis_img]: https://travis-ci.org/rhcad/ShapeAnimation-Swift.svg?branch=xcode61
 
 SVG animation development with [SVGKit](https://github.com/SVGKit/SVGKit) happens on the [SVG][svg_branch] branch.
 

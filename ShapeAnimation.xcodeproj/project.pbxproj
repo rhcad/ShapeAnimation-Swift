@@ -35,6 +35,7 @@
 		02E8A7EC1A7A3B9500EB03C3 /* EllipseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E8A7EB1A7A3B9500EB03C3 /* EllipseViewController.swift */; };
 		4537991D19AA788B004DF99E /* DummyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4537991C19AA788B004DF99E /* DummyTests.swift */; };
 		45DA4AC919AA62A800133F32 /* ShapeAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 45DA4AC819AA62A800133F32 /* ShapeAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE236C6C1AA4B07F005EF10A /* SearchMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE236C6B1AA4B07F005EF10A /* SearchMenuController.swift */; };
 		AED21A2D1A88EDE2004EFD25 /* CAShapeLayer+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED21A2C1A88EDE2004EFD25 /* CAShapeLayer+Path.swift */; };
 		AEE57A151A81168F00420D54 /* ShapeView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE57A141A81168F00420D54 /* ShapeView+Image.swift */; };
 /* End PBXBuildFile section */
@@ -139,6 +140,7 @@
 		45DA4AC419AA62A800133F32 /* ShapeAnimation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ShapeAnimation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45DA4AC719AA62A800133F32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45DA4AC819AA62A800133F32 /* ShapeAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShapeAnimation.h; sourceTree = "<group>"; };
+		AE236C6B1AA4B07F005EF10A /* SearchMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMenuController.swift; sourceTree = "<group>"; };
 		AED21A2C1A88EDE2004EFD25 /* CAShapeLayer+Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Path.swift"; sourceTree = "<group>"; };
 		AEE57A141A81168F00420D54 /* ShapeView+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ShapeView+Image.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -230,6 +232,7 @@
 				02A18B191A8D8B0D00FF826A /* MasterVC+Hamburger.swift */,
 				02CD3F0C1A70907600C83B5C /* DetailViewController.swift */,
 				02E8A7EB1A7A3B9500EB03C3 /* EllipseViewController.swift */,
+				AE236C6B1AA4B07F005EF10A /* SearchMenuController.swift */,
 				02CD3F0E1A70907600C83B5C /* Main.storyboard */,
 				027DC1B71A77998D00D3CF60 /* Images */,
 				02CD3F111A70907600C83B5C /* Images.xcassets */,
@@ -510,6 +513,7 @@
 				02CD3F0D1A70907600C83B5C /* DetailViewController.swift in Sources */,
 				02147CA11A836E2A001E5617 /* MasterVC+Drag.swift in Sources */,
 				02E8A7EC1A7A3B9500EB03C3 /* EllipseViewController.swift in Sources */,
+				AE236C6C1AA4B07F005EF10A /* SearchMenuController.swift in Sources */,
 				02CD3F0B1A70907600C83B5C /* MasterViewController.swift in Sources */,
 				02CD3F091A70907600C83B5C /* AppDelegate.swift in Sources */,
 			);

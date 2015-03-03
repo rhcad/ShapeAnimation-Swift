@@ -164,7 +164,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Drag Layer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Q7j-0b-Gd8" userLabel="Drag Layer">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Drag Layer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Q7j-0b-Gd8">
                                                     <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
@@ -176,6 +176,27 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="ZGS-jo-7Sy" kind="show" identifier="Drag Layer" id="Bao-Xx-sny"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="mc0-i7-H3S" style="IBUITableViewCellStyleDefault" id="hbB-hr-Wjb">
+                                        <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hbB-hr-Wjb" id="Lvg-al-Kxi">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Search Menu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mc0-i7-H3S">
+                                                    <rect key="frame" x="15" y="0.0" width="270" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <segue destination="622-eA-Mln" kind="show" identifier="Search Menu" id="cxZ-nF-08Y"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -231,6 +252,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4KR-dI-uh3" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1307" y="64"/>
+        </scene>
+        <!--Search Menu-->
+        <scene sceneID="QIv-h8-ugO">
+            <objects>
+                <viewController title="Search Menu" id="622-eA-Mln" customClass="SearchMenuController" customModule="ShapeAnimation_UITest" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ggr-I3-oNg"/>
+                        <viewControllerLayoutGuide type="bottom" id="dJ5-lk-4wU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6vB-aV-7tG">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="esk-3e-xCN">
+                                <rect key="frame" x="160" y="72" width="280" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="5BH-tY-Btf"/>
+                                    <constraint firstAttribute="height" constant="30" id="FzY-gb-D2e"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U8y-u5-mzA">
+                                <rect key="frame" x="289" y="76" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="MG5-j1-WCK"/>
+                                    <constraint firstAttribute="width" constant="22" id="PfJ-KF-n8m"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="searchButtonTapped:" destination="622-eA-Mln" eventType="touchUpInside" id="6fH-AI-qzp"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.098039215686274508" green="0.43529411764705883" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="esk-3e-xCN" firstAttribute="top" secondItem="ggr-I3-oNg" secondAttribute="bottom" constant="8" id="1lZ-ZM-kgM"/>
+                            <constraint firstItem="esk-3e-xCN" firstAttribute="centerX" secondItem="U8y-u5-mzA" secondAttribute="centerX" id="9Im-nG-Wdd"/>
+                            <constraint firstItem="esk-3e-xCN" firstAttribute="centerY" secondItem="U8y-u5-mzA" secondAttribute="centerY" id="9J9-eg-GwX"/>
+                            <constraint firstAttribute="centerX" secondItem="esk-3e-xCN" secondAttribute="centerX" id="aVV-8R-Uyp"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Detail" id="D3P-lu-Rvn"/>
+                    <connections>
+                        <outlet property="srearchButton" destination="U8y-u5-mzA" id="fOE-OJ-FDT"/>
+                        <outlet property="textField" destination="esk-3e-xCN" id="mnh-Xs-hH3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="COd-bE-tTK" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="886" y="885"/>
         </scene>
         <!--Ellipse with Slider-->
         <scene sceneID="X4T-5T-FnJ">
@@ -359,7 +431,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nIr-Pq-zzO" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="763" y="801"/>
+            <point key="canvasLocation" x="255" y="885"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
