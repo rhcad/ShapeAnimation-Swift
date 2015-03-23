@@ -10,7 +10,7 @@ import SwiftGraphics
 
 public extension CALayer {
     public func enumerateLayers(block:(CALayer) -> Void) {
-        if let sublayers = self.sublayers {
+        if let sublayers = sublayers {
             for layer in sublayers {
                 if !layer.isKindOfClass(CAGradientLayer) {
                     block(layer as! CALayer)
@@ -23,7 +23,7 @@ public extension CALayer {
 public extension ShapeView {
     
     public func enumerateLayers(block:(CALayer) -> Void) {
-        self.layer.enumerateLayers(block)
+        sublayer.enumerateLayers(block)
     }
     
     public func hitTest(point:CGPoint, filter:((CALayer) -> Bool)? = nil) -> CALayer? {
@@ -76,13 +76,13 @@ public extension CAShapeLayer {
     }
     
     public func hitTestPath(point:CGPoint) -> Bool {
-        let path = isFilled ? self.path : self.strokingPath(max(lineWidth, 10))
+        let path = isFilled ? self.path : strokingPath(max(lineWidth, 10))
         var xf = affineTransform().inverted() + CGAffineTransform(translation: -position)
         return CGPathContainsPoint(path, &xf, point, false)
     }
     
     public func intersects(rect:CGRect) -> Bool {
         var xf = affineTransform().inverted() + CGAffineTransform(translation: -position)
-        return self.path.intersects(rect * xf)
+        return path.intersects(rect * xf)
     }
 }

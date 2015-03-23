@@ -1,6 +1,6 @@
 # ShapeAnimation-Swift
 
-Vector animation framework in Swift based on [SwiftGraphics][SwiftGraphics] for iOS 8.
+Vector animation framework in Swift based on [SwiftGraphics][SwiftGraphics] for iOS 8 and OSX.
 With ShapeAnimation you can easily create various animations with a nice Swift based syntax.
 
 [![Travis][travis_img]][travis]

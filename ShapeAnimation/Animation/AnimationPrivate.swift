@@ -19,29 +19,22 @@ internal class AnimationDelagate : NSObject {
     
     override internal func animationDidStart(anim:CAAnimation!) {
         didStart?(anim)
+        didStart = nil
     }
     
     override internal func animationDidStop(anim:CAAnimation!, finished:Bool) {
-        /*
-        let keypath = (anim as? CAPropertyAnimation)?.keyPath
-        let name = keypath != nil ? keypath! : anim.description
-        
-        if let layerid = anim.valueForKey("layerID") as? String {
-            println("animationDidStop \(layerid) \(name)")
-        } else {
-            println("animationDidStop \(name)")
-        }*/
-        
         self.finished = finished
         if finished {
-            self.willStop?()
-            self.didStop?()
+            willStop?()
+            didStop?()
         } else {
             stopping++
-            self.willStop?()
-            self.didStop?()
+            willStop?()
+            didStop?()
             stopping--
         }
+        willStop = nil
+        didStop = nil
     }
     
     internal class func groupDidStop(completion:() -> Void, finished:Bool) {
@@ -111,11 +104,6 @@ public extension CAAnimation {
     internal var finished:Bool {
         get {
             if let delegate = self.delegate as? AnimationDelagate {
-                if let p = self as? CAPropertyAnimation {
-                    if !(delegate.finished) {
-                        println(p.keyPath)
-                    }
-                }
                 return delegate.finished
             }
             return true

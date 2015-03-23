@@ -13,7 +13,7 @@ private var GradientLayerKey = 12
 public extension CAShapeLayer {
     public var gradient: Gradient? {
         get {
-            if let layer = self.gradientLayer {
+            if let layer = gradientLayer {
                 if path.isClosed {
                     var style = Gradient()
                     style.colors = layer.colors as! [CGColor]!
@@ -38,8 +38,8 @@ public extension CAShapeLayer {
             let gradientLayer = CAGradientLayer()
             let maskLayer = CAShapeLayer()
             
-            maskLayer.frame = self.bounds
-            maskLayer.path = self.path
+            maskLayer.frame = bounds
+            maskLayer.path = path
             maskLayer.strokeColor = nil
             
             gradientLayer.colors = style.colors!
@@ -53,11 +53,11 @@ public extension CAShapeLayer {
             }
             gradientLayer.frame = frame
             gradientLayer.mask = maskLayer
-            gradientLayer.contentsScale = UIScreen.mainScreen().scale
+            gradientLayer.contentsScale = self.contentsScale
             gradientLayer.setAffineTransform(affineTransform())
             
-            self.superlayer.addSublayer(gradientLayer)
-            self.fillColor = nil
+            superlayer.addSublayer(gradientLayer)
+            fillColor = nil
             self.gradientLayer = gradientLayer
         } else {
             self.gradientLayer = nil
@@ -73,7 +73,7 @@ public extension CALayer {
             return getAssociatedWrappedObject(self, &GradientLayerKey, defv)
         }
         set {
-            if let oldlayer = self.gradientLayer {
+            if let oldlayer = gradientLayer {
                 oldlayer.removeAllAnimations()
                 oldlayer.removeFromSuperlayer()
             } else if newValue == nil {

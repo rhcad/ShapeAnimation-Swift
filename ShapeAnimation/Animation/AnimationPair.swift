@@ -26,8 +26,12 @@ public func animationGroup(animations:[AnimationPair], didStop:(() -> Void)? = n
 }
 
 public func applyAnimations(animations:[AnimationPair], completion:(() -> Void)?) {
+    applyAnimations(animations, CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut), completion)
+}
+
+public func applyAnimations(animations:[AnimationPair], timingFunction:CAMediaTimingFunction, completion:(() -> Void)?) {
     CATransaction.begin()
-    CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut))
+    CATransaction.setAnimationTimingFunction(timingFunction)
     if completion != nil {
         CATransaction.setCompletionBlock {
             var finished = true
@@ -37,10 +41,13 @@ public func applyAnimations(animations:[AnimationPair], completion:(() -> Void)?
             AnimationDelagate.groupDidStop(completion!, finished:finished)
         }
     }
+    
     var duration:CFTimeInterval = 0
+    let start = CACurrentMediaTime()
+    
     for la in animations {
         la.apply()
-        duration = max(duration, la.animation.duration)
+        duration = max(duration + max(la.animation.beginTime - start, 0), la.animation.duration)
         la.animation.finished = true    // create delegate
     }
     CATransaction.setAnimationDuration(duration)
@@ -60,11 +67,15 @@ public class AnimationPair {
         self.key = key
     }
     
+    convenience init(_ layer:CALayer, _ animation:CAPropertyAnimation) {
+        self.init(layer, animation, key:animation.keyPath)
+    }
+    
     public func apply() {
         if !CAAnimation.isStopping {
             if let gradientLayer = layer.gradientLayer {
                 let anim2 = animation.copy() as! CAAnimation
-                anim2.delegate = AnimationDelagate()
+                anim2.delegate = nil
                 if let layerid = layer.identifier {
                     anim2.setValue(layerid + "_gradient", forKey:"layerID")
                 }
@@ -90,7 +101,7 @@ public class AnimationPair {
 public extension AnimationPair {
     
     public func set(did:(CAAnimation) -> Void) -> AnimationPair {
-        did(self.animation)
+        did(animation)
         return self
     }
     
@@ -106,6 +117,9 @@ public extension AnimationPair {
     
     public func setFillMode(fillMode:String) -> AnimationPair {
         animation.fillMode = fillMode
+        if fillMode == kCAFillModeForwards {
+            animation.removedOnCompletion = false
+        }
         return self
     }
     
@@ -162,18 +176,30 @@ public extension AnimationPair {
     }
 }
 
+public extension AnimationPair {
+    public func setTimingFunction(function:CAMediaTimingFunction) -> AnimationPair {
+        animation.timingFunction = function
+        return self
+    }
+    
+    public func setTimingFunction(c1x:Float, _ c1y:Float, _ c2x:Float, _ c2y:Float) -> AnimationPair {
+        animation.timingFunction = CAMediaTimingFunction(controlPoints:c1x, c1y, c2x, c2y)
+        return self
+    }
+}
+
 // MARK: setAnchorPoint just change anchorPoint, and not change position
 
 public extension CALayer {
     public func setAnchorPoint(point:CGPoint, fromLayer:CALayer? = nil) {
-        let oldframe = self.frame
+        let oldframe = frame
         if let fromLayer = fromLayer {
             let pt = convertPoint(point, fromLayer:fromLayer) / bounds.size
-            self.anchorPoint = pt
+            anchorPoint = pt
         } else {
-            self.anchorPoint = point
+            anchorPoint = point
         }
-        self.frame = oldframe
+        frame = oldframe
     }
 }
 

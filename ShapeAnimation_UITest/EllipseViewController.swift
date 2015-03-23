@@ -23,7 +23,7 @@ class EllipseViewController: DetailViewController {
         animationLayer = animationView.addAnimationLayer(frame:animationView.bounds,
             properties:[("rx", 20), ("ry", 20), ("angle", 0)]) { (layer, ctx) -> Void in
                 let ellipse = self.makeEllipse(layer)
-                ctx.stroke(ellipse.asBezierChain)
+                ctx.strokePath(ellipse.cgpath)
                 self.drawLabelText(ctx, ellipse.a, ellipse.b, ellipse.rotation)
         }
         animationLayer.didStart = { self.ballLayer?.removeLayer(); return }

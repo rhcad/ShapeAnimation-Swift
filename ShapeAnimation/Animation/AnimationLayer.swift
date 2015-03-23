@@ -8,6 +8,12 @@
 
 import SwiftGraphics
 
+#if os(OSX)
+    public typealias DisplayLink = CDisplayLink
+#else
+    public typealias DisplayLink = CADisplayLink
+#endif
+
 public class AnimationLayer : CALayer {
     
     public var properties:[(key:String, min:CGFloat)]! {
@@ -26,7 +32,7 @@ public class AnimationLayer : CALayer {
     public var didStop :(() -> Void)?
     
     private var keys:[String]! = nil
-    public  var timer:CADisplayLink?
+    public  var timer:DisplayLink?
     private var animations:[CAAnimation] = []
     
     public func getProperty(key:String) -> CGFloat {
@@ -76,8 +82,18 @@ public class AnimationLayer : CALayer {
                 animations.append(animation)
                 if timer == nil {
                     didStart?()
-                    timer = CADisplayLink(target:self, selector:Selector("animationLoop:"))
+#if os(iOS)
+                    timer = CADisplayLink(target:self, selector:Selector("animationLoop"))
                     timer!.addToRunLoop(NSRunLoop.mainRunLoop(), forMode:NSDefaultRunLoopMode)
+#else
+                    timer = CDisplayLink()
+                    timer!.displayLinkBlock = { _ in
+                        if (!self.paused) {
+                            self.setNeedsDisplay()
+                        }
+                    }
+                    timer!.start()
+#endif
                 }
             }
         }
@@ -87,7 +103,11 @@ public class AnimationLayer : CALayer {
         if let index = find(animations, anim) {
             animations.removeAtIndex(index)
             if animations.isEmpty {
+#if os(iOS)
                 timer!.invalidate()
+#else
+                timer!.stop()
+#endif
                 timer = nil
                 didStop?()
             }
@@ -102,20 +122,22 @@ public class AnimationLayer : CALayer {
             animation.delegate = self
             animation.duration = 1.0
             animationCreated?(event, animation)
-            self.addAnimation(animation, forKey:event)
+            addAnimation(animation, forKey:event)
             return animation
         }
         return super.actionForKey(event)
     }
     
     // Timer Callback
-    internal func animationLoop(timer:CADisplayLink) {
-        self.setNeedsDisplay()
+    internal func animationLoop() {
+        setNeedsDisplay()
     }
     
     // Layer Drawing
     override public func drawInContext(ctx: CGContext!) {
         super.drawInContext(ctx)
+        CGContextSetAllowsAntialiasing(ctx, true)
+        CGContextSetShouldAntialias(ctx, true)
         draw?(self, ctx)
     }
     
@@ -129,7 +151,7 @@ public extension ShapeView {
         var layer = AnimationLayer()
         layer.properties = properties
         layer.draw = draw
-        self.addSublayer(layer, frame:frame)
+        addSublayer(layer, frame:frame)
         return layer
     }
     

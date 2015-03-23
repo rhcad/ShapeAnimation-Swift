@@ -28,7 +28,7 @@ public extension CAShapeLayer {
         }
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.didStop = didStop
-        return AnimationPair(self, animation, key:animation.keyPath)
+        return AnimationPair(self, animation)
     }
     
     func strokeEndAnimation(from:CGFloat? = nil, to:CGFloat = 1, didStop:(() -> Void)? = nil) -> AnimationPair {
@@ -49,7 +49,7 @@ public extension CAShapeLayer {
         }
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.didStop = didStop
-        return AnimationPair(self, animation, key:animation.keyPath)
+        return AnimationPair(self, animation)
     }
     
     func strokeColorAnimation(from:CGColor? = nil, to:CGColor, didStop:(() -> Void)? = nil) -> AnimationPair {
@@ -65,7 +65,7 @@ public extension CAShapeLayer {
                 }
             }
         }
-        return AnimationPair(self, animation, key:animation.keyPath)
+        return AnimationPair(self, animation)
     }
     
     func fillColorAnimation(from:CGColor? = nil, to:CGColor, didStop:(() -> Void)? = nil) -> AnimationPair {
@@ -81,7 +81,7 @@ public extension CAShapeLayer {
             }
         }
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
-        return AnimationPair(self, animation, key:animation.keyPath)
+        return AnimationPair(self, animation)
     }
     
     func lineWidthAnimation(from:CGFloat? = nil, to:CGFloat, didStop:(() -> Void)? = nil) -> AnimationPair {
@@ -97,7 +97,7 @@ public extension CAShapeLayer {
                 }
             }
         }
-        return AnimationPair(self, animation, key:animation.keyPath)
+        return AnimationPair(self, animation)
     }
     
     func dashPhaseAnimation(from:CGFloat? = nil, to:CGFloat) -> AnimationPair {
@@ -106,7 +106,7 @@ public extension CAShapeLayer {
         animation.toValue = to
         setDefaultProperties(animation, lineDashPhase, nil)
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
-        return AnimationPair(self, animation, key:animation.keyPath)
+        return AnimationPair(self, animation)
     }
     
     func switchPathAnimation(to:CGPath, didStop:(() -> Void)? = nil) -> AnimationPair {
@@ -124,6 +124,6 @@ public extension CAShapeLayer {
                 }
             }
         }
-        return AnimationPair(self, animation, key:animation.keyPath)
+        return AnimationPair(self, animation)
     }
 }

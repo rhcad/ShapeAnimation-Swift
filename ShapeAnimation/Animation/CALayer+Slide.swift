@@ -71,6 +71,6 @@ public extension CALayer {
             }
         }
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
-        return AnimationPair(self, animation, key:animation.keyPath)
+        return AnimationPair(self, animation)
     }
 }

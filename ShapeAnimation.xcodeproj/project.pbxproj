@@ -20,6 +20,25 @@
 		022E98201A8072270028A198 /* CAShapeLayer+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E981E1A8072270028A198 /* CAShapeLayer+Gradient.swift */; };
 		022E98211A8072270028A198 /* CAShapeLayer+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E981F1A8072270028A198 /* CAShapeLayer+Style.swift */; };
 		02478B091A70C6A200CCAC47 /* ShapeAnimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DA4AC419AA62A800133F32 /* ShapeAnimation.framework */; };
+		0256C6701ABEC1D8007FC099 /* Portability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0256C66F1ABEC1D8007FC099 /* Portability.swift */; };
+		0267D0D31AC00FF400CEF476 /* ShapeAnimation_OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 0267D0D21AC00FF400CEF476 /* ShapeAnimation_OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0267D0E71AC0101500CEF476 /* Portability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0256C66F1ABEC1D8007FC099 /* Portability.swift */; };
+		0267D0E81AC0101500CEF476 /* ShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E98091A8071A70028A198 /* ShapeView.swift */; };
+		0267D0E91AC0101500CEF476 /* ShapeView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE57A141A81168F00420D54 /* ShapeView+Image.swift */; };
+		0267D0EA1AC0101500CEF476 /* ShapeView+HitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F675F1A8760FA00634383 /* ShapeView+HitTest.swift */; };
+		0267D0EB1AC0101500CEF476 /* CALayer+ID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02887B2A1A820CAC00E800A1 /* CALayer+ID.swift */; };
+		0267D0EC1AC0101500CEF476 /* CAShapeLayer+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E981E1A8072270028A198 /* CAShapeLayer+Gradient.swift */; };
+		0267D0ED1AC0101500CEF476 /* CAShapeLayer+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E981F1A8072270028A198 /* CAShapeLayer+Style.swift */; };
+		0267D0EE1AC0101500CEF476 /* CAShapeLayer+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED21A2C1A88EDE2004EFD25 /* CAShapeLayer+Path.swift */; };
+		0267D0EF1AC0101500CEF476 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E980E1A8071A70028A198 /* CALayer+Animation.swift */; };
+		0267D0F01AC0101500CEF476 /* CALayer+Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021D75691A89EBB3009C5129 /* CALayer+Slide.swift */; };
+		0267D0F11AC0101500CEF476 /* CALayer+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02147CAB1A847EA3001E5617 /* CALayer+Drag.swift */; };
+		0267D0F21AC0101500CEF476 /* CAShapeLayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E98101A8071A70028A198 /* CAShapeLayer+Animation.swift */; };
+		0267D0F31AC0101500CEF476 /* AnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E980B1A8071A70028A198 /* AnimationLayer.swift */; };
+		0267D0F41AC0101500CEF476 /* CALayer+Pause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E980F1A8071A70028A198 /* CALayer+Pause.swift */; };
+		0267D0F51AC0101500CEF476 /* AnimationPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E980C1A8071A70028A198 /* AnimationPair.swift */; };
+		0267D0F61AC0101500CEF476 /* AnimationPrivate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E980D1A8071A70028A198 /* AnimationPrivate.swift */; };
+		0267D0F71AC0102700CEF476 /* ShapeAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 45DA4AC819AA62A800133F32 /* ShapeAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		027DC1B91A77998D00D3CF60 /* airship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 027DC1B81A77998D00D3CF60 /* airship@2x.png */; };
 		027E6C631A70CCB7002658F7 /* SwiftGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CD3EEE1A708C8D00C83B5C /* SwiftGraphics.framework */; };
 		02887B2B1A820CAC00E800A1 /* CALayer+ID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02887B2A1A820CAC00E800A1 /* CALayer+ID.swift */; };
@@ -46,6 +65,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 45DA4AC319AA62A800133F32;
 			remoteInfo = ShapeAnimation;
+		};
+		0256C6591ABEC126007FC099 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02CD3EE31A708C8D00C83B5C /* SwiftGraphics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 451D29091A8A911F00209FE3;
+			remoteInfo = SwiftGraphics_iOS_UnitTests;
 		};
 		02CD3EED1A708C8D00C83B5C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -118,6 +144,10 @@
 		022E98101A8071A70028A198 /* CAShapeLayer+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Animation.swift"; sourceTree = "<group>"; };
 		022E981E1A8072270028A198 /* CAShapeLayer+Gradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Gradient.swift"; sourceTree = "<group>"; };
 		022E981F1A8072270028A198 /* CAShapeLayer+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Style.swift"; sourceTree = "<group>"; };
+		0256C66F1ABEC1D8007FC099 /* Portability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Portability.swift; sourceTree = "<group>"; };
+		0267D0CE1AC00FF400CEF476 /* ShapeAnimation_OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ShapeAnimation_OSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0267D0D11AC00FF400CEF476 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0267D0D21AC00FF400CEF476 /* ShapeAnimation_OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShapeAnimation_OSX.h; sourceTree = "<group>"; };
 		027DC1B81A77998D00D3CF60 /* airship@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "airship@2x.png"; sourceTree = "<group>"; };
 		02887B2A1A820CAC00E800A1 /* CALayer+ID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+ID.swift"; sourceTree = "<group>"; };
 		028F675F1A8760FA00634383 /* ShapeView+HitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ShapeView+HitTest.swift"; sourceTree = "<group>"; };
@@ -144,6 +174,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0267D0CA1AC00FF400CEF476 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		02CD3F011A70907600C83B5C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -200,6 +237,23 @@
 			path = Animation;
 			sourceTree = "<group>";
 		};
+		0267D0CF1AC00FF400CEF476 /* ShapeAnimation_OSX */ = {
+			isa = PBXGroup;
+			children = (
+				0267D0D21AC00FF400CEF476 /* ShapeAnimation_OSX.h */,
+				0267D0D01AC00FF400CEF476 /* Supporting Files */,
+			);
+			path = ShapeAnimation_OSX;
+			sourceTree = "<group>";
+		};
+		0267D0D01AC00FF400CEF476 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0267D0D11AC00FF400CEF476 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		027DC1B71A77998D00D3CF60 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,7 +270,8 @@
 				02CD3EF41A708C8D00C83B5C /* SwiftGraphicsPlayground.framework */,
 				02CD3EF61A708C8D00C83B5C /* SwiftGraphics_OSX_UITest.app */,
 				02EB74E61A85BC3E00C07FA6 /* SwiftGraphics_OSX_Scratch.app */,
-				02CD3EF21A708C8D00C83B5C /* SwiftGraphicsTests.xctest */,
+				02CD3EF21A708C8D00C83B5C /* SwiftGraphics_OSX_UnitTests.xctest */,
+				0256C65A1ABEC126007FC099 /* SwiftGraphics_iOS_UnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -262,6 +317,7 @@
 				45DA4AC519AA62A800133F32 /* ShapeAnimation */,
 				454D551319AA5CE6000E3EB3 /* ShapeAnimation_UnitTests */,
 				02CD3F051A70907600C83B5C /* ShapeAnimation_UITest */,
+				0267D0CF1AC00FF400CEF476 /* ShapeAnimation_OSX */,
 				4514F5F71A61D2D800CC9C26 /* Frameworks */,
 				454D550819AA5CE6000E3EB3 /* Products */,
 			);
@@ -273,6 +329,7 @@
 				454D551219AA5CE6000E3EB3 /* ShapeAnimationTests.xctest */,
 				45DA4AC419AA62A800133F32 /* ShapeAnimation.framework */,
 				02CD3F041A70907600C83B5C /* ShapeAnimation_UITest.app */,
+				0267D0CE1AC00FF400CEF476 /* ShapeAnimation_OSX.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -297,6 +354,7 @@
 		45DA4AC519AA62A800133F32 /* ShapeAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				0256C66F1ABEC1D8007FC099 /* Portability.swift */,
 				022E98081A8071A70028A198 /* View */,
 				022E980A1A8071A70028A198 /* Animation */,
 				45DA4AC819AA62A800133F32 /* ShapeAnimation.h */,
@@ -316,6 +374,15 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		0267D0CB1AC00FF400CEF476 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0267D0F71AC0102700CEF476 /* ShapeAnimation.h in Headers */,
+				0267D0D31AC00FF400CEF476 /* ShapeAnimation_OSX.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		45DA4AC119AA62A800133F32 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -327,6 +394,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		0267D0CD1AC00FF400CEF476 /* ShapeAnimation_OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0267D0E11AC00FF400CEF476 /* Build configuration list for PBXNativeTarget "ShapeAnimation_OSX" */;
+			buildPhases = (
+				0267D0C91AC00FF400CEF476 /* Sources */,
+				0267D0CA1AC00FF400CEF476 /* Frameworks */,
+				0267D0CB1AC00FF400CEF476 /* Headers */,
+				0267D0CC1AC00FF400CEF476 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShapeAnimation_OSX;
+			productName = ShapeAnimation_OSX;
+			productReference = 0267D0CE1AC00FF400CEF476 /* ShapeAnimation_OSX.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		02CD3F031A70907600C83B5C /* ShapeAnimation_UITest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 02CD3F221A70907600C83B5C /* Build configuration list for PBXNativeTarget "ShapeAnimation_UITest" */;
@@ -391,6 +476,9 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = github.com/rhcad;
 				TargetAttributes = {
+					0267D0CD1AC00FF400CEF476 = {
+						CreatedOnToolsVersion = 6.3;
+					};
 					02CD3F031A70907600C83B5C = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -424,11 +512,19 @@
 				45DA4AC319AA62A800133F32 /* ShapeAnimation */,
 				454D551119AA5CE6000E3EB3 /* ShapeAnimationTests */,
 				02CD3F031A70907600C83B5C /* ShapeAnimation_UITest */,
+				0267D0CD1AC00FF400CEF476 /* ShapeAnimation_OSX */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		0256C65A1ABEC126007FC099 /* SwiftGraphics_iOS_UnitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftGraphics_iOS_UnitTests.xctest;
+			remoteRef = 0256C6591ABEC126007FC099 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		02CD3EEE1A708C8D00C83B5C /* SwiftGraphics.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -443,10 +539,10 @@
 			remoteRef = 02CD3EEF1A708C8D00C83B5C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		02CD3EF21A708C8D00C83B5C /* SwiftGraphicsTests.xctest */ = {
+		02CD3EF21A708C8D00C83B5C /* SwiftGraphics_OSX_UnitTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = SwiftGraphicsTests.xctest;
+			path = SwiftGraphics_OSX_UnitTests.xctest;
 			remoteRef = 02CD3EF11A708C8D00C83B5C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -474,6 +570,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0267D0CC1AC00FF400CEF476 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		02CD3F021A70907600C83B5C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -502,6 +605,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0267D0C91AC00FF400CEF476 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0267D0E71AC0101500CEF476 /* Portability.swift in Sources */,
+				0267D0E81AC0101500CEF476 /* ShapeView.swift in Sources */,
+				0267D0E91AC0101500CEF476 /* ShapeView+Image.swift in Sources */,
+				0267D0EA1AC0101500CEF476 /* ShapeView+HitTest.swift in Sources */,
+				0267D0EB1AC0101500CEF476 /* CALayer+ID.swift in Sources */,
+				0267D0EC1AC0101500CEF476 /* CAShapeLayer+Gradient.swift in Sources */,
+				0267D0ED1AC0101500CEF476 /* CAShapeLayer+Style.swift in Sources */,
+				0267D0EE1AC0101500CEF476 /* CAShapeLayer+Path.swift in Sources */,
+				0267D0EF1AC0101500CEF476 /* CALayer+Animation.swift in Sources */,
+				0267D0F01AC0101500CEF476 /* CALayer+Slide.swift in Sources */,
+				0267D0F11AC0101500CEF476 /* CALayer+Drag.swift in Sources */,
+				0267D0F21AC0101500CEF476 /* CAShapeLayer+Animation.swift in Sources */,
+				0267D0F31AC0101500CEF476 /* AnimationLayer.swift in Sources */,
+				0267D0F41AC0101500CEF476 /* CALayer+Pause.swift in Sources */,
+				0267D0F51AC0101500CEF476 /* AnimationPair.swift in Sources */,
+				0267D0F61AC0101500CEF476 /* AnimationPrivate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		02CD3F001A70907600C83B5C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -542,6 +668,7 @@
 				022E98211A8072270028A198 /* CAShapeLayer+Style.swift in Sources */,
 				022E98181A8071A70028A198 /* CALayer+Pause.swift in Sources */,
 				022E98141A8071A70028A198 /* AnimationLayer.swift in Sources */,
+				0256C6701ABEC1D8007FC099 /* Portability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,6 +712,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0267D0E21AC00FF400CEF476 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LIBRARY = "libc++";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ShapeAnimation_OSX/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		0267D0E31AC00FF400CEF476 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LIBRARY = "libc++";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = ShapeAnimation_OSX/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		02CD3F231A70907600C83B5C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -783,6 +954,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0267D0E11AC00FF400CEF476 /* Build configuration list for PBXNativeTarget "ShapeAnimation_OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0267D0E21AC00FF400CEF476 /* Debug */,
+				0267D0E31AC00FF400CEF476 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		02CD3F221A70907600C83B5C /* Build configuration list for PBXNativeTarget "ShapeAnimation_UITest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

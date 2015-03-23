@@ -9,7 +9,7 @@
 import SwiftGraphics
 
 //! View class which contains vector shape layers.
-public class ShapeView : UIView {
+public class ShapeView : View {
     
     public var style:PaintStyle = {
         var style = PaintStyle.defaultStyle
@@ -19,13 +19,23 @@ public class ShapeView : UIView {
         }()
     public var gradient = Gradient()
     
+#if os(OSX)
+    public var sublayer:CALayer { return self.layer! }
+#else
+    public var sublayer:CALayer { return self.layer }
+#endif
+    
     public func addSublayer(layer:CALayer, frame:CGRect, superlayer:CALayer? = nil) {
         layer.frame = frame
+#if os(OSX)
+        layer.contentsScale = NSScreen.mainScreen()!.backingScaleFactor
+#else
         layer.contentsScale = UIScreen.mainScreen().scale
+#endif
         if let superlayer = superlayer {
             superlayer.addSublayer(layer)
         } else {
-            self.layer.addSublayer(layer)
+            sublayer.addSublayer(layer)
         }
     }
     
@@ -45,7 +55,7 @@ public class ShapeView : UIView {
         let layer = CAShapeLayer()
         
         layer.path = box.isNull || position != nil ? path : CGPathCreateCopyByTransformingPath(path, &xf)
-        self.addSublayer(layer, frame:frame, superlayer:superlayer)
+        addSublayer(layer, frame:frame, superlayer:superlayer)
         layer.apply(style)
         layer.apply(gradient)
         
@@ -58,12 +68,12 @@ public class ShapeView : UIView {
         enumerateLayers { $0.removeLayer() }
         super.removeFromSuperview()
     }
-    
+    /*
     private var lastBounds = CGRect.zeroRect
     
     override public func didMoveToSuperview() {
         super.didMoveToSuperview()
-        lastBounds = self.layer.bounds
+        lastBounds = layer.bounds
     }
     
     override public func layoutSubviews() {
@@ -77,7 +87,7 @@ public class ShapeView : UIView {
             }
             lastBounds = self.bounds
         }
-    }
+    }*/
 }
 
 // MARK: CALayer.removeLayer
@@ -86,7 +96,7 @@ public extension CALayer {
     
     public func removeLayer() {
         gradientLayer = nil
-        self.removeAllAnimations()
-        self.removeFromSuperlayer()
+        removeAllAnimations()
+        removeFromSuperlayer()
     }
 }

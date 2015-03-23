@@ -23,7 +23,7 @@ public extension CALayer {
                 layer.opacity = Float(to)
             }
         }
-        return AnimationPair(self, animation, key:animation.keyPath)
+        return AnimationPair(self, animation)
     }
     
     func flashAnimation(repeatCount n:Float = 2, didStop:(() -> Void)? = nil) -> AnimationPair {
@@ -42,7 +42,7 @@ public extension CALayer {
                 layer.backgroundColor = to
             }
         }
-        return AnimationPair(self, animation, key:animation.keyPath)
+        return AnimationPair(self, animation)
     }
     
     // MARK: scaleAnimation and tapAnimation
@@ -62,7 +62,7 @@ public extension CALayer {
                 layer.setAffineTransform(layer.affineTransform() + xf)
             }
         }
-        return AnimationPair(self, animation, key:animation.keyPath)
+        return AnimationPair(self, animation)
     }
     
     func scaleAnimation(#from:CGFloat?, to:CGFloat, repeatCount n:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
@@ -71,7 +71,8 @@ public extension CALayer {
     }
     
     func tapAnimation(didStop:(() -> Void)? = nil) -> AnimationPair {
-        return scaleAnimation(from:1, to:1.25, didStop:didStop).autoreverses().set {$0.duration=0.3}
+        let w = max(bounds.size.width, bounds.size.height)
+        return scaleAnimation(from:1, to:(w + 10) / w, didStop:didStop).autoreverses().setDuration(0.2)
     }
     
     // MARK: rotate360Degrees and rotationAnimation
@@ -92,7 +93,7 @@ public extension CALayer {
                 layer.setAffineTransform(layer.affineTransform() + xf)
             }
         }
-        return AnimationPair(self, animation, key:animation.keyPath)
+        return AnimationPair(self, animation)
     }
     
     // MARK: shakeAnimation, moveAnimation and moveOnPathAnimation
@@ -122,7 +123,7 @@ public extension CALayer {
                 layer.position = relative ? layer.position + to : to
             }
         }
-        return AnimationPair(self, animation, key:animation.keyPath)
+        return AnimationPair(self, animation)
     }
     
     func moveOnPathAnimation(path:CGPath, autoRotate:Bool = false, didStop:(() -> Void)? = nil) -> AnimationPair {
@@ -143,7 +144,7 @@ public extension CALayer {
                 }
             }
         }
-        return AnimationPair(self, animation, key:animation.keyPath)
+        return AnimationPair(self, animation)
     }
     
     internal func setDefaultProperties(animation:CAAnimation, _ defaultFromValue:AnyObject, _ didStop:(() -> Void)?) {
@@ -153,7 +154,7 @@ public extension CALayer {
         animation.didStop = didStop
         if let basic = animation as? CABasicAnimation {
             if basic.fromValue == nil {
-                if let presentation = self.presentationLayer() as? CALayer {
+                if let presentation = presentationLayer() as? CALayer {
                     basic.fromValue = presentation.valueForKeyPath(basic.keyPath)
                 } else {
                     basic.fromValue = defaultFromValue
@@ -162,3 +163,14 @@ public extension CALayer {
         }
     }
 }
+
+#if os(OSX)
+internal extension NSValue {
+    convenience init(CGPoint point: CGPoint) {
+        self.init(point:point)
+    }
+    var CGPointValue:CGPoint {
+        return self.pointValue
+    }
+}
+#endif

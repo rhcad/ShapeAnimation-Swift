@@ -12,24 +12,27 @@ public extension CALayer {
     
     public var paused:Bool {
         get {
-            return self.speed == 0.0
+            return speed == 0.0
         }
         set {
             if newValue && !paused {
                 let pausedTime = convertTime(CACurrentMediaTime(), fromLayer:nil)
-                self.speed = 0.0
-                self.timeOffset = pausedTime
+                speed = 0.0
+                timeOffset = pausedTime
             }
             else if !newValue && paused {
-                let pausedTime = self.timeOffset
-                self.speed = 1.0
-                self.timeOffset = 0.0
-                self.beginTime = 0.0
-                self.beginTime = convertTime(CACurrentMediaTime(), fromLayer:nil) - pausedTime
+                let pausedTime = timeOffset
+                speed = 1.0
+                timeOffset = 0.0
+                beginTime = 0.0
+                beginTime = convertTime(CACurrentMediaTime(), fromLayer:nil) - pausedTime
             }
+            gradientLayer?.paused = newValue
+#if os(iOS)
             if let layer = self as? AnimationLayer {
                 layer.timer?.paused = newValue
             }
+#endif
         }
     }
     

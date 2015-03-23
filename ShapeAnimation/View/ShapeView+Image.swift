@@ -45,34 +45,40 @@ public extension ShapeView {
         }
         layer.alignmentMode = kCAAlignmentCenter
         layer.wrapped = true
-        self.addSublayer(layer, frame:frame)
+        addSublayer(layer, frame:frame)
     
         return layer
     }
     
     public func addTextLayer(text:String, center:CGPoint, fontSize:CGFloat) -> CATextLayer! {
-        let attr = [NSFontAttributeName: UIFont.systemFontOfSize(fontSize)]
+        let attr = [NSFontAttributeName: Font.systemFontOfSize(fontSize)]
         let size = text.sizeWithAttributes(attr)
         return addTextLayer(text, frame:CGRect(center:center, size:size), fontSize:fontSize)
     }
     
-    public func addImageLayer(image:UIImage!, center:CGPoint) -> CALayer! {
+    public func addImageLayer(image:Image, center:CGPoint) -> CALayer! {
         let layer = CALayer()
+#if os(iOS)
         layer.contents = image.CGImage
-        self.addSublayer(layer, frame:CGRect(center:center, size:image.size))
+#else
+        let ctx = NSGraphicsContext.currentContext()
+        var rect = CGRect(size:image.size)
+        layer.contents = image.CGImageForProposedRect(&rect, context:ctx, hints:nil)?.takeUnretainedValue()
+#endif
+        addSublayer(layer, frame:CGRect(center:center, size:image.size))
         return layer
     }
     
     public func addImageLayer(#named:String, center:CGPoint) -> CALayer? {
-        if let image = UIImage(named:named) {
-            return self.addImageLayer(image, center:center)
+        if let image = Image(named:named) {
+            return addImageLayer(image, center:center)
         }
         return nil
     }
     
     public func addImageLayer(contentsOfFile path:String, center:CGPoint) -> CALayer? {
-        if let image = UIImage(contentsOfFile:path) {
-            return self.addImageLayer(image, center:center)
+        if let image = Image(contentsOfFile:path) {
+            return addImageLayer(image, center:center)
         }
         return nil
     }

@@ -27,7 +27,7 @@ public extension CAShapeLayer {
         if path == nil {
             return path
         }
-        let s = self.paintStyle
+        let s = paintStyle
         return CGPathCreateCopyByStrokingPath(path, nil, lineWidth,
             s.lineCap!, s.lineJoin!, miterLimit)
     }
