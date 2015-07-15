@@ -42,7 +42,7 @@ class MasterViewController: UITableViewController {
             let points1 = [CGPoint((10,20)),CGPoint((150,40)),CGPoint((120,320))]
             let la1 = view.addLinesLayer(points1, closed:true, color:CGColor.redColor())
             la1.identifier = "triangle1"
-            animationGroup([la1.strokeEndAnimation(), la1.lineWidthAnimation(from:0, to:5)]).apply() {
+            animationGroup([la1.strokeEndAnimation(), la1.lineWidthAnimation(0, to:5)]).apply() {
                 la1.shakeAnimation().apply()
             }
             
@@ -78,9 +78,9 @@ class MasterViewController: UITableViewController {
             let pathLayer = view.addLinesLayer([CGPoint.zeroPoint])
             pathLayer.pathToSuperlayer = path
             pathLayer.lineDashPattern = [5, 5]
-            let a4 = pathLayer.strokeColorAnimation(from:CGColor.lightGrayColor(), to:CGColor.greenColor())
+            let a4 = pathLayer.strokeColorAnimation(CGColor.lightGrayColor(), to:CGColor.greenColor())
                 .autoreverses().forever()
-            let a5 = pathLayer.dashPhaseAnimation(from:0, to:20)
+            let a5 = pathLayer.dashPhaseAnimation(0, to:20)
             animationGroup([a4, a5]).forever().apply()
             
             // Rotate and move a picture along the path
@@ -100,7 +100,7 @@ class MasterViewController: UITableViewController {
             
             var animations:[AnimationPair] = []
             
-            for (i, c) in enumerate("swift") {
+            for (i, c) in "swift".characters.enumerate() {
                 let polygon = RegularPolygon(nside:5, center:CGPoint(x:50 + 60*i, y:50), radius:25)
                 let edgeLayer = view.addLinesLayer(polygon.points, closed:true)
                 let textLayer = view.addTextLayer(String(c), frame:polygon.incircle.frame, fontSize:30)
@@ -114,7 +114,7 @@ class MasterViewController: UITableViewController {
             }
             applyAnimations(animations) {
                 let movement = CGPoint(x:300)
-                for (i, anim) in enumerate(animations) {
+                for (i, anim) in animations.enumerate() {
                     anim.layer.moveAnimation(to:movement).setBeginTime(5 - i/2, gap:0.3).apply()
                 }
             }
@@ -156,8 +156,8 @@ class MasterViewController: UITableViewController {
                 let t = layer.getProperty("t")
                 
                 let x = (-W / 3) + (5 * W / 3) * (t / D)
-                let y = ground - HJ*4*(x % DJ)*(DJ-(x % DJ))/DJ**2
-                let coef = (HJ-y)/HJ
+                let y = ground - HJ * 4 * (x % DJ) * (DJ - (x % DJ)) / (DJ * DJ)
+                let coef = (HJ - y) / HJ
                 let sr = (1 - coef / 4) * r
                 
                 var sgradient = Gradient(colors: [CGColor.color(white:0, alpha:0.2-coef/5), CGColor.clearColor()], axial:true)

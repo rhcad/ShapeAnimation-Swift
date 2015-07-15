@@ -17,12 +17,12 @@ internal class AnimationDelagate : NSObject {
     internal var willStop :(() -> Void)?
     internal var finished = true
     
-    override internal func animationDidStart(anim:CAAnimation!) {
+    override internal func animationDidStart(anim:CAAnimation) {
         didStart?(anim)
         didStart = nil
     }
     
-    override internal func animationDidStop(anim:CAAnimation!, finished:Bool) {
+    override internal func animationDidStop(anim:CAAnimation, finished:Bool) {
         self.finished = finished
         if finished {
             willStop?()
@@ -60,7 +60,7 @@ public extension CAAnimation {
                 delegate.didStart = newValue
             }
             else if newValue != nil {
-                var delegate = AnimationDelagate()
+                let delegate = AnimationDelagate()
                 delegate.didStart = newValue
                 self.delegate = delegate
             }
@@ -77,7 +77,7 @@ public extension CAAnimation {
                 delegate.didStop = newValue
             }
             else if newValue != nil {
-                var delegate = AnimationDelagate()
+                let delegate = AnimationDelagate()
                 delegate.didStop = newValue
                 self.delegate = delegate
             }
@@ -94,7 +94,7 @@ public extension CAAnimation {
                 delegate.willStop = newValue
             }
             else if newValue != nil {
-                var delegate = AnimationDelagate()
+                let delegate = AnimationDelagate()
                 delegate.willStop = newValue
                 self.delegate = delegate
             }
@@ -113,7 +113,7 @@ public extension CAAnimation {
                 delegate.finished = newValue
             }
             else {
-                var delegate = AnimationDelagate()
+                let delegate = AnimationDelagate()
                 delegate.finished = finished
                 self.delegate = delegate
             }

@@ -19,7 +19,7 @@ public extension CAShapeLayer {
             style.lineWidth = self.lineWidth
             style.miterLimit = self.miterLimit
             if let lineDashPattern = self.lineDashPattern {
-                style.lineDash = lineDashPattern.map{ CGFloat($0 as! NSNumber) }
+                style.lineDash = lineDashPattern.map{ CGFloat($0 as NSNumber) }
             }
             style.lineDashPhase = self.lineDashPhase
             style.alpha = CGFloat(self.opacity)
@@ -28,19 +28,19 @@ public extension CAShapeLayer {
             
             switch self.lineCap {
                 case kCALineCapRound:
-                    style.lineCap = kCGLineCapRound
+                    style.lineCap = CGLineCap.Round
                 case kCALineCapSquare:
-                    style.lineCap = kCGLineCapSquare
+                    style.lineCap = CGLineCap.Square
                 default:
-                    style.lineCap = kCGLineCapButt
+                    style.lineCap = CGLineCap.Butt
             }
             switch self.lineJoin {
                 case kCALineJoinMiter:
-                    style.lineJoin = kCGLineJoinMiter
+                    style.lineJoin = CGLineJoin.Miter
                 case kCALineJoinBevel:
-                    style.lineJoin = kCGLineJoinBevel
+                    style.lineJoin = CGLineJoin.Bevel
                 default:
-                    style.lineJoin = kCGLineJoinRound
+                    style.lineJoin = CGLineJoin.Round
             }
             return style
         }
@@ -58,20 +58,20 @@ public extension CAShapeLayer {
             self.lineWidth = lineWidth
         }
         if let lineCap = newStyle.lineCap {
-            switch lineCap.value {
-            case kCGLineCapRound.value:
+            switch lineCap {
+            case CGLineCap.Round:
                 self.lineCap = kCALineCapRound
-            case kCGLineCapSquare.value:
+            case CGLineCap.Square:
                 self.lineCap = kCALineCapSquare
             default:
                 self.lineCap = kCALineCapButt
             }
         }
         if let lineJoin = newStyle.lineJoin {
-            switch lineJoin.value {
-            case kCGLineJoinMiter.value:
+            switch lineJoin {
+            case CGLineJoin.Miter:
                 self.lineJoin = kCALineJoinMiter
-            case kCGLineJoinBevel.value:
+            case CGLineJoin.Bevel:
                 self.lineJoin = kCALineJoinBevel
             default:
                 self.lineJoin = kCALineJoinRound
@@ -86,13 +86,13 @@ public extension CAShapeLayer {
         if let lineDashPhase = newStyle.lineDashPhase {
             self.lineDashPhase = lineDashPhase
         }
-        if let flatness = newStyle.flatness {
+        if let _ = newStyle.flatness {
             // TODO flatness
         }
         if let alpha = newStyle.alpha {
             self.opacity = Float(alpha)
         }
-        if let blendMode = newStyle.blendMode {
+        if let _ = newStyle.blendMode {
             // TODO blendMode
         }
     }

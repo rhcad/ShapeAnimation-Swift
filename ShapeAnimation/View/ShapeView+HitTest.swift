@@ -13,7 +13,7 @@ public extension CALayer {
         if let sublayers = sublayers {
             for layer in sublayers {
                 if !layer.isKindOfClass(CAGradientLayer) {
-                    block(layer as! CALayer)
+                    block(layer as CALayer)
                 }
             }
         }
@@ -72,7 +72,7 @@ public extension ShapeView {
 public extension CAShapeLayer {
     
     public var isFilled : Bool {
-        return path.isClosed && (paintStyle.fillColor != nil || gradient?.colors != nil)
+        return path!.isClosed && (paintStyle.fillColor != nil || gradient?.colors != nil)
     }
     
     public func hitTestPath(point:CGPoint) -> Bool {
@@ -82,7 +82,7 @@ public extension CAShapeLayer {
     }
     
     public func intersects(rect:CGRect) -> Bool {
-        var xf = affineTransform().inverted() + CGAffineTransform(translation: -position)
-        return path.intersects(rect * xf)
+        let xf = affineTransform().inverted() + CGAffineTransform(translation: -position)
+        return path!.intersects(rect * xf)
     }
 }

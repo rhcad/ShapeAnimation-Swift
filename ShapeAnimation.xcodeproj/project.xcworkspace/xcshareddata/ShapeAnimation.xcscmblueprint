@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "40FDDDEC61536E12C2875DD3A3B52ABF310E0333",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "729A64D6D525F9784C8EE5D237BF81C9AEA202EE" : 0,
+    "40FDDDEC61536E12C2875DD3A3B52ABF310E0333" : 0,
+    "575D880AECD46D5450DCE1653E0F6C244B39D702" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "969E9941-83DA-489C-9A95-C447EC8F37B1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "729A64D6D525F9784C8EE5D237BF81C9AEA202EE" : "ShapeAnimation-Swift\/Vendor\/SwiftGraphics\/Externals\/SwiftUtilities\/",
+    "40FDDDEC61536E12C2875DD3A3B52ABF310E0333" : "ShapeAnimation-Swift\/",
+    "575D880AECD46D5450DCE1653E0F6C244B39D702" : "ShapeAnimation-Swift\/Vendor\/SwiftGraphics\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ShapeAnimation",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 203,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ShapeAnimation.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/rhcad\/ShapeAnimation-Swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "40FDDDEC61536E12C2875DD3A3B52ABF310E0333"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/rhcad\/SwiftGraphics.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "575D880AECD46D5450DCE1653E0F6C244B39D702"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/schwa\/SwiftUtilities.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "729A64D6D525F9784C8EE5D237BF81C9AEA202EE"
+    }
+  ]
+}

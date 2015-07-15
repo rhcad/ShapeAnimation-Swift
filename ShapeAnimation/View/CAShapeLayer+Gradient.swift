@@ -7,6 +7,7 @@
 //
 
 import SwiftGraphics
+import SwiftUtilities
 
 private var GradientLayerKey = 12
 
@@ -14,11 +15,11 @@ public extension CAShapeLayer {
     public var gradient: Gradient? {
         get {
             if let layer = gradientLayer {
-                if path.isClosed {
+                if path!.isClosed {
                     var style = Gradient()
                     style.colors = layer.colors as! [CGColor]!
                     if let locations = layer.locations {
-                        style.locations = locations.map {CGFloat($0 as! NSNumber)}
+                        style.locations = locations.map {CGFloat($0 as NSNumber)}
                     }
                     style.orientation = (layer.startPoint, layer.endPoint)
                     style.axial = layer.type == kCAGradientLayerAxial
@@ -33,7 +34,7 @@ public extension CAShapeLayer {
     }
     
     public func apply(newStyle:Gradient?) {
-        if newStyle?.colors != nil && path.isClosed {
+        if newStyle?.colors != nil && path!.isClosed {
             let style = newStyle!
             let gradientLayer = CAGradientLayer()
             let maskLayer = CAShapeLayer()
@@ -56,7 +57,7 @@ public extension CAShapeLayer {
             gradientLayer.contentsScale = self.contentsScale
             gradientLayer.setAffineTransform(affineTransform())
             
-            superlayer.addSublayer(gradientLayer)
+            superlayer!.addSublayer(gradientLayer)
             fillColor = nil
             self.gradientLayer = gradientLayer
         } else {
@@ -70,7 +71,7 @@ public extension CALayer {
     public var gradientLayer: CAGradientLayer? {
         get {
             let defv:CAGradientLayer? = nil
-            return getAssociatedWrappedObject(self, &GradientLayerKey, defv)
+            return getAssociatedWrappedObject(self, key: &GradientLayerKey, defaultValue: defv)
         }
         set {
             if let oldlayer = gradientLayer {
@@ -80,7 +81,7 @@ public extension CALayer {
                 return
             }
             weak var layer = newValue
-            setAssociatedWrappedObject(self, &GradientLayerKey, layer)
+            setAssociatedWrappedObject(self, key: &GradientLayerKey, value: layer)
         }
     }
 }

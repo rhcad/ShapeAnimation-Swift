@@ -59,11 +59,11 @@ public class AnimationLayer : CALayer {
         return 0
     }
     
-    override public init!() {
+    override public init() {
         super.init()
     }
     
-    override public init!(layer: AnyObject!) {
+    override public init(layer: AnyObject) {
         super.init(layer: layer)
         if let layer = layer as? AnimationLayer {
             self.properties = layer.properties
@@ -72,13 +72,13 @@ public class AnimationLayer : CALayer {
         }
     }
 
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override public func animationDidStart(anim:CAAnimation!) {
+    override public func animationDidStart(anim:CAAnimation) {
         if let animation = anim as? CAPropertyAnimation {
-            if keys != nil && contains(keys, animation.keyPath) {
+            if keys != nil && keys.contains(animation.keyPath!) {
                 animations.append(animation)
                 if timer == nil {
                     didStart?()
@@ -99,8 +99,8 @@ public class AnimationLayer : CALayer {
         }
     }
     
-    override public func animationDidStop(anim:CAAnimation!, finished:Bool) {
-        if let index = find(animations, anim) {
+    override public func animationDidStop(anim:CAAnimation, finished:Bool) {
+        if let index = animations.indexOf(anim) {
             animations.removeAtIndex(index)
             if animations.isEmpty {
 #if os(iOS)
@@ -115,8 +115,8 @@ public class AnimationLayer : CALayer {
     }
     
     // Called when layer's property changes.
-    override public func actionForKey(event: String!) -> CAAction! {
-        if keys != nil && contains(keys, event) {
+    override public func actionForKey(event: String) -> CAAction? {
+        if keys != nil && keys.contains(event) {
             let animation = CABasicAnimation(keyPath:event)
             animation.fromValue = getProperty(event)
             animation.delegate = self
@@ -134,7 +134,7 @@ public class AnimationLayer : CALayer {
     }
     
     // Layer Drawing
-    override public func drawInContext(ctx: CGContext!) {
+    override public func drawInContext(ctx: CGContext) {
         super.drawInContext(ctx)
         CGContextSetAllowsAntialiasing(ctx, true)
         CGContextSetShouldAntialias(ctx, true)
@@ -145,10 +145,10 @@ public class AnimationLayer : CALayer {
 
 public extension ShapeView {
     
-    public func addAnimationLayer(#frame:CGRect, properties:[(key:String, min:CGFloat)],
+    public func addAnimationLayer(frame frame:CGRect, properties:[(key:String, min:CGFloat)],
                                     draw:((AnimationLayer, CGContext) -> Void)) -> AnimationLayer
     {
-        var layer = AnimationLayer()
+        let layer = AnimationLayer()
         layer.properties = properties
         layer.draw = draw
         addSublayer(layer, frame:frame)

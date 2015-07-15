@@ -69,7 +69,7 @@ public extension ShapeView {
         return layer
     }
     
-    public func addImageLayer(#named:String, center:CGPoint) -> CALayer? {
+    public func addImageLayer(named named:String, center:CGPoint) -> CALayer? {
         if let image = Image(named:named) {
             return addImageLayer(image, center:center)
         }

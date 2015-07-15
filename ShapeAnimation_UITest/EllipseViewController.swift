@@ -8,6 +8,7 @@
 
 import SwiftGraphics
 import ShapeAnimation
+import SwiftUtilities
 
 class EllipseViewController: DetailViewController {
     @IBOutlet weak var rxSlider: UISlider!

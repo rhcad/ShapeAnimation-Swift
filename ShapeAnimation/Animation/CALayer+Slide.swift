@@ -37,7 +37,7 @@ public extension CALayer {
         return flipAnimation(x:1, y:0, didStop:didStop)
     }
     
-    private func flipAnimation(#x:CGFloat, y:CGFloat, didStop:(() -> Void)? = nil) -> AnimationPair {
+    private func flipAnimation(x x:CGFloat, y:CGFloat, didStop:(() -> Void)? = nil) -> AnimationPair {
         var xf = CATransform3DIdentity
         xf.m34 = 1.0 / -500
         xf = CATransform3DRotate(xf, CGFloat(M_PI), x, y, 0.0)
@@ -49,7 +49,7 @@ public extension CALayer {
         setDefaultProperties(animation, NSNull(), didStop)
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         animation.willStop = {
-            withDisableActions(self, animation, "flip") { layer in
+            withDisableActions(self, animation: animation, key: "flip") { layer in
                 layer.transform = CATransform3DConcat(xf, layer.transform)
             }
         }
@@ -66,7 +66,7 @@ public extension CALayer {
         animation.toValue = NSValue(CATransform3D:to)
         setDefaultProperties(animation, NSValue(CATransform3D:CATransform3DIdentity), didStop)
         animation.willStop = {
-            withDisableActions(self, animation, animation.keyPath) { layer in
+            withDisableActions(self, animation: animation, key: animation.keyPath!) { layer in
                 layer.transform = to
             }
         }

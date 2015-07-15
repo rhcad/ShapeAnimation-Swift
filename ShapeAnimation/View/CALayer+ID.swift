@@ -7,6 +7,7 @@
 //
 
 import SwiftGraphics
+import SwiftUtilities
 
 private var LayerIDKey = 13
 
@@ -14,11 +15,11 @@ public extension CALayer {
     
     public var identifier: String? {
         get {
-            return getAssociatedObject(self, &LayerIDKey) as? String
+            return getAssociatedObject(self, key: &LayerIDKey) as? String
         }
         set {
             if newValue != identifier {
-                setAssociatedObject(self, &LayerIDKey, newValue!)
+                setAssociatedObject(self, key: &LayerIDKey, value: newValue!)
             }
         }
     }

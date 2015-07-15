@@ -13,13 +13,13 @@ public extension CALayer {
     
     // MARK: opacityAnimation and flashAnimation
     
-    func opacityAnimation(#from:CGFloat?, to:CGFloat, didStop:(() -> Void)? = nil) -> AnimationPair {
+    func opacityAnimation(from from:CGFloat?, to:CGFloat, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"opacity")
         animation.fromValue = from
         animation.toValue = to
         setDefaultProperties(animation, 0, didStop)
         animation.willStop = {
-            withDisableActions(self, animation, animation.keyPath) { layer in
+            withDisableActions(self, animation: animation, key: animation.keyPath!) { layer in
                 layer.opacity = Float(to)
             }
         }
@@ -35,10 +35,10 @@ public extension CALayer {
         let animation = CABasicAnimation(keyPath:"backgroundColor")
         animation.fromValue = from
         animation.toValue = to
-        setDefaultProperties(animation, backgroundColor, didStop)
+        setDefaultProperties(animation, backgroundColor!, didStop)
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut)
         animation.willStop = {
-            withDisableActions(self, animation, animation.keyPath) { layer in
+            withDisableActions(self, animation: animation, key: animation.keyPath!) { layer in
                 layer.backgroundColor = to
             }
         }
@@ -47,7 +47,7 @@ public extension CALayer {
     
     // MARK: scaleAnimation and tapAnimation
     
-    func scaleAnimation(#from:CGFloat?, to:CGFloat, didStop:(() -> Void)? = nil) -> AnimationPair {
+    func scaleAnimation(from from:CGFloat?, to:CGFloat, didStop:(() -> Void)? = nil) -> AnimationPair {
         let animation = CABasicAnimation(keyPath:"transform.scale")
         let oldxf = affineTransform(), oldscale = hypot(oldxf.a, oldxf.b)
         
@@ -57,7 +57,7 @@ public extension CALayer {
         animation.toValue = to * oldscale
         setDefaultProperties(animation, 1, didStop)
         animation.willStop = {
-            withDisableActions(self, animation, animation.keyPath) { layer in
+            withDisableActions(self, animation: animation, key: animation.keyPath!) { layer in
                 let xf = CGAffineTransform(scale:to)
                 layer.setAffineTransform(layer.affineTransform() + xf)
             }
@@ -65,7 +65,7 @@ public extension CALayer {
         return AnimationPair(self, animation)
     }
     
-    func scaleAnimation(#from:CGFloat?, to:CGFloat, repeatCount n:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
+    func scaleAnimation(from from:CGFloat?, to:CGFloat, repeatCount n:Float, didStop:(() -> Void)? = nil) -> AnimationPair {
         return scaleAnimation(from:from, to:to, didStop:didStop)
             .setRepeatCount(n).setFillMode(kCAFillModeRemoved).set { $0.autoreverses = n > 1 }
     }
@@ -88,7 +88,7 @@ public extension CALayer {
         animation.toValue = angle
         setDefaultProperties(animation, 0, didStop)
         animation.willStop = {
-            withDisableActions(self, animation, animation.keyPath) { layer in
+            withDisableActions(self, animation: animation, key: animation.keyPath!) { layer in
                 let xf = CGAffineTransform(rotation:angle)
                 layer.setAffineTransform(layer.affineTransform() + xf)
             }
@@ -119,7 +119,7 @@ public extension CALayer {
         setDefaultProperties(animation, NSNull(), didStop)
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseOut)
         animation.willStop = {
-            withDisableActions(self, animation, animation.keyPath) { layer in
+            withDisableActions(self, animation: animation, key: animation.keyPath!) { layer in
                 layer.position = relative ? layer.position + to : to
             }
         }
@@ -136,7 +136,7 @@ public extension CALayer {
             animation.rotationMode = kCAAnimationRotateAuto
         }
         animation.willStop = {
-            withDisableActions(self, animation, animation.keyPath) { layer in
+            withDisableActions(self, animation: animation, key: animation.keyPath!) { layer in
                 layer.position = path.endPoint
                 if autoRotate {
                     let xf = CGAffineTransform(rotation:path.endTangent.direction)
@@ -155,7 +155,7 @@ public extension CALayer {
         if let basic = animation as? CABasicAnimation {
             if basic.fromValue == nil {
                 if let presentation = presentationLayer() as? CALayer {
-                    basic.fromValue = presentation.valueForKeyPath(basic.keyPath)
+                    basic.fromValue = presentation.valueForKeyPath(basic.keyPath!)
                 } else {
                     basic.fromValue = defaultFromValue
                 }

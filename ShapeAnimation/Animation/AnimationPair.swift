@@ -19,14 +19,14 @@ public func animationGroup(animations:[AnimationPair], didStop:(() -> Void)? = n
         assert($0.layer == layer)
         return $0.animation
     }
-    for anim in animation.animations {
+    for anim in animation.animations! {
         animation.duration = max(animation.duration, anim.duration)
     }
     return AnimationPair(layer, animation, key:"group")
 }
 
 public func applyAnimations(animations:[AnimationPair], completion:(() -> Void)?) {
-    applyAnimations(animations, CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut), completion)
+    applyAnimations(animations, timingFunction: CAMediaTimingFunction(name:kCAMediaTimingFunctionEaseInEaseOut), completion: completion)
 }
 
 public func applyAnimations(animations:[AnimationPair], timingFunction:CAMediaTimingFunction, completion:(() -> Void)?) {
@@ -68,7 +68,7 @@ public class AnimationPair {
     }
     
     convenience init(_ layer:CALayer, _ animation:CAPropertyAnimation) {
-        self.init(layer, animation, key:animation.keyPath)
+        self.init(layer, animation, key:animation.keyPath!)
     }
     
     public func apply() {
@@ -80,7 +80,7 @@ public class AnimationPair {
                     anim2.setValue(layerid + "_gradient", forKey:"layerID")
                 }
                 if key == "path" {
-                    gradientLayer.mask.addAnimation(anim2, forKey:key)
+                    gradientLayer.mask!.addAnimation(anim2, forKey:key)
                 } else {
                     gradientLayer.addAnimation(anim2, forKey:key)
                 }
@@ -126,8 +126,8 @@ public extension AnimationPair {
     public func setDuration(d:CFTimeInterval) -> AnimationPair {
         animation.duration = d
         if let group = animation as? CAAnimationGroup {
-            for sub in group.animations {
-                let subanim = sub as! CAAnimation
+            for sub in group.animations! {
+                let subanim = sub as CAAnimation
                 subanim.duration = d
             }
         }

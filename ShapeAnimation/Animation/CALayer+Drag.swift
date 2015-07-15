@@ -7,6 +7,7 @@
 //
 
 import SwiftGraphics
+import SwiftUtilities
 
 private var LayerTapKey = 14
 private var LayerSelectedKey = 15
@@ -14,14 +15,14 @@ private var LayerSelectedKey = 15
 public extension CALayer {
     func constrainCenterToSuperview(center:CGPoint) {
         let kEdgeBuffer:CGFloat = 4
-        var constrain = superlayer.bounds.insetted(dx:kEdgeBuffer, dy:kEdgeBuffer)
+        var constrain = superlayer!.bounds.insetted(dx:kEdgeBuffer, dy:kEdgeBuffer)
         constrain.inset(dx: frame.width / 2, dy: frame.height / 2)
-        let pt = constrain.isEmpty ? superlayer.bounds.mid : center.clampedTo(constrain)
+        let pt = constrain.isEmpty ? superlayer!.bounds.mid : center.clampedTo(constrain)
         moveAnimation(to: pt, relative:false).apply()
     }
     
     func bringOnScreen() {
-        if !superlayer.bounds.contains(frame) {
+        if !superlayer!.bounds.contains(frame) {
             constrainCenterToSuperview(position)
         }
     }
@@ -29,22 +30,22 @@ public extension CALayer {
     public var didTap: (() -> Void)? {
         get {
             let defv:(() -> Void)? = nil
-            return getAssociatedWrappedObject(self, &LayerTapKey, defv)
+            return getAssociatedWrappedObject(self, key: &LayerTapKey, defaultValue: defv)
         }
         set {
-            setAssociatedWrappedObject(self, &LayerTapKey, newValue)
+            setAssociatedWrappedObject(self, key: &LayerTapKey, value: newValue)
         }
     }
     
     public var selected: Bool {
         get {
             let defv:NSObject? = nil
-            return getAssociatedWrappedObject(self, &LayerSelectedKey, defv) != nil
+            return getAssociatedWrappedObject(self, key: &LayerSelectedKey, defaultValue: defv) != nil
         }
         set {
             if (newValue != selected) {
                 weak var value = self
-                setAssociatedWrappedObject(self, &LayerSelectedKey, newValue ? value : nil)
+                setAssociatedWrappedObject(self, key: &LayerSelectedKey, value: newValue ? value : nil)
             }
         }
     }

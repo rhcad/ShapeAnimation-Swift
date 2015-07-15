@@ -40,7 +40,6 @@
 		0267D0F61AC0101500CEF476 /* AnimationPrivate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022E980D1A8071A70028A198 /* AnimationPrivate.swift */; };
 		0267D0F71AC0102700CEF476 /* ShapeAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 45DA4AC819AA62A800133F32 /* ShapeAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		027DC1B91A77998D00D3CF60 /* airship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 027DC1B81A77998D00D3CF60 /* airship@2x.png */; };
-		027E6C631A70CCB7002658F7 /* SwiftGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CD3EEE1A708C8D00C83B5C /* SwiftGraphics.framework */; };
 		02887B2B1A820CAC00E800A1 /* CALayer+ID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02887B2A1A820CAC00E800A1 /* CALayer+ID.swift */; };
 		028F67601A8760FA00634383 /* ShapeView+HitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F675F1A8760FA00634383 /* ShapeView+HitTest.swift */; };
 		02A18B1A1A8D8B0D00FF826A /* MasterVC+Hamburger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A18B191A8D8B0D00FF826A /* MasterVC+Hamburger.swift */; };
@@ -54,6 +53,8 @@
 		02E8A7EC1A7A3B9500EB03C3 /* EllipseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E8A7EB1A7A3B9500EB03C3 /* EllipseViewController.swift */; };
 		4537991D19AA788B004DF99E /* DummyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4537991C19AA788B004DF99E /* DummyTests.swift */; };
 		45DA4AC919AA62A800133F32 /* ShapeAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 45DA4AC819AA62A800133F32 /* ShapeAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE39DFAA1B56571500E8456F /* SwiftGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CD3EEE1A708C8D00C83B5C /* SwiftGraphics.framework */; };
+		AE39DFAB1B56573800E8456F /* SwiftGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02CD3EF01A708C8D00C83B5C /* SwiftGraphics.framework */; };
 		AED21A2D1A88EDE2004EFD25 /* CAShapeLayer+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED21A2C1A88EDE2004EFD25 /* CAShapeLayer+Path.swift */; };
 		AEE57A151A81168F00420D54 /* ShapeView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE57A141A81168F00420D54 /* ShapeView+Image.swift */; };
 /* End PBXBuildFile section */
@@ -101,13 +102,6 @@
 			remoteGlobalIDString = 454FE66219C77031002E4DEF;
 			remoteInfo = SwiftGraphicsPlayground;
 		};
-		02CD3EF51A708C8D00C83B5C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 02CD3EE31A708C8D00C83B5C /* SwiftGraphics.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45CFDC9E1A61CE3500053F96;
-			remoteInfo = SwiftGraphics_OSX_UITest;
-		};
 		02CD3EFB1A708EBC00C83B5C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 02CD3EE31A708C8D00C83B5C /* SwiftGraphics.xcodeproj */;
@@ -122,12 +116,12 @@
 			remoteGlobalIDString = 45DA4AC319AA62A800133F32;
 			remoteInfo = ShapeAnimation;
 		};
-		02EB74E51A85BC3E00C07FA6 /* PBXContainerItemProxy */ = {
+		AE39DFA81B56570700E8456F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 02CD3EE31A708C8D00C83B5C /* SwiftGraphics.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 455AC2C31A76130B00BCC373;
-			remoteInfo = SwiftGraphics_OSX_Scratch;
+			proxyType = 1;
+			remoteGlobalIDString = 454D550619AA5CE6000E3EB3;
+			remoteInfo = SwiftGraphics_OSX;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -169,6 +163,9 @@
 		45DA4AC419AA62A800133F32 /* ShapeAnimation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ShapeAnimation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45DA4AC719AA62A800133F32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45DA4AC819AA62A800133F32 /* ShapeAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShapeAnimation.h; sourceTree = "<group>"; };
+		AE39DFA41B56567400E8456F /* SwiftUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUtilities.framework; path = "Vendor/SwiftGraphics/Externals/SwiftUtilities/build/Debug-iphoneos/SwiftUtilities.framework"; sourceTree = "<group>"; };
+		AE39DFA61B56568000E8456F /* SwiftUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUtilities.framework; path = Vendor/SwiftGraphics/Externals/SwiftUtilities/build/Debug/SwiftUtilities.framework; sourceTree = "<group>"; };
+		AE39DFB31B565D9000E8456F /* SwiftUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUtilities.framework; path = "../../../Library/Developer/Xcode/DerivedData/ShapeAnimation-bjbfrttucwqehrbjhfnalpfhaaoa/Build/Products/Debug/SwiftUtilities.framework"; sourceTree = "<group>"; };
 		AED21A2C1A88EDE2004EFD25 /* CAShapeLayer+Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+Path.swift"; sourceTree = "<group>"; };
 		AEE57A141A81168F00420D54 /* ShapeView+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ShapeView+Image.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -178,6 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE39DFAA1B56571500E8456F /* SwiftGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				027E6C631A70CCB7002658F7 /* SwiftGraphics.framework in Frameworks */,
+				AE39DFAB1B56573800E8456F /* SwiftGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,8 +266,6 @@
 				02CD3EEE1A708C8D00C83B5C /* SwiftGraphics.framework */,
 				02CD3EF01A708C8D00C83B5C /* SwiftGraphics.framework */,
 				02CD3EF41A708C8D00C83B5C /* SwiftGraphicsPlayground.framework */,
-				02CD3EF61A708C8D00C83B5C /* SwiftGraphics_OSX_UITest.app */,
-				02EB74E61A85BC3E00C07FA6 /* SwiftGraphics_OSX_Scratch.app */,
 				02CD3EF21A708C8D00C83B5C /* SwiftGraphics_OSX_UnitTests.xctest */,
 				0256C65A1ABEC126007FC099 /* SwiftGraphics_iOS_UnitTests.xctest */,
 			);
@@ -305,6 +301,9 @@
 		4514F5F71A61D2D800CC9C26 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE39DFB31B565D9000E8456F /* SwiftUtilities.framework */,
+				AE39DFA61B56568000E8456F /* SwiftUtilities.framework */,
+				AE39DFA41B56567400E8456F /* SwiftUtilities.framework */,
 				02CD3EE31A708C8D00C83B5C /* SwiftGraphics.xcodeproj */,
 			);
 			name = Frameworks;
@@ -406,6 +405,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				AE39DFA91B56570700E8456F /* PBXTargetDependency */,
 			);
 			name = ShapeAnimation_OSX;
 			productName = ShapeAnimation_OSX;
@@ -473,7 +473,9 @@
 		454D54FE19AA5CE6000E3EB3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = github.com/rhcad;
 				TargetAttributes = {
 					0267D0CD1AC00FF400CEF476 = {
@@ -551,20 +553,6 @@
 			fileType = wrapper.framework;
 			path = SwiftGraphicsPlayground.framework;
 			remoteRef = 02CD3EF31A708C8D00C83B5C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		02CD3EF61A708C8D00C83B5C /* SwiftGraphics_OSX_UITest.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = SwiftGraphics_OSX_UITest.app;
-			remoteRef = 02CD3EF51A708C8D00C83B5C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		02EB74E61A85BC3E00C07FA6 /* SwiftGraphics_OSX_Scratch.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = SwiftGraphics_OSX_Scratch.app;
-			remoteRef = 02EB74E51A85BC3E00C07FA6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -690,6 +678,11 @@
 			target = 45DA4AC319AA62A800133F32 /* ShapeAnimation */;
 			targetProxy = 02CD3F281A70929600C83B5C /* PBXContainerItemProxy */;
 		};
+		AE39DFA91B56570700E8456F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftGraphics_OSX;
+			targetProxy = AE39DFA81B56570700E8456F /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -731,6 +724,7 @@
 				INFOPLIST_FILE = ShapeAnimation_OSX/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "github.rhcad.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -751,6 +745,7 @@
 				INFOPLIST_FILE = ShapeAnimation_OSX/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "github.rhcad.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -766,8 +761,8 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = ShapeAnimation_UITest/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "github.rhcad.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -780,8 +775,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ShapeAnimation_UITest/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "github.rhcad.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -809,6 +804,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -824,6 +820,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -865,6 +862,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				RUN_CLANG_STATIC_ANALYZER = YES;
@@ -884,8 +882,8 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = ShapeAnimation_UnitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/..";
+				PRODUCT_BUNDLE_IDENTIFIER = "github.rhcad.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 			};
@@ -896,8 +894,8 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = ShapeAnimation_UnitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/..";
+				PRODUCT_BUNDLE_IDENTIFIER = "github.rhcad.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 			};
@@ -918,9 +916,9 @@
 				);
 				INFOPLIST_FILE = ShapeAnimation/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "github.rhcad.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = ShapeAnimation;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -940,9 +938,9 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ShapeAnimation/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "github.rhcad.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = ShapeAnimation;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;

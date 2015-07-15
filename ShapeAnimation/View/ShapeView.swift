@@ -13,8 +13,8 @@ public class ShapeView : View {
     
     public var style:PaintStyle = {
         var style = PaintStyle.defaultStyle
-        style.lineCap = kCGLineCapButt
-        style.lineJoin = kCGLineJoinRound
+        style.lineCap = CGLineCap.Butt
+        style.lineJoin = CGLineJoin.Round
         return style
         }()
     public var gradient = Gradient()
