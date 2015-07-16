@@ -1,6 +1,6 @@
 # ShapeAnimation-Swift
 
-Vector animation framework in Swift based on [SwiftGraphics][SwiftGraphics] for iOS 8 and OSX.
+Vector animation framework in Swift based on [SwiftGraphics][SwiftGraphics] for iOS 9 and OSX.
 With ShapeAnimation you can easily create various animations with a nice Swift based syntax.
 
 [![Travis][travis_img]][travis]
@@ -9,11 +9,14 @@ With ShapeAnimation you can easily create various animations with a nice Swift b
 [travis_img]: https://travis-ci.org/rhcad/ShapeAnimation-Swift.svg?branch=master
 
 SVG animation development with [SVGKit][SVGKit] happens on the [SVG][svg_branch] branch.
-Also note this project is moving to Swift 1.2, which requires Xcode 6.3.
+[ShapeAnimation-ObjC][SAObjC] is an alternative vector animation framework in Objective-C.
+
+Also note this project has moved to Swift 2.0 which requires Xcode 7.0 and Mac OS X 10.10.
 
 [SwiftGraphics]: https://github.com/schwa/SwiftGraphics
 [SVGKit]: https://github.com/SVGKit/SVGKit
 [svg_branch]: https://github.com/rhcad/ShapeAnimation-Swift/tree/SVG
+[SAObjC]: https://github.com/rhcad/ShapeAnimation-ObjC
 
 ## What's included
 
